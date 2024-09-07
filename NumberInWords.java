@@ -92,6 +92,6 @@ public class NumberInWords {
         Scanner inp = new Scanner(System.in);
         System.out.print("Enter the no. : ");
         int n = inp.nextInt();
-        System.out.println("=" + numberInWords(n) + "=");
+        System.out.println(numberInWords(n));
     }
 }
