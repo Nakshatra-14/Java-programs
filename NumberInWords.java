@@ -89,10 +89,9 @@ public class NumberInWords {
     }
 
     public static void main(String[] args) {
-        // Scanner inp = new Scanner(System.in);
-        // System.out.print("Enter the no. : ");
-        // char ch = inp.next().charAt(0);
-        //for(int i = 1 ; i <= 99 ; i++)
-            System.out.println("=" + numberInWords(12345678) + "=");
+        Scanner inp = new Scanner(System.in);
+        System.out.print("Enter the no. : ");
+        int n = inp.nextInt();
+        System.out.println("=" + numberInWords(n) + "=");
     }
 }
