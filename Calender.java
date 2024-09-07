@@ -1,4 +1,4 @@
-import java.util.*;;
+import java.util.*;
 
 public class Calender {
 
@@ -32,7 +32,7 @@ public class Calender {
     }
 
     public static void calender(int month, int year) {
-        int cal
+    
     }
 
     public static void main(String[] args) {
@@ -43,14 +43,16 @@ public class Calender {
         System.out.print("Enter Year: ");
         int year = inp.nextInt();
         System.out.println(month(month));
-        int d[] = date(month, year);
+        
         for (String e : w) {
             System.out.print(e + "\t");
         }
         System.out.println();
-        // for (int e : d) {
-        //     System.out.print(e + "\t");
-        // }
+
+        int d[] = date(month, year);
+        for (int e : d) {
+            System.out.print(e + "\t");
+        }
 
         calender(month, year);
 
