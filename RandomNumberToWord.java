@@ -82,14 +82,15 @@ public class RandomNumberToWord {
 
     public static void main(String[] args) {
         
-        int n = 20, lb = 0, ub = 1000000000;
+        int n = 90, lb = 0, ub = 1000000000;
         int arr[] = genRandoms(n, lb, ub);
         //System.out.println(Arrays.toString(arr));
 
         for(int i = 0; i < n; i++)
         {
-            System.out.print(i+1 + ") " + arr[i] + ": ");
-            System.out.println(numberInWords(arr[i]));
+            // System.out.print(i+1 + ") " + arr[i] + ": ");
+            // System.out.println(numberInWords(arr[i]));
+            System.out.printf("%2d) %10d: %s\n", i + 1, arr[i], numberInWords(arr[i]));
         }
 
     }
