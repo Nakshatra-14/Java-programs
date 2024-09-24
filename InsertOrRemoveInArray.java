@@ -12,6 +12,57 @@
 
 import java.util.*;
 public class InsertOrRemoveInArray {
+
+    public static int randInt(int lb, int ub) {
+        return lb + (int) ((ub - lb + 1) * Math.random());
+    }
+
+    public static int[] genRandoms(int n, int lb, int ub) {
+        int arr[], r, j;
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            r = randInt(lb, ub);
+            boolean f = false;
+            for (j = 0; j < i; j++) {
+                if (arr[j] == r) {
+                    f = true;
+                    break;
+                }
+            }
+
+            if (f == true) {
+                i--;
+            } else
+                arr[i] = r;
+        }
+
+        return arr;
+    }
+
+    public static int[] insertORremove(int ar[], int e) {
+        int copy[];
+        Arrays.sort(ar);
+        int p = Arrays.binarySearch(ar, e);
+        if(p < 0)       //element not found
+        {
+            p = - p - 1;
+            copy = new int[ar.length + 1];
+            for(int i = 0 ; i < p ; i++)
+                copy[i] = ar[i];
+            copy[p] = e;
+            for(int i = p ; i < ar.length ; i++)
+                copy[i + 1] = ar[i];
+        }  
+        else            //element found
+        {
+            copy = new int[ar.length - 1];
+            for(int i = 0 ; i < p ; i++)
+                copy[i] = ar[i];
+            for(int i = p + 1 ; i < copy.length ; i++)
+                copy[i - 1] = ar[i];
+        }
+        return copy;
+    }
     public static void main(String[] args) {
 
     }
