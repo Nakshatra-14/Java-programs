@@ -25,27 +25,17 @@ public class CalenderPrinter {
         return 0;
     }
     
-    public static int daysBetween(int yearOld, int yearNew) //Returns no. of days from year old upto year new
+    public static int daysBetween(int yearFrom, int yearTo)
     {
-        return yearOld ;
-    }
-
-    // public static int[] date(int month, int year) { // Dates
-    //     int d[] = null;
-    //     if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-    //         d = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 };
-    //     else if (month == 4 || month == 6 || month == 9 || month == 11)
-    //         d = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
-    //     else if (month == 2)                        // For February
-    //         {
-    //             if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-    //                 d = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29};
-    //             else
-    //                 d = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28 };
-    //         }
-
-    //         return d;
-    // }
+        int n = 0;
+        for (int y = yearFrom ; y <= yearTo ; y++)
+        {
+            if(isLeapYear(y) == true)
+                n++;
+            }
+            int day = (yearTo - yearFrom + 1) * 365 + n;
+            return day;   
+        }
 
     public static void main(String[] args) {
         Scanner inp = new Scanner(System.in);
