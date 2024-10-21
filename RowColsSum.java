@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class RowColsSum {
     public static void main(String[] args) {
         int mat[][] = {
@@ -13,8 +14,7 @@ public class RowColsSum {
         System.out.println("Row: " + row + "\nCols: " + cols);
 
         int rowSum = 0, i;
-        int colsSum[];
-        colsSum = new int[20];
+        int colsSum[] = new int[20];
         
         for(i = 0 ; i < row ; i++)
         {

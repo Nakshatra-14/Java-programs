@@ -6,7 +6,7 @@ public class Functions {
         return lb + (int) ((ub - lb + 1) * Math.random());
     }
 
-    public static int[] genRandoms(int n, int lb, int ub) {
+    public static int[] genRandomsOLD(int n, int lb, int ub) {
         int arr[], r, j;
         arr = new int[n];
         for (int i = 0; i < n; i++) {
@@ -23,6 +23,33 @@ public class Functions {
                 i--;
             } else
                 arr[i] = r;
+        }
+
+        return arr;
+    }
+    public static int[] genRandoms(int n, int lb, int ub) {
+        
+        int r;
+        int arr[] = new int[n];
+        boolean hash[] = new boolean[ub + 1];
+        for (int i = 0; i < n; i++) {
+            // while(true)
+            // {
+            //     r = randInt(lb, ub);
+            //     if(hash[r] == false)
+            //     {
+            //         arr[i] = r;
+            //         hash[r] = true;
+            //         break;
+            //     }
+            // }
+            while(hash[r = randInt(lb, ub)] == true)
+                ;
+
+            arr[i] = r;
+            hash[r] = true;
+                
+            
         }
 
         return arr;
@@ -105,11 +132,11 @@ public class Functions {
 
     public static void main(String[] args) {
         // Testing random genrator
-        // int n = 20, lb = 50, ub = 80;
-        // int arr[] = genRandoms(n, lb, ub);
-        // System.out.println(Arrays.toString(arr));
-        // Arrays.sort(arr);
-        // System.out.println(Arrays.toString(arr));
+        int n = 20, lb = 50, ub = 80;
+        int arr[] = genRandoms(n, lb, ub);
+        System.out.println(Arrays.toString(arr));
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
 
         // Testing Right Shift
         // int n = 20, lb = 50, ub = 80;
@@ -125,7 +152,7 @@ public class Functions {
         // leftShift(arr, 4);
         // System.out.println(Arrays.toString(arr));
 
-        printCalender(10, 2024);
+        // printCalender(10, 2024);
 
     }
 }
