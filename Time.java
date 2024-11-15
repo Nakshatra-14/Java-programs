@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,5 +23,14 @@ public class Time {
         DateTimeFormatter df2 = DateTimeFormatter.ISO_LOCAL_DATE;
         date = dt.format(df2);
         System.out.println(date);
+
+
+        LocalDate today = LocalDate.now();
+        LocalDate nextWeek = today.plusWeeks(1);
+        LocalDate lastMonth = today.minusMonths(1);
+        
+        System.out.println("Today: " + today);
+        System.out.println("Next week: " + nextWeek);
+        System.out.println("Last month: " + lastMonth);
     }
 }
