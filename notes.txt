@@ -1,0 +1,163 @@
+How an object of a class is initialized
+=======================================
+1. First the member variables of a class are iniatialized with default values or with the immediate values, if any.
+
+example:
+class Emp
+{
+   private String name ;         // gets null
+   private int age = calcAge() ; // gets the immediate value returned by calAge()
+   private float sal = 10000 ;   // gets the immediate value 10000
+}
+
+2. Then all the initialization blocks, if any, are called in their given order.
+
+Initialization Block
+--------------------
+An iniatialized block in a class is a block of statements enclosed by a pair of braces. 
+
+class Emp
+{
+   ...
+
+   {
+      // initialization block 1
+      ...
+      ...
+      ...
+   }
+   ...
+   ...
+
+   {
+      // initialization block 2
+      ...
+      ...
+   }
+
+   ...
+   ...
+}
+
+
+example:
+
+class Test
+{
+   private char ch = '?' ;
+
+    {
+       System.out.println("first");
+       ch = 'K' ;
+    }
+    
+    public void disp()
+    {
+        System.out.println(ch) ;
+    }
+    
+    
+   {
+        System.out.println("second");
+        ch = 'T' ;
+   }
+
+}
+
+public class Test9 
+{
+    public static void main(String args[])
+    {
+        Test t = new Test() ;
+        t.disp();
+    }    
+}
+
+Output
+~~~~~~
+first
+second
+T  
+
+
+3. Then, if the called constructor of an object of the class is called then, if any other constructor of the
+   class is called from the former constructor then that constructaor gets called.
+
+ 1  class CheckIt
+ 2  {
+ 3      private String s ;
+ 4      public CheckIt()
+ 5      {
+ 6          this("hello") ;  // the parameterized consctructor gets called
+ 7          System.out.println("no-arg");
+ 8      }
+ 9
+10      public CheckIt(String s)
+11      {
+12          System.out.println("parameterized");
+13          this.s = s ;
+14      }
+15  
+16      public void disp()
+17      {
+18          System.out.println(s);
+19     }
+20  }
+21
+22
+23 public class Test10 
+24 {
+25    public static void main(String[] args) 
+26     {
+27        CheckIt ct = new CheckIt() ;
+28        ct.disp();
+29    }    
+30 }
+
+// Order of execution : 25, 27, 4, 6, 10, 12, 13, 7, 28, 16, 18
+/*
+Output :
+parameterized
+no-arg
+hello 
+*/ 
+
+
+Calling constructor form some constructor
+-----------------------------------------
+a. a constructor can call another constructor of the same class, but that must be the very first statement in the consructor.
+b. a constructor can call another constructor of the same class by using the 'this' keyword.
+
+
+4. At last rest of the corresponding constructor is executed.
+
+Q. Write a function 
+   void SpecialEmpSort(Emp ar[])
+   that sorts an array of Employees in descending order of their salaries but for the same salaries
+   they should appear in the ascending order of their names. For this suppose there also exists 
+   the following method within the Emp class:
+   public String getName() {return name ;}
+
+Q. Write class named Student that encapculates following information about a student : Name, Roll, 
+   Marks in 3 subjects, total marks.
+   It also should have the following methods :
+   void set(String name, int roll, int marks1, int marks2, int marks3)
+   void disp()
+   int getTotal() // returns total marks of a student
+
+   Then write a program that inuts information about some students and then prints them in descending
+   order of their total marks obtained as shown below :
+   Roll   Name                  Marks1 Marks2 Marks3 Average Total Grade
+   ...    ............             ..      ..     ..      ..   ...   .
+   ...    ............             ..      ..     ..      ..   ...   .
+   ...    ............             ..      ..     ..      ..   ...   .
+   ...    ............             ..      ..     ..      ..   ...   .
+
+   The grade is a letter calculated on the total marks obtained according to the following rule:
+   Percentage              Grade
+   ----------              -----
+   more than 80% to 100%     A
+   more than 60% to 80%      B
+   50% or more to 60%        C
+   below 50                  F
+
