@@ -6,12 +6,15 @@ class Emp {
     private int age ;
     private float sal ;
 
-    Emp()
     {
         name = "<noname>";
         age = 18;
         sal = 10000;
     }
+
+    public Emp(){}
+
+    
 
     public Emp(String name, int age, float sal) {
         this.name = name;
@@ -32,6 +35,15 @@ class Emp {
 
 public class EmpSort {
 
+    public static int compareEmp(Emp a, Emp b)
+    {
+        int r = a.getName().compareTo(b.getName());
+
+        if(r == 0)
+            r = - (int) (a.getSal() - b.getSal());
+        return r;    
+    }
+
     public static void specialEmpSort(Emp ar[])
     {
         int n = ar.length;
@@ -40,7 +52,7 @@ public class EmpSort {
             
             for(int j = i + 1 ; j < n ; j++)
             {
-                if(ar[i] == ar[j])
+                if(ar[i].getName().compareTo(ar[j].getName()) > 0)
                 {
                     //swap ar[i], ar[j]
                     Emp temp = ar[i];
@@ -52,6 +64,7 @@ public class EmpSort {
     }
 
     public static void main(String[] args) {
+        
         Emp e[] = new Emp[6];
 
         for (int i = 0 ; i < e.length ; i++) {
@@ -61,12 +74,11 @@ public class EmpSort {
         e[0] = new Emp("Alice", 25, 30000);
         e[1] = new Emp("Neela", 30, 35000);
         e[2] = new Emp("Rakesh", 28, 32000);
-        e[3] = new Emp("Mukesh", 35, 40000);
+        e[3] = new Emp("Anya", 35, 40000);
 
         
-        // specialEmpSort(e);
+        specialEmpSort(e);
 
-        Arrays.sort(e);
         for (Emp emp : e) {
             System.out.println(emp.getName() + ", " + emp.getAge() + ", " + emp.getSal());
         }
