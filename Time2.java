@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Time {
+public class Time2 {
     public static void main(String[] args) {
         
         // System.out.println("Time from 1 Jan 1900:");
