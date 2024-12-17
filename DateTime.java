@@ -46,7 +46,7 @@ public class DateTime {
         else if(w == 3)
             suffix = "rd";
 
-        System.out.printf("%02d%s %s, %04d, %s", dow, suffix, m, y, day);    
+        System.out.printf("%02d%s %s, %04d, %s\n", dow, suffix, m, y, day);    
     }
 
     public static int daysInMonth(int month, int year) {
@@ -58,11 +58,14 @@ public class DateTime {
     }
 
     public static void main(String[] args) {
-        GregorianCalendar dt = new GregorianCalendar(2024, Calendar.MARCH, 21);
+        GregorianCalendar dt = new GregorianCalendar();
 
         printDate(dt);
         printTime(dt);
         printLongDate(dt);
+        // DateTime.printDate(dt);
+        // DateTime.printTime(dt);
+        // DateTime.printLongDate(dt);
         System.out.println(daysInMonth(2, 2024));
     }
 }
