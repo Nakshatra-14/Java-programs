@@ -28,8 +28,7 @@ public class DateTime {
 
     public static void printLongDate(GregorianCalendar dt) {
         int dow = dt.get(Calendar.DAY_OF_MONTH);
-        String month[] = { "January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October",
-                "November", "December" };
+        String month[] =
         String m = month[dt.get(Calendar.MONTH)];
         int y = dt.get(Calendar.YEAR);
         String[] daysOfWeek = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};

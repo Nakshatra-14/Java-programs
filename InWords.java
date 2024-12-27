@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class NumberInWords {
+public class InWords {
 
     public static String oneTo99(int n)
     {
