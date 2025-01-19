@@ -1,3 +1,4 @@
+import java.text.DateFormatSymbols;
 import java.util.*;
 
 public class DateTime {
@@ -27,8 +28,9 @@ public class DateTime {
     }
 
     public static void printLongDate(GregorianCalendar dt) {
+        DateFormatSymbols dfs =new DateFormatSymbols();
         int dow = dt.get(Calendar.DAY_OF_MONTH);
-        String month[] =
+        String month[] = dfs.getMonths();
         String m = month[dt.get(Calendar.MONTH)];
         int y = dt.get(Calendar.YEAR);
         String[] daysOfWeek = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
