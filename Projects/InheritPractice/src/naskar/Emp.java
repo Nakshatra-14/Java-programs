@@ -1,5 +1,7 @@
 package naskar;
 
+import java.util.GregorianCalendar;
+
 public class Emp extends Human{
 
     private float salary;
@@ -9,9 +11,9 @@ public class Emp extends Human{
         salary = 10000;
     }
 
-    public Emp(String nm, int ag, float sal)
+    public Emp(String nm, GregorianCalendar dob, float sal)
     {
-        super(nm, ag);
+        super(nm, dob);
         salary = sal;
     }
     
@@ -21,15 +23,21 @@ public class Emp extends Human{
         return salary;
     }
 
-    public void disp()
+    @Override
+    public String toString()
     {
-        super.disp();
-        System.out.println("\t\t" + salary);
+        return super.toString() + ", " + salary;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Emp e && super.equals(obj) && salary == e.salary;
+    }
+
 
     public static void main(String[] args) {
         System.out.println("Testing Emp: ");
         Emp e = new Emp();
-        e.disp();
+        System.out.println(e);
     }
 }

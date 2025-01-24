@@ -1,34 +1,47 @@
 package naskar;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class Human {
     private String name;
-    private int age;
-
+    private GregorianCalendar dob;
+    
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    
     public Human()
     {
         name = "<no-name>";
-        age = 20;
+        dob = new GregorianCalendar(1968,Calendar.JUNE,23);
     }
-
-    public Human(String name, int age)
+    
+    public Human(String name, GregorianCalendar dob)
     {
         this.name = name;
-        this.age = age;
+        this.dob = dob;
+    }
+    
+    public GregorianCalendar getDob()
+    {
+        return dob;
+    }
+    
+    @Override
+    public String toString()
+    {   
+        
+        return name + ", " + sdf.format(dob.getTime());
     }
 
-    public int getAge()
-    {
-        return age;
-    }
-
-    public void disp()
-    {
-        System.out.println(name + ", " + age);
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Human h && name.equals(h.name) && dob.equals(h.dob);
     }
 
     public static void main(String[] args) {
         System.out.println("Testing Human: ");
         Human h = new Human();
-        h.disp();
+        System.out.println(h);;
     }
 }

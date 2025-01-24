@@ -1,5 +1,7 @@
 package naskar;
 
+import java.util.GregorianCalendar;
+
 public class Manager extends Emp{
     
     private String dept;
@@ -9,9 +11,9 @@ public class Manager extends Emp{
         dept = "Sales";
     }
 
-    public Manager(String nm, int ag, float sal, String dept)
+    public Manager(String nm, GregorianCalendar dob, float sal, String dept)
     {
-        super(nm, ag, sal);
+        super(nm, dob, sal);
         this.dept = dept;
     }
 
@@ -20,15 +22,20 @@ public class Manager extends Emp{
         return dept;
     }
 
-    public void disp()
+    @Override
+    public String toString()
     {
-        super.disp();
-        System.out.println("\t\t\t" + dept);
+        return super.toString() + ", " + dept;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Manager m && super.equals(obj) && dept == m.dept;
     }
 
     public static void main(String[] args) {
         System.out.println("Testing Manager: ");
         Manager m = new Manager();
-        m.disp();
+        System.out.println(m);;
     }
 }

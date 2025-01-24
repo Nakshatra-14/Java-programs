@@ -1,5 +1,6 @@
 package naskar.tools;
 
+import java.lang.Thread.State;
 import java.util.Arrays;
 
 public class Stack {
@@ -78,24 +79,32 @@ public class Stack {
             return arr[top];
         }
     }
-    
-    public void disp()
-    {
+
+    @Override
+    public String toString() {
+        String result = "(";
         for (int i = top ; i >= 0 ; i--) {
-            System.out.print(arr[i] + " ");
+            result += arr[i];    
+            if(i != 0)
+                result += ", ";
         }
-        System.out.println();
+        result += ")";    
+        // return result.substring(0, result.length() - 2);
+        return result;
     }
 
-    public static void main(String[] args) {
-        int ar[] = {25, 82, 63, 54, 39, 12};
+    @Override
+    public boolean equals(Object obj) {
         
-        System.out.println("Before Reverse:" + Arrays.toString(ar));
-
-        reverseUsingStack(ar);
-
-        System.out.println("After  Reverse:" + Arrays.toString(ar));
-
+        if(!(obj instanceof Stack))
+        {
+            return false;
+        }
+        else
+        {
+            Stack s = (Stack) obj;
+            return (top == s.top && Arrays.equals(arr, s.arr));
+        }
     }
 
     public static void reverseUsingStack(int arr[])
@@ -111,6 +120,25 @@ public class Stack {
            i++;
         }   
     }
+
+
+    public static void main(String[] args) {
+        int ar[] = {25, 82, 63, 54, 39, 12};
+        
+        // System.out.println("Before Reverse:" + Arrays.toString(ar));
+
+        // reverseUsingStack(ar);
+
+        // System.out.println("After  Reverse:" + Arrays.toString(ar));
+
+        Stack stk = new Stack(ar.length);
+        for (int e : ar) {
+            stk.push(e);
+        }
+        System.out.println(stk);
+
+    }
+
 
 
 }

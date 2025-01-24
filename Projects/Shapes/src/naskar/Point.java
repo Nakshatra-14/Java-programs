@@ -20,8 +20,9 @@ public class Point {
 
     }
 
-    public void disp()
-    {
-        System.out.println( x + ", " + y );
+    @Override
+    public String toString() {
+        String result = x + ", " + y;
+        return result;
     }
 }

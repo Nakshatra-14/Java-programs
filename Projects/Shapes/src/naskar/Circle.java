@@ -17,9 +17,4 @@ public class Circle extends Shape{
         return (float)(Math.PI * radius * radius);
     }
 
-    public void disp()
-    {
-        super.disp();
-        System.out.println(radius);
-    }
 }
