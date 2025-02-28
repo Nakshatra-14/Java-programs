@@ -1,0 +1,371 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "RadixSort",
+            "request": "launch",
+            "mainClass": "RadixSort",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "AddThem",
+            "request": "launch",
+            "mainClass": "AddThem",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "AreaOfTriangle",
+            "request": "launch",
+            "mainClass": "AreaOfTriangle",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Array2D",
+            "request": "launch",
+            "mainClass": "Array2D",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ArrayReverse",
+            "request": "launch",
+            "mainClass": "ArrayReverse",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Calender",
+            "request": "launch",
+            "mainClass": "Calender",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "CalenderPrinter",
+            "request": "launch",
+            "mainClass": "CalenderPrinter",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "CheckDublicate",
+            "request": "launch",
+            "mainClass": "CheckDublicate",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "CirQueue",
+            "request": "launch",
+            "mainClass": "CirQueue",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "CirQueueModified",
+            "request": "launch",
+            "mainClass": "CirQueueModified",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "DateTime",
+            "request": "launch",
+            "mainClass": "DateTime",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "EmpSort",
+            "request": "launch",
+            "mainClass": "EmpSort",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Functions",
+            "request": "launch",
+            "mainClass": "Functions",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "InWords",
+            "request": "launch",
+            "mainClass": "InWords",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "InsertOrRemoveInArray",
+            "request": "launch",
+            "mainClass": "InsertOrRemoveInArray",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "LengthClass",
+            "request": "launch",
+            "mainClass": "LengthClass",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "LotteryGame",
+            "request": "launch",
+            "mainClass": "LotteryGame",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "MatrixProduct",
+            "request": "launch",
+            "mainClass": "MatrixProduct",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Maze",
+            "request": "launch",
+            "mainClass": "Maze",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "MinnimunLengthWord",
+            "request": "launch",
+            "mainClass": "MinnimunLengthWord",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Month",
+            "request": "launch",
+            "mainClass": "Month",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "MouseMazeProject",
+            "request": "launch",
+            "mainClass": "MouseMazeProject",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "NameSort",
+            "request": "launch",
+            "mainClass": "NameSort",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ObjectBag",
+            "request": "launch",
+            "mainClass": "ObjectBag",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "PackageTester",
+            "request": "launch",
+            "mainClass": "PackageTester",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "PrincipalDiagonal",
+            "request": "launch",
+            "mainClass": "PrincipalDiagonal",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Emp",
+            "request": "launch",
+            "mainClass": "Projects.InheritPractice.src.naskar.Emp",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Human",
+            "request": "launch",
+            "mainClass": "Projects.InheritPractice.src.naskar.Human",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Main(1)",
+            "request": "launch",
+            "mainClass": "Projects.InheritPractice.src.naskar.Main",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Manager",
+            "request": "launch",
+            "mainClass": "Projects.InheritPractice.src.naskar.Manager",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ToolsTester",
+            "request": "launch",
+            "mainClass": "Projects.Practice.src.naskar.practice.ToolsTester",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "DateTime(1)",
+            "request": "launch",
+            "mainClass": "Projects.Tools.src.naskar.tools.DateTime",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Stack",
+            "request": "launch",
+            "mainClass": "Projects.Tools.src.naskar.tools.Stack",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Queue",
+            "request": "launch",
+            "mainClass": "Queue",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "RandomNumberToWord",
+            "request": "launch",
+            "mainClass": "RandomNumberToWord",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ReverseEachWordString",
+            "request": "launch",
+            "mainClass": "ReverseEachWordString",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ReverseString",
+            "request": "launch",
+            "mainClass": "ReverseString",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "RowColsSum",
+            "request": "launch",
+            "mainClass": "RowColsSum",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StackTest",
+            "request": "launch",
+            "mainClass": "StackTest",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StringAlphabeticalOrder",
+            "request": "launch",
+            "mainClass": "StringAlphabeticalOrder",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StringBag",
+            "request": "launch",
+            "mainClass": "StringBag",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StringOccurance",
+            "request": "launch",
+            "mainClass": "StringOccurance",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StringWord",
+            "request": "launch",
+            "mainClass": "StringWord",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "StudentMarks",
+            "request": "launch",
+            "mainClass": "StudentMarks",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Swap",
+            "request": "launch",
+            "mainClass": "Swap",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "T",
+            "request": "launch",
+            "mainClass": "T",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Time2",
+            "request": "launch",
+            "mainClass": "Time2",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "VolumeOfSphere",
+            "request": "launch",
+            "mainClass": "VolumeOfSphere",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "WordExtractor",
+            "request": "launch",
+            "mainClass": "WordExtractor",
+            "projectName": "Java_6249442a"
+        }
+    ]
+}

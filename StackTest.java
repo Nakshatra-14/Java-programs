@@ -1,20 +1,19 @@
 import java.util.Arrays;
 
-class Stack {
+class Stack <T>{
     
     private int top;
-    private int arr[];
+    private T arr[];
 
     public Stack()
     {
-        top = -1;
-        arr = new int[10];
+        this(10);
     }
 
     public Stack(int n)
     {
         top = -1;
-        arr = new int[n];
+        arr = (T[])new Object[n];
     }
 
     public int capacity()
@@ -39,7 +38,7 @@ class Stack {
     }
 
     
-    public void push(int e)
+    public void push(T e)
     {
         if(isFull())
             System.out.println("Error! Stack is full");
@@ -50,27 +49,27 @@ class Stack {
         }    
     }
     
-    public int pop()
+    public T pop()
     {
         if(isEmpty())
         {
             System.out.println("Error! Stack is empty");
-            return -1;
+            return null;
         }
         else
         {
-            int n = arr[top];
+            T n = arr[top];
             top--;
             return n;
         }    
     }
 
-    public int peek()
+    public T peek()
     {
         if(isEmpty())
         {
             System.out.println("Error! Stack is empty");
-            return -1;
+            return null;
         }
         else
         {
@@ -91,18 +90,14 @@ public class StackTest {
 
     public static void reverseUsingStack(int arr[])
     {
-        Stack s = new Stack(arr.length);
+        Stack<Integer> s = new Stack<>(arr.length);
         int i = 0;
-        while(true)
-        {
-            if(s.isEmpty() == false)
-                break;
-            s.push(arr[i]);
-            i++;
+        for (int e : arr) {
+            s.push(e);
         }
         i = 0;
         while(!s.isEmpty())
-            arr[i] = s.pop();    
+            arr[i++] = s.pop();    
     }
 
     // public static void main(String args[])

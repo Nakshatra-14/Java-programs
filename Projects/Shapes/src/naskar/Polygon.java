@@ -1,6 +1,7 @@
 package naskar;
 
 import java.awt.*;
+import java.util.StringJoiner;
 
 public abstract class Polygon extends Shape{
     
@@ -35,15 +36,23 @@ public abstract class Polygon extends Shape{
 
     @Override
     public String toString() {
-        var sb = new StringBuilder(super.toString());
-        sb.append(", Vertices: (");
-        for(int i = 0 ; i < verts.length; i++)
+        // var sb = new StringBuilder(super.toString());
+        // sb.append(", Vertices: (");
+        // for(int i = 0 ; i < verts.length; i++)
+        // {
+        //     if(i != 0)
+        //         sb.append(", ");
+        //     sb.append(verts[i]);
+        // }
+        // sb.append(')');
+        
+        //return sb.toString();
+
+        var sj = new StringJoiner(", ", super.toString() + ", Vertices: (", ")");
+        for(int i = 0 ; i < verts.length ; i++)
         {
-            if(i != 0)
-                sb.append(", ");
-            sb.append(verts[i]);
+            sj.add(verts[i].toString());
         }
-        sb.append(')');
-        return sb.toString();
+        return sj.toString();
     }
 }

@@ -130,29 +130,36 @@ public class Functions {
         }
     }
 
-    public static void main(String[] args) {
-        // Testing random genrator
-        int n = 20, lb = 50, ub = 80;
-        int arr[] = genRandoms(n, lb, ub);
-        System.out.println(Arrays.toString(arr));
-        Arrays.sort(arr);
-        System.out.println(Arrays.toString(arr));
-
-        // Testing Right Shift
-        // int n = 20, lb = 50, ub = 80;
-        // int arr[] = genRandoms(n, lb, ub);
-        // System.out.println(Arrays.toString(arr));
-        // rightShift(arr, 1);
-        // System.out.println(Arrays.toString(arr));
-
-        // Testing Left Shift
-        // int n = 20, lb = 50, ub = 80;
-        // int arr[] = genRandoms(n, lb, ub);
-        // System.out.println(Arrays.toString(arr));
-        // leftShift(arr, 4);
-        // System.out.println(Arrays.toString(arr));
-
-        // printCalender(10, 2024);
-
+    public static String anyToAny(String strNum, int fromRadix, int  toRadix)
+        {
+            int deci = Integer.parseInt(strNum, fromRadix);    // From number to decimal
+            return Integer.toString(deci, toRadix);
+        }
+    
+        public static void main(String[] args) {
+            // Testing random genrator
+            // int n = 20, lb = 50, ub = 80;
+            // int arr[] = genRandoms(n, lb, ub);
+            // System.out.println(Arrays.toString(arr));
+            // Arrays.sort(arr);
+            // System.out.println(Arrays.toString(arr));
+    
+            // Testing Right Shift
+            // int n = 20, lb = 50, ub = 80;
+            // int arr[] = genRandoms(n, lb, ub);
+            // System.out.println(Arrays.toString(arr));
+            // rightShift(arr, 1);
+            // System.out.println(Arrays.toString(arr));
+    
+            // Testing Left Shift
+            // int n = 20, lb = 50, ub = 80;
+            // int arr[] = genRandoms(n, lb, ub);
+            // System.out.println(Arrays.toString(arr));
+            // leftShift(arr, 4);
+            // System.out.println(Arrays.toString(arr));
+    
+            // printCalender(10, 2024);
+    
+            System.out.println(anyToAny("1100", 2, 2));
     }
 }

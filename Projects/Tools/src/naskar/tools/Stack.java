@@ -1,12 +1,10 @@
 package naskar.tools;
-
-import java.lang.Thread.State;
 import java.util.Arrays;
 
 public class Stack {
     
     private int top;
-    private int arr[];
+    private Object arr[];
 
     public Stack()
     {
@@ -16,7 +14,7 @@ public class Stack {
     public Stack(int n)
     {
         top = -1;
-        arr = new int[n];
+        arr = new Object[n];
     }
 
     public int capacity()
@@ -41,7 +39,7 @@ public class Stack {
     }
 
     
-    public void push(int e)
+    public void push(Object e)
     {
         if(isFull())
             System.out.println("Error! Stack is full");
@@ -52,7 +50,7 @@ public class Stack {
         }    
     }
     
-    public int pop()
+    public Object pop()
     {
         if(isEmpty())
         {
@@ -61,13 +59,13 @@ public class Stack {
         }
         else
         {
-            int n = arr[top];
+            Object n = arr[top];
             top--;
             return n;
         }    
     }
 
-    public int peek()
+    public Object peek()
     {
         if(isEmpty())
         {
@@ -107,10 +105,10 @@ public class Stack {
         }
     }
 
-    public static void reverseUsingStack(int arr[])
+    public static void reverseUsingStack(Object arr[])
     {
         Stack s = new Stack(arr.length);
-        for (int e : arr) {
+        for (Object e : arr) {
             s.push(e);
         }
         int i = 0;
@@ -119,6 +117,19 @@ public class Stack {
            arr[i] = s.pop();
            i++;
         }   
+    }
+
+    public static void reverseStringUsingStack(String arr[])
+    {
+        Stack s = new Stack(arr.length);
+        for(String e : arr)
+            s.push(e);
+        int i = 0;
+        while(!s.isEmpty())
+        {
+            arr[i] = (String) s.pop();
+            i++;
+        }    
     }
 
 
