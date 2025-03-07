@@ -17,9 +17,19 @@ public class Point {
 
     }
 
+    public Point copy()
+    {
+        return new Point(x, y);
+    }
+
     @Override
     public String toString() {
         String result = "(" + x + ", " + y + ")";
         return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Point p && p.x == this.x && p.y == this.y;
     }
 }

@@ -1,4 +1,11 @@
+import java.util.ArrayList;
+
 public class Maze {
+
+    private static boolean isValidCoords(Point p, int maze[][])
+    {
+        return p.x >= 0 && p.x < maze[0].length && p.y >= 0 && p.y < maze.length && maze[p.y][p.x] == 0;
+    }
 
     public static int[][] createMaze(String mazeLines[])
     {
@@ -18,73 +25,89 @@ public class Maze {
             return maze;
     }
 
-        public static char checker(int row, int col, int maze[][])
-        {
-            Point n = new Point(row, col);
-                if(n.x - 1 == 0)
-                {
-                    maze[n.x - 1][n.y] = 2;
-                    return 'A'; 
-                }
-                if(n.y + 1 == 0)
-                {
-                    maze[n.x][n.y + 1] = 2;
-                    return 'B';
-                }
-                if(n.x + 1 == 0)
-                {
-                    maze[n.x + 1][n.y] = 2;
-                    return 'C';
-                }
-                if(n.y - 1 == 0)
-                {
-                    maze[n.x][n.y - 1] = 2;
-                    return 'D';            
-                }
-            return 'F';         
-        }
-
-    public static void printRoute(int maze[][], int irow, int icol, int orow, int ocol)
+    public static ArrayList<Point> trackRoute(int maze[][], int irow, int icol, int orow, int ocol)
     {
-        Point arr[] = new Point[50];
+        int rows = maze.length;
+        int cols = maze[0].length;
+        Point entry = new Point(icol, irow);
+        Point exit = new Point(ocol, orow);
+    
+        Point cur = entry;
+        Point next;
 
-        Point n = new Point(irow, icol);
-        int i = 0;
+        Point inc[] = new Point[4];
 
-        while(n.x != orow && n.y != ocol)
+        ArrayList<Point> tracks = new ArrayList<>();
+        
+        inc[0] = new Point(0, -1); //North
+        inc[1] = new Point(1, 0); //East
+        inc[2] = new Point(0, 1); //South
+        inc[3] = new Point(-1, 0); //West
+
+
+        // while(!cur.equals(exit))
+        while(!cur.equals(exit))
         {
-            if(checker(n.x, n.y, maze) == 'A')
-            {
-                n.x--;
-                arr[i] = new Point(n.x, n.y);
+            // System.out.println(cur);
+            tracks.add(cur);
+            maze[cur.y][cur.x] = 2;
+
+            for (Point dir : inc) {
+                next = new Point(cur.x + dir.x, cur.y + dir.y);
+                if(isValidCoords(next, maze))
+                {
+                    cur = next;
+                    break;
+                }
             }
 
-            else if(checker(n.x, n.y, maze) == 'B')
-            {
-                n.y++;
-                arr[i] = new Point(n.x, n.y);
-            }
+            // //check whether next coordinate is valid
+            // if(next.x >= 0 && next.x < cols && next.y >= 0 && next.y < rows && maze[next.y][next.x] == 0)
+            // {
+            //     cur = next;
+            //     continue;
+            // }
 
-            else if(checker(n.x, n.y, maze) == 'C')
-            {
-                n.x++;
-                arr[i] = new Point(n.x, n.y);
-            }
+            // //Go East
+            // next = new Point(cur.x+1, cur.y);
 
-            else if(checker(n.x, n.y, maze) == 'D')
-            {
-                n.y--;
-                arr[i] = new Point(n.x, n.y);
-            }
+            // //check whether next coordinate is valid
+            // if(next.x >= 0 && next.x < cols && next.y >= 0 && next.y < rows && maze[next.y][next.x] == 0)
+            // {
+            //     cur = next;
+            //     continue;
+            // }
 
-            i++;
-            // int t = i;
-            // for(i = 0 ; i < t ; i++)
-            //     System.out.println("(" + arr[i] +")");
+            // //Go South
+            // next = new Point(cur.x, cur.y+1);
+
+            // //check whether next coordinate is valid
+            // if(next.x >= 0 && next.x < cols && next.y >= 0 && next.y < rows && maze[next.y][next.x] == 0)
+            // {
+            //     cur = next;
+            //     continue;
+            // }
+
+            // //Go West
+            // next = new Point(cur.x-1, cur.y);
+
+            // //check whether next coordinate is valid
+            // if(next.x >= 0 && next.x < cols && next.y >= 0 && next.y < rows && maze[next.y][next.x] == 0)
+            // {
+            //     cur = next;
+            //     continue;
+            // }
+
+            
         }
-        System.out.println(i);
 
+        maze[cur.y][cur.x] = 2;
+        // System.out.println(exit);
+        tracks.add(exit);
+        return tracks;
     }
+
+
 
     public static void main(String[] args) {
         String strMaze[] =
@@ -110,8 +133,14 @@ public class Maze {
             System.out.println();
         }
 
-        printRoute(maze, 0, 2, 6, 13);
+        System.out.println(trackRoute(maze, 0, 2, 6, 14));
 
+        for(int i = 0 ; i < maze.length ; i++)
+        {
+            for(int j = 0 ; j < maze[i].length ; j++)
+                System.out.print(maze[i][j]);
+            System.out.println();
+        }
     }
 }
 
