@@ -1,7 +1,7 @@
 import java.text.DateFormatSymbols;
 import java.util.*;
 
-public class DateTime {
+public class DateTimeTest {
 
     public static void printDate(GregorianCalendar dt) {
         int d = dt.get(Calendar.DAY_OF_MONTH);
@@ -60,13 +60,14 @@ public class DateTime {
 
     public static void main(String[] args) {
         GregorianCalendar dt = new GregorianCalendar();
-
+        
         printDate(dt);
-        printTime(dt);
+            printTime(dt);
         printLongDate(dt);
-        // DateTime.printDate(dt);
-        // DateTime.printTime(dt);
-        // DateTime.printLongDate(dt);
+        DateTimeTest.printDate(dt);
+        DateTimeTest.printTime(dt);
+        DateTimeTest.printLongDate(dt);
         System.out.println(daysInMonth(2, 2024));
+        // System.out.println("Hello");
     }
 }

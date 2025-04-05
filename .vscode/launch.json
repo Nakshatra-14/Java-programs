@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DateTimeTest",
+            "request": "launch",
+            "mainClass": "DateTimeTest",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "MoveZero",
+            "request": "launch",
+            "mainClass": "MoveZero",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "RadixSort",
             "request": "launch",
             "mainClass": "RadixSort",

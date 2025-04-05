@@ -15,6 +15,6 @@ public class ToolsTester {
         s.disp();
 
         GregorianCalendar dt = new GregorianCalendar(1920, Calendar.MARCH, 25);
-        DateTime.printLongDate(dt);
+        DateTimeTest.printLongDate(dt);
     }
 }
