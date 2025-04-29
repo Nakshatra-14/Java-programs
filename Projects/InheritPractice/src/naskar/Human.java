@@ -26,6 +26,14 @@ public class Human {
     {
         return dob;
     }
+
+    public int getAge()
+    {
+        GregorianCalendar t = new GregorianCalendar();
+        int today = t.get(Calendar.YEAR);
+        int n = dob.get(Calendar.YEAR);
+        return today - n;
+    }
     
     @Override
     public String toString()

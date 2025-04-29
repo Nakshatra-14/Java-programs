@@ -4,6 +4,25 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class Main {
+
+    public static void printSpecial(Object b)
+    {
+        //if b is string then print its first char
+        // but if b is a human, then print its age
+        //otherwise print "Dont Know"
+
+        // if(b instanceof Human h && !(b instanceof Emp))
+        if(b.getClass() == Human.class)
+            System.out.println(((Human) b).getAge());
+
+        else if (b instanceof String s) 
+            System.out.println(s.charAt(0));
+
+        else
+            System.out.println("Dont Know");
+
+    }
+
     public static void main(String[] args) {
         
     //     Human h1 = new Human();
@@ -69,5 +88,10 @@ public class Main {
         System.out.println(e);
         System.out.println(e.equals(g));
         System.out.println(e.equals(k));
+
+        Human h = new Human();
+        printSpecial("Nakshatra"); //N
+        printSpecial(k); //92
+        printSpecial(h);
     }
 }

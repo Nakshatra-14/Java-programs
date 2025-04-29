@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DateChecker",
+            "request": "launch",
+            "mainClass": "DateChecker",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "VaidFloatChecker",
+            "request": "launch",
+            "mainClass": "VaidFloatChecker",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "TimeDisplay",
+            "request": "launch",
+            "mainClass": "TimeDisplay",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Timer",
+            "request": "launch",
+            "mainClass": "Timer",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "DateTimeTest",
             "request": "launch",
             "mainClass": "DateTimeTest",
