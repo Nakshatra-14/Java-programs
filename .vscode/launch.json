@@ -6,6 +6,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FileWordCount",
+            "request": "launch",
+            "mainClass": "FileWordCount",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileMatrixReader",
+            "request": "launch",
+            "mainClass": "FileMatrixReader",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileMatrixInput",
+            "request": "launch",
+            "mainClass": "FileMatrixInput",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileReadNumSort",
+            "request": "launch",
+            "mainClass": "FileReadNumSort",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileInput",
+            "request": "launch",
+            "mainClass": "FileInput",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "HexViewer",
+            "request": "launch",
+            "mainClass": "HexViewer",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FilePrinter",
+            "request": "launch",
+            "mainClass": "FilePrinter",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "DateChecker",
             "request": "launch",
             "mainClass": "DateChecker",

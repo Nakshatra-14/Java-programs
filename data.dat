@@ -1,0 +1,13 @@
+About the Project: NutriVoice
+Inspiration
+Growing up, I was fascinated by the clarity of food packaging in Japan and Singapore, where every detail—nutritional values, EcoScore, and Nutri-Score—is printed clearly on the packet, empowering consumers to make informed choices. However, in many parts of the world, including my own community, people often feel confused when selecting food, overwhelmed by complex labels or unclear health impacts. This challenge hit close to home as I watched my father, who has diabetes, struggle to choose safe foods without guidance. Inspired by the simplicity of Japanese and Singaporean packaging and driven by a desire to help people like my father, I created NutriVoice—an app that scans food barcodes to deliver clear nutritional insights, diabetes-friendly recommendations, and personalized, multilingual guidance, making healthy eating accessible to everyone, everywhere.
+
+What I Learned
+Building NutriVoice was a journey of growth in both technical and empathetic skills:
+
+Technical Skills: I deepened my expertise in Android development with Kotlin, mastering libraries like Retrofit for API calls to OpenFoodFacts, Room for local database storage, Moshi for JSON parsing, and the Gemini API for generating personalized narratives. I also learned to integrate Android’s Text-to-Speech (TTS) engine to support multiple languages (English, Hindi, Bengali), enhancing accessibility.
+User-Centric Design: I gained insights into designing for diverse users, from diabetic individuals needing precise nutritional guidance to non-diabetic users seeking general health insights. Understanding the importance of clear, TTS-friendly narratives taught me to prioritize accessibility.
+Problem-Solving: Tackling real-world challenges, like unreliable internet or complex nutritional data, helped me appreciate robust error handling and fallback mechanisms.
+Empathy: My father’s experience with diabetes taught me to approach development with empathy, ensuring the app feels like a trusted friend guiding users through food choices.
+How I Built NutriVoice
+NutriVoice is an Android app built with Kotlin, designed to simplify food choices through barcode scanning and personalized guidance. Here’s how I brought it to life:

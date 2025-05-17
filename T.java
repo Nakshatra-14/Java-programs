@@ -24,25 +24,36 @@
 //     }
 // }
 
-public class T
-{
-    public static void test(int n[])
-    {
-        n[0]++;
-    }
+// public class T
+// {
+//     public static void test(int n[])
+//     {
+//         n[0]++;
+//     }
+//     public static void main(String[] args) {
+
+//         int n = 123;
+
+//         int a = n%10;
+
+//         int b = n%100;
+
+//         int c = n%1000;
+
+
+//         System.out.println(a);
+//         System.out.println(b);
+//         System.out.println(c);
+//     }
+// }
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class T {
     public static void main(String[] args) {
-
-        int n = 123;
-
-        int a = n%10;
-
-        int b = n%100;
-
-        int c = n%1000;
-
-
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(c);
+        // WordFinder.main(null);
+       int n[] = Functions.genRandoms(10, 5, 50);
+       Arrays.toString(n);
     }
 }
