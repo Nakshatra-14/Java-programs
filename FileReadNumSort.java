@@ -7,9 +7,9 @@ public class FileReadNumSort {
     
     public static void main(String[] args) throws IOException{
         Scanner inp = new Scanner(System.in);
-        System.out.print("Enter Filname: ");
-        String fname = inp.nextLine();
-        File file = new File(fname);
+        // System.out.print("Enter Filname: ");
+        // String fname = inp.nextLine();
+        File file = new File("numbers.dat");
 
         var fis = new FileInputStream(file);
 

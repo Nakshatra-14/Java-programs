@@ -18,6 +18,6 @@ public class FileMatrixReader {
             System.out.println();
         }
         dos.close();
-        System.out.println("Succesfully read a " + row + "X" + col + " Matrix");
+        // System.out.println("Succesfully read a " + row + "X" + col + " Matrix");
     }
 }

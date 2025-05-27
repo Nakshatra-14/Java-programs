@@ -3,7 +3,7 @@ import java.io.*;
 public class FileWordCount {
 
     public static int countWordOld(String st) {
-        String words[] = st.split("");
+        String words[] = st.split(" ");
         int count = 0;
         for (String w : words)
             if (!w.isEmpty()) // if str has length zero
@@ -33,9 +33,11 @@ public class FileWordCount {
         int toWord = 0;
 
         for(String line = br.readLine() ; line != null ; line = br.readLine())
+        {
             toWord += countWord(line);
             // toWord += countWordOld(line);
-            // System.out.println(line);
+            System.out.println(line);
+        }
         
         br.close();
         System.out.println("No. of words =  " + toWord);

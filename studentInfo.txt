@@ -1,0 +1,120 @@
+Rahul Kumar  
+12 89 78 88  
+Riki Das  
+13 78 75 87  
+Sneha Roy  
+14 92 81 90  
+Amit Sharma  
+15 67 74 80  
+Pooja Mehta  
+16 88 85 84  
+Karan Singh  
+17 79 83 77  
+Anita Joshi  
+18 91 89 92  
+Vikram Rao  
+19 72 76 70  
+Neha Kapoor  
+20 86 88 85  
+Rohan Das  
+21 80 79 81  
+Tanya Verma  
+22 84 86 82  
+Manish Gupta  
+23 69 70 68  
+Simran Kaur  
+24 90 92 94  
+Arjun Yadav  
+25 77 75 78  
+Isha Jain  
+26 85 87 88 
+Dev Patel  
+27 74 73 76  
+Priya Nair  
+28 93 91 95  
+Sameer Khan  
+29 81 80 79  
+Ritika Sen  
+30 89 90 88  
+Kabir Bansal  
+31 76 78 80  
+Meera Sinha  
+32 87 85 89  
+Nikhil Reddy  
+33 73 76 75  
+Anjali Thakur  
+34 91 90 92  
+Saurabh Mishra  
+35 68 70 72  
+Divya Iyer  
+36 88 86 84  
+Harsh Vora  
+37 77 79 78  
+Kritika Shah  
+38 93 95 94  
+Alok Das  
+39 81 82 80  
+Tanvi Malhotra  
+40 85 83 86  
+Rajat Kulkarni  
+41 74 76 73  
+Bhavna Chatterjee  
+42 89 90 91  
+Naveen Joseph  
+43 70 71 69  
+Shreya Rathi  
+44 92 94 90  
+Yashwant Naik  
+45 78 77 76  
+Lavanya Bhat  
+46 87 89 88  
+Omkar Shetty  
+47 75 74 77  
+Ishita Bose  
+48 90 91 89  
+Rudra Sen  
+49 82 83 85  
+Pallavi Chawla  
+50 88 86 87  
+Aditya Menon  
+51 79 81 80  
+Swati Dubey  
+52 86 88 87  
+Ramesh Gowda  
+53 72 74 70  
+Trisha Paul  
+54 91 90 93  
+Mohit Raina  
+55 69 68 71  
+Nandini Rao  
+56 88 90 89  
+Abhishek Nair  
+57 77 75 78  
+Reema Talwar  
+58 92 91 94  
+Tarun Bhatt  
+59 80 82 79  
+Sanya Oberoi  
+60 85 86 88  
+Deepak Joshi  
+61 73 74 72  
+Preeti Suresh  
+62 89 90 91  
+Anshul Mehra  
+63 68 70 69  
+Kajal Bansal  
+64 93 94 92  
+Vivek Tripathi  
+65 76 75 77  
+Ira Sood  
+66 87 89 88  
+Kunal Sehgal  
+67 74 72 73  
+Shalini Agarwal  
+68 90 91 89  
+Parth Deshmukh  
+69 81 83 82  
+Namrata Singh  
+70 88 87 86  
+Zaid Hussain  
+71 79 80 78

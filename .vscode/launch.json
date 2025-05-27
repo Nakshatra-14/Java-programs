@@ -6,6 +6,90 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SplitFile",
+            "request": "launch",
+            "mainClass": "SplitFile.SplitFile",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileMarksheetToHTML",
+            "request": "launch",
+            "mainClass": "FileMarksheetToHTML",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileStateCity",
+            "request": "launch",
+            "mainClass": "FileStateCity",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileByteMaker",
+            "request": "launch",
+            "mainClass": "FileByteMaker",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileGenericCSVreader",
+            "request": "launch",
+            "mainClass": "FileGenericCSVreader",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileCSVReader",
+            "request": "launch",
+            "mainClass": "FileCSVReader",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileMarksheetReading",
+            "request": "launch",
+            "mainClass": "FileMarksheetReading",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileNumbersReading",
+            "request": "launch",
+            "mainClass": "FileNumbersReading",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileMarksheetReadingTester",
+            "request": "launch",
+            "mainClass": "FileMarksheetReadingTester",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileInputScanner",
+            "request": "launch",
+            "mainClass": "FileInputScanner",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileCopyWithoutLoop",
+            "request": "launch",
+            "mainClass": "FileCopyWithoutLoop",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "FileWordCount",
             "request": "launch",
             "mainClass": "FileWordCount",
