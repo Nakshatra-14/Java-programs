@@ -10,7 +10,6 @@ public class FileGenericCSVreader {
 
         try (
                 Scanner finp = new Scanner(file);
-                Scanner inp = new Scanner(System.in);
             ) 
             {
                 int n = 0;
@@ -58,6 +57,5 @@ public class FileGenericCSVreader {
     }
 }
 
-// title[] = finp.nextLine().split(",");
-// title = finp.nextLine().split(",");
+
 

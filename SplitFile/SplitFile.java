@@ -12,23 +12,32 @@ import java.io.*;
 
 public class SplitFile {
 
-    public static void splitFileByNumber(File file, int n)
+    public static void splitFileByNumber(File file, int n) throws IOException
     {
         // String f[] = null;
-        int v  = 0;
+        // int v  = 0;
         int size = (int)file.length();
         int chunkSize = Math.ceilDiv(size, n);
         // int lastSize = size - chunkSize * (n - 1);
+        var fis = new FileInputStream(file);
+        // byte buff[] = null;
         for(int i = 1 ; i <= n ; i++)
         {
             if(i == n)
                 chunkSize = size;
+            byte buff[] = new byte[chunkSize];
             String filename = file.getName() + "." + String.format("%03d", i);
-            System.out.printf("%s %d bytes%n", filename, chunkSize);
+            // System.out.printf("%s %d bytes%n", filename, chunkSize);
+            File cf = new File(file.getName() + "." + String.format("%03d", i));
+            var fos = new FileOutputStream(cf);
+            // int read = fis.read(buff);
+            fos.write(buff);
+            System.out.printf("%s of %d byte is Created%n", filename, chunkSize);
             size -= chunkSize;
         }
     }
 
+    // private void fileMaker(File)
 
     public static void splitFileBySize(File file, int size)
     {
@@ -39,7 +48,7 @@ public class SplitFile {
     
     public static void main(String[] args) throws IOException{
         
-        File file = new File("Random.dat");
+        File file = new File("E:\\code\\Java\\Random.dat");
 
         splitFileByNumber(file, 5);
     }

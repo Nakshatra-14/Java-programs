@@ -8,11 +8,11 @@ public class HexViewer {
 
         Scanner inp = new Scanner(System.in);
 
-        File file = new File("Random.dat");
+        // File file = new File("Random.dat");
+        File file = new File("E:\\code\\Java\\customers-100.csv");
         var fis = new FileInputStream(file);
 
         int byteCount = 0;
-        int b;
         int p = 0;
 
         System.out.print(" ".repeat(9));
