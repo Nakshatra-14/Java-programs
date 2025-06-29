@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DigitalClock",
+            "request": "launch",
+            "mainClass": "DigitalClock",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileComperator",
+            "request": "launch",
+            "mainClass": "FileComperator",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "SplitOrJoin",
+            "request": "launch",
+            "mainClass": "SplitFile.SplitOrJoin",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FirstGUI",
+            "request": "launch",
+            "mainClass": "FirstGUI",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "FileCSVtoHTML",
+            "request": "launch",
+            "mainClass": "FileCSVtoHTML",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "SplitFile",
             "request": "launch",
             "mainClass": "SplitFile.SplitFile",

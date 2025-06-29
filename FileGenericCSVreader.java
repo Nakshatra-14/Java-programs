@@ -10,13 +10,14 @@ public class FileGenericCSVreader {
 
         try (
                 Scanner finp = new Scanner(file);
+                Scanner inp = new Scanner(System.in);
             ) 
             {
                 int n = 0;
                 String f = "y";
                 System.out.print("Does contain header (y/n): ");
 
-                // f = inp.nextLine();             
+                f = inp.nextLine();             
 
                 String title[] = null;
                 if(f.charAt(0) == 'y')
@@ -24,7 +25,7 @@ public class FileGenericCSVreader {
                     title = finp.nextLine().split(",");
                 }
 
-                if(f.charAt(0) == 'n')
+                if(f.charAt(0) == 'n')      //for testing no header
                      finp.nextLine();
 
             

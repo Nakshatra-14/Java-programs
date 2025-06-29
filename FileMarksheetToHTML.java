@@ -47,6 +47,7 @@ public class FileMarksheetToHTML {
             while (hd.hasNextLine()) {
                 pw.println(hd.nextLine());
             }
+            pw.println("                    <center><table border=\"5\" width=\"90%\" style=\"border-collapse: collapse; font-family: Arial, sans-serif; font-size: 16px; text-align: center; background-color: #f9f9f9;\">");
             pw.println("            <tr style=\"background-color: #77ff7ca8;\">");
             pw.println("                <th>Name</td>");
             pw.println("                <th>Roll</td>");
