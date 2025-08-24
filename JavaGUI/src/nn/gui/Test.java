@@ -1,9 +1,26 @@
 package nn.gui;
 
-import java.util.Date;
 
-public class Test {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Test extends JFrame {
+
+    public Test()
+    {
+        setTitle("Test");
+        setSize(500, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        JPanel p = new JPanel();
+
+        
+        
+        add(p);
+    }
+    
     public static void main(String[] args) {
-        System.out.println(new Date().getSeconds());
+        new Test().setVisible(true);
     }
 }
