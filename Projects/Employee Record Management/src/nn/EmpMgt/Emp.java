@@ -12,6 +12,12 @@ public class Emp {
     private String name;
     private Date dob;
     private float salary;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+    static
+    {
+        sdf.setLenient(false);
+    }
 
     public Emp(int id, String name, Date dob, float salary)
     {
@@ -23,34 +29,40 @@ public class Emp {
 
     public Emp(int id, String name, String dob, float salary) throws ParseException
     {
-        String pattern = "dd/MM/yyyy";
-        var sdf = new SimpleDateFormat(pattern);
-
-        this.id = id;
-        this.name = name;
-        this.dob = sdf.parse(dob);
-        this.salary = salary;
+        this(id, name, sdf.parse(dob), salary);
     }
 
     public void save(DataOutputStream os) throws IOException
     {
-        String pattern = "dd/MM/yyyy";
-        var sdf = new SimpleDateFormat(pattern);
-
         os.writeInt(id);
         os.writeUTF(name);
         os.writeUTF(sdf.format(dob));
         os.writeFloat(salary);
     }
 
-    
-    public Emp load(DataInputStream in) throws IOException, ParseException
+    public static Emp load(DataInputStream in) throws IOException
     {
-        return new Emp(in.readInt(), in.readUTF(), in.readUTF(), in.readFloat());
+        Emp e = null;
+    
+        try {
+            e = new Emp(in.readInt(), in.readUTF(), in.readUTF(), in.readFloat());
+        } catch (ParseException ex) 
+        {
+            
+        }
+        return e;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "Emp [id=" + id + ", name=" + name + ", dob=" + dob + ", salary=" + salary + "]";
+        return "Emp [id=" + id + ", name=" + name + ", dob=" + sdf.format(dob) + ", salary=" + salary + "]";
     }
 }

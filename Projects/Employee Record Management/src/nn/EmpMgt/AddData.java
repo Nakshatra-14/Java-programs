@@ -15,6 +15,7 @@ public class AddData {
         File file = new File("emp.dat");
         try
         (
+            
             var fos = new FileOutputStream(file);
             var dos = new DataOutputStream(fos);
             
@@ -22,7 +23,6 @@ public class AddData {
             var dis = new DataInputStream(fis);
         )
         {
-
             Emp a = new Emp(101, "test 1", new Date(), 10000);
             Emp b = new Emp(102, "test 2", new Date(), 10000);
             Emp c = new Emp(103, "test 3", new Date(), 10000);
@@ -34,10 +34,12 @@ public class AddData {
             d.save(dos);
             e.save(dos);
 
-            // Emp l = a.load(dis);
+            Emp l = Emp.load(dis);
+            Emp m = Emp.load(dis);
     
             // System.out.println(c.toString());
-            // System.out.println(l.toString());
+            System.out.println(l.toString());
+            System.out.println(m);
             
             System.out.println("saved");
         }

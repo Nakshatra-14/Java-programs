@@ -4,12 +4,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuBased {
@@ -106,7 +104,11 @@ public class MenuBased {
                 //System.out.println("\r");
                 System.out.print("Enter id to search: ");
                 int id = inp.nextInt();
-                findDataById(filename+".dat", id);
+                Emp e = findDataById(filename+".dat", id);
+                if(e == null)
+                    System.out.println("Record not found");
+                else
+                    System.out.println(e);
             }
             else if(input == 5)
             {
@@ -126,65 +128,47 @@ public class MenuBased {
         }
     }
 
-    private static void findDataById(String filename, int findId) throws FileNotFoundException, IOException, ParseException, InterruptedException
+    private static Emp findDataById(String filename, int findId)
     {
-        ArrayList<Integer> al = new ArrayList<>();
-        int id;
-        String name;
-        String dt;
-        float salary;
-        
-        var fis = new FileInputStream(filename);
-        var dis = new DataInputStream(fis);
         try
-           {
-               while (true) {
-                   id = dis.readInt();
-                   dis.readUTF();
-                   dis.readUTF();
-                   dis.readFloat();
-                    System.out.println(id);
-                   al.add(id);
-               }
-           }
-            catch (IOException e) { System.out.println("reached EOF");}
-
-        fis = new FileInputStream(filename);
-        dis = new DataInputStream(fis);
-
-        //System.out.println("\r");
-
-
-        if(al.contains(findId))
-            {
-                int pos = al.indexOf(findId);
-                for(int i = 0 ; i < pos ; i++)
-                {
-                    System.out.println(i);
-                    dis.readInt();
-                    dis.readUTF();
-                    dis.readUTF();
-                    dis.readFloat();
-                    if(i+1 == pos)
-                    {
-                        id = dis.readInt();
-                        name = dis.readUTF();
-                        dt = dis.readUTF();
-                        salary = dis.readFloat();
-
-                        System.out.println("Found Data at index " + pos + "\nID: " + id + "\nName: " + name + "\nDOB: " + sdf.parse(dt) + "\nSalary: " + salary);
-
-                        Thread.sleep(3000);
-                    }
-                    
-                }
+        (
+            var fis = new FileInputStream(filename);
+            var dis = new DataInputStream(fis);
+        )
+        {
+            while (true) {
+                Emp e = Emp.load(dis);
+                if(e.getId() == findId)
+                    return e;
             }
-            else
-                System.out.println("Data with ID: " + findId + " is not found");
-
-            fis.close();
-            dis.close();
+        } catch (IOException e1) {}
+        return null;
     }
+
+    // public static void displayAllData(File file) throws InterruptedException
+    // {
+    //     try (
+    //             var fis = new FileInputStream(file);
+    //             var dis = new DataInputStream(fis);
+    //         ) 
+    //         {
+
+    //         //System.out.println("\r");
+
+    //             while (true) {
+    //                 int id = dis.readInt();
+    //                 String name = dis.readUTF();
+    //                 String dt = dis.readUTF();
+    //                 float salary = dis.readFloat();
+
+    //                 System.out.println("Emp [id=" + id + ", name=" + name + ", dob=" + dt + ", salary=" + salary + "]");
+    //             }
+    //         } catch (IOException e) {
+    //             System.out.println("Read all");
+    //         } 
+
+    //     Thread.sleep(3000);
+    // }
 
     public static void displayAllData(File file) throws InterruptedException
     {
@@ -197,12 +181,9 @@ public class MenuBased {
             //System.out.println("\r");
 
                 while (true) {
-                    int id = dis.readInt();
-                    String name = dis.readUTF();
-                    String dt = dis.readUTF();
-                    float salary = dis.readFloat();
-
-                    System.out.println("Emp [id=" + id + ", name=" + name + ", dob=" + dt + ", salary=" + salary + "]");
+                    
+                    Emp e = Emp.load(dis);
+                    System.out.println(e);
                 }
             } catch (IOException e) {
                 System.out.println("Read all");
