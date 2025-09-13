@@ -8,11 +8,11 @@ class Assistant1 implements Runnable
     public void run() {
         for (int i = 0; i < 20; i++) {
             System.out.println("Assistant 1 working on task: " + i);
-            try {
-                Thread.sleep(new Random().nextInt(2000));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            // try {
+            //     Thread.sleep(new Random().nextInt(2000));
+            // } catch (InterruptedException e) {
+            //     e.printStackTrace();
+            // }
         }
     }
 
@@ -24,11 +24,11 @@ class Assistant2 implements Runnable
     public void run() {
         for (int i = 0; i < 20; i++) {
             System.out.println("Assistant 2 working on task: " + i);
-            try {
-                Thread.sleep(new Random().nextInt(2000)); 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            // try {
+            //     Thread.sleep(new Random().nextInt(2000)); 
+            // } catch (InterruptedException e) {
+            //     e.printStackTrace();
+            // }
         }
     }
 
