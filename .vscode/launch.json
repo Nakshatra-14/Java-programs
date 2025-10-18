@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CubeStructureBuilder",
+            "request": "launch",
+            "mainClass": "CubeStructureBuilder",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "OptimalShipLoading",
+            "request": "launch",
+            "mainClass": "OptimalShipLoading",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Testing",
+            "request": "launch",
+            "mainClass": "Testing",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "DigitalClock",
             "request": "launch",
             "mainClass": "DigitalClock",
