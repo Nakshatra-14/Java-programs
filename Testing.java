@@ -1,4 +1,11 @@
-void main()
+// import static java.lang.System.out;
+import static java.lang.Math.PI;
+import static java.lang.IO.println;
+
+public class Testing
 {
-    IO.println("Helloo");
+  void main()
+  {
+    println("Hello " + PI);
+  }
 }

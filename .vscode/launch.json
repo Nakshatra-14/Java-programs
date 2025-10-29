@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "letterSorting",
+            "request": "launch",
+            "mainClass": "letterSorting",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "CubeStructureBuilder",
             "request": "launch",
             "mainClass": "CubeStructureBuilder",

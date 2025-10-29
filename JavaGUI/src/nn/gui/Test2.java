@@ -27,17 +27,17 @@ public class Test2 {
             new JCheckBox("Eight"),
         };
 
-        // JList<JCheckBox> checkBoxList = new JList<>(jtxtBox);
-        // JScrollPane scpCheckBox = new JScrollPane(checkBoxList);
-        // checkBoxList.setVisibleRowCount(4);
+        JList<JCheckBox> checkBoxList = new JList<>(jtxtBox);
+        JScrollPane scpCheckBox = new JScrollPane(checkBoxList);
+        checkBoxList.setVisibleRowCount(4);
 
         JFrame frm = new JFrame();
         JPanel p = new JPanel(new GridLayout(9, 0));
-        // p.add(checkBoxList);
-        p.add(ckBox);
-        for (JCheckBox jCheckBox : jtxtBox) {
-            p.add(jCheckBox);
-        }
+        p.add(checkBoxList);
+        // p.add(ckBox);
+        // for (JCheckBox jCheckBox : jtxtBox) {
+        //     p.add(jCheckBox);
+        // }
         frm.add(p);
         frm.pack();
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
