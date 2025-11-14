@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PersonManager",
+            "request": "launch",
+            "mainClass": "PersonManager",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "ComparePerson",
+            "request": "launch",
+            "mainClass": "ComparePerson",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "Anagram",
+            "request": "launch",
+            "mainClass": "Anagram",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "letterSorting",
             "request": "launch",
             "mainClass": "letterSorting",
