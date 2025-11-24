@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
 
 public class ImageJlist {
 
@@ -29,12 +30,16 @@ public class ImageJlist {
     //         jlst.add(icon, i);
     //     }
     // }
-    public static Icon getBigIcon(int index) throws IOException
+    public static Icon getBigIcon(int index)
     {
         File imgPath = new File("picture");
         File file = new File(imgPath, index + ".png");
-        Image img = ImageIO.read(file);
-        return new ImageIcon(img);
+        try {
+            Image img = ImageIO.read(file);
+            return new ImageIcon(img);
+        } catch (IOException e) {
+            return null; 
+        }
     }
 
     public static void main(String[] args) throws IOException {
@@ -53,15 +58,26 @@ public class ImageJlist {
             Icon icon = new ImageIcon(image);
             model.addElement(icon);
         }
-        JLabel showImg = new JLabel("click");
-        int curImgIndex = jlst.getSelectedIndex();
-        if(curImgIndex != -1)
-            showImg = new JLabel(getBigIcon(curImgIndex));
+
+        JLabel imgLbl = new JLabel();
+        
+        jlst.addListSelectionListener(_ -> 
+        {
+
+            if(!jlst.getValueIsAdjusting())
+            {
+                int curImgIndex = jlst.getSelectedIndex();
+
+                if(curImgIndex != -1)
+                    imgLbl.setIcon(getBigIcon(curImgIndex));
+
+            }
+        });
 
         JFrame frm = new JFrame();
         JPanel p = new JPanel(new GridLayout(2, 1));
         p.add(scpIconList);
-        p.add(showImg);
+        p.add(imgLbl);
         frm.add(p);
         frm.pack();
         frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

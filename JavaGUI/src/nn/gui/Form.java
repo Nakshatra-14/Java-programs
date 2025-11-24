@@ -33,20 +33,20 @@ public class Form {
     JTextField txtName = new JTextField(); 
     JLabel pictPanel = new JLabel();
     JLabel lblAddress = new JLabel("Address:");
-    JTextArea addressPanel = new JTextArea();
+    JTextArea taAddress = new JTextArea(4, 30);
     JLabel lbldob = new JLabel("DOB:");
     JTextField dob = new JTextField();
     JRadioButton radMale = new JRadioButton("M");
     JRadioButton radFemale = new JRadioButton("F");
     JLabel lblEmail = new JLabel("Email:");
-    JTextField email = new JTextField();
+    JTextField email = new JTextField(20);
     JLabel lblOccupation = new JLabel("Occupation:");
     JTextField occupation = new JTextField();
     JButton picChgBtn = new JButton("Change");
     JLabel lblUsername = new JLabel("Username:");
-    JTextField username = new JTextField();
+    JTextField username = new JTextField(15);
     JLabel lblPassword = new JLabel("Password:");
-    JTextField password = new JTextField();
+    JTextField password = new JTextField(10);
     JButton chgPassBtn = new JButton("Change");
 
     public Form() throws IOException {
@@ -69,11 +69,11 @@ public class Form {
         mainPanel.add(scplst, gbc);
 
         //lblName
-        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lblName, gbc);
 
         //txtName
-        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         mainPanel.add(txtName, gbc);
 
         //pictPanel
@@ -82,75 +82,82 @@ public class Form {
         mainPanel.add(pictPanel, gbc);
 
         //txtAddress
-        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lblAddress, gbc);
 
         //addressPanel
-        addressPanel.setText(
-            """
-            Flat 3B, Sai Residency, 
-            45 Park Road, Koregaon Park, Pune, 
-            Maharashtra 411001, India
-            """
-            );
-        gbc = new GridBagConstraints(2, 1, 1, 5, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(addressPanel, gbc);
+        // taAddress.setText(
+        //     """
+        //     Flat 3B, Sai Residency, 
+        //     45 Park Road, Koregaon Park, Pune, 
+        //     Maharashtra 411001, India
+        //     """
+        //     );
+        gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
+        mainPanel.add(new JScrollPane(taAddress), gbc);
 
         //genderPanel
         JPanel genderPanel = new JPanel();
         genderPanel.setBorder(BorderFactory.createTitledBorder("Gender"));
         genderPanel.add(radMale);
         genderPanel.add(radFemale);
-        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(genderPanel, gbc);
 
         //lbldob
-        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lbldob, gbc);
 
         //dob
-        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         mainPanel.add(dob, gbc);
 
         //lblemail
-        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lblEmail, gbc);
 
         //email
-        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         mainPanel.add(email, gbc);
 
         //lblOccupation
-        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lblOccupation, gbc);
 
         //occupation
-        gbc = new GridBagConstraints(2, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         mainPanel.add(occupation, gbc);
 
         //picChgBtn
-        gbc = new GridBagConstraints(4, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
         mainPanel.add(picChgBtn, gbc);
 
         //lblUsername
-        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
         mainPanel.add(lblUsername, gbc);
         
         //username
-        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         mainPanel.add(username, gbc);
 
+        JPanel passwordPanel = new JPanel();
+
         //lblPassword
-        gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(lblPassword, gbc);
+        // gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // mainPanel.add(lblPassword, gbc);
+        // passwordPanel.add(lblPassword);
 
         //password
-        gbc = new GridBagConstraints(4, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(password, gbc);
+        // gbc = new GridBagConstraints(4, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // mainPanel.add(password, gbc);
+        passwordPanel.add(password);
 
         //ChgPassBtn
-        gbc = new GridBagConstraints(5, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(chgPassBtn, gbc);
+        // mainPanel.add(chgPassBtn, gbc);
+        passwordPanel.add(chgPassBtn);
+        passwordPanel.setBorder(BorderFactory.createTitledBorder("Password"));
+        gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        mainPanel.add(passwordPanel, gbc);
 
         frm.add(mainPanel);
         frm.pack();
