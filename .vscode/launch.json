@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DataBaseConnectionJDBC",
+            "request": "launch",
+            "mainClass": "DataBaseConnectionJDBC",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
+            "name": "DataBAseConnectionJDBC",
+            "request": "launch",
+            "mainClass": "DataBAseConnectionJDBC",
+            "projectName": "Java_6249442a"
+        },
+        {
+            "type": "java",
             "name": "PersonManager",
             "request": "launch",
             "mainClass": "PersonManager",
