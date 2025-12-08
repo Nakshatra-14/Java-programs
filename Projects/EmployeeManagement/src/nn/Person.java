@@ -1,6 +1,13 @@
 package nn;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import java.io.FileReader;
+import java.io.IOException;
+import com.opencsv.CSVReader;
 
 public class Person {
     private String name;
@@ -55,11 +62,29 @@ public class Person {
         return password;
     }
 
-    public static ArrayList<Person> generate()
+    public static ArrayList<Person> generate() throws IOException
     {
         ArrayList<Person> al = new ArrayList<>();
-        al.add(new Person("Nikil", "10-11-2002", "M", "Kolkata", "abc123@mail.com", "Doctor", "nikil123", "nik123"));
-        al.add(new Person("Mukesh", "11-01-2003", "F", "Hydrabad", "def123@mail.com", "Engineer", "mukesh456", "muk456"));
+        // al.add(new Person("Nikil", "10-11-2002", "M", "Kolkata", "abc123@mail.com", "Doctor", "nikil123", "nik123"));
+        // al.add(new Person("Mukesh", "11-01-2003", "F", "Hydrabad", "def123@mail.com", "Engineer", "mukesh456", "muk456"));
+        
+        // File file = new File("indian_1000_records.csv");
+        try
+        (
+            // Scanner inp = new Scanner(file);
+            FileReader file = new FileReader("indian_1000_records.csv");
+            CSVReader csvread = new CSVReader(file) ;
+        )
+        {
+            // inp.nextLine();
+            // while (inp.hasNextLine()) {
+            //     String arr[] = inp.nextLine().split(",");
+            //     Person p = new Person(arr[2], arr[6], arr[3], arr[7], arr[4], arr[8], arr[0], arr[1]);
+            //     al.add(p);
+            // }
+
         return al;
+        }
+
     }
 }

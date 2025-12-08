@@ -5,10 +5,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -78,84 +81,10 @@ public class Form {
         genderGrp.add(radFemale);
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc;
+        GridBagConstraints gbc = new GridBagConstraints();
         Insets insets = new Insets(5, 5, 5, 5);
-        
-        //List
-        gbc = new GridBagConstraints(0, 0, 1, 6, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(scplst, gbc);
 
-        //lblName
-        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lblName, gbc);
-
-        //txtName
-        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        mainPanel.add(txtName, gbc);
-
-        //pictPanel
-        pictPanel.setIcon(new ImageIcon(ImageIO.read(new File("E:\\code\\Java\\JavaGUI\\picture\\resize\\1.png"))));
-        gbc = new GridBagConstraints(4, 0, 1, 5, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(pictPanel, gbc);
-
-        //txtAddress
-        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lblAddress, gbc);
-
-        //addressPanel
-        // taAddress.setText(
-        //     """
-        //     Flat 3B, Sai Residency, 
-        //     45 Park Road, Koregaon Park, Pune, 
-        //     Maharashtra 411001, India
-        //     """
-        //     );
-        gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(new JScrollPane(txtAddress), gbc);
-
-        //genderPanel
-        JPanel genderPanel = new JPanel();
-        genderPanel.setBorder(BorderFactory.createTitledBorder("Gender"));
-        genderPanel.add(radMale);
-        genderPanel.add(radFemale);
-        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(genderPanel, gbc);
-
-        //lbldob
-        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lbldob, gbc);
-
-        //dob
-        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        mainPanel.add(txtDob, gbc);
-
-        //lblemail
-        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lblEmail, gbc);
-
-        //email
-        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        mainPanel.add(txtEmail, gbc);
-
-        //lblOccupation
-        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lblOccupation, gbc);
-
-        //occupation
-        gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        mainPanel.add(txtOccup, gbc);
-
-        //picChgBtn
-        gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
-        mainPanel.add(picChgBtn, gbc);
-
-        //lblUsername
-        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
-        mainPanel.add(lblUsername, gbc);
-        
-        //username
-        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        mainPanel.add(txtUsername, gbc);
+        addToLayout(gbc, insets, mainPanel, scplst);
 
         JPanel passwordPanel = new JPanel();
 
@@ -177,7 +106,7 @@ public class Form {
         mainPanel.add(passwordPanel, gbc);
         frm.add(mainPanel);
 
-        JPanel controlerPanel = new JPanel(new GridLayout(1, 0));
+        JPanel controlerPanel = new JPanel(new GridLayout(1, 7, 10, 5));
 
         ActionListener al = ev -> {
             JButton btn = (JButton) ev.getSource();
@@ -201,6 +130,10 @@ public class Form {
         addControrollerBtn(controlerPanel, "Previous", al);
         addControrollerBtn(controlerPanel, "Next", al);
         addControrollerBtn(controlerPanel, "Last", al);
+        addControrollerBtn(controlerPanel, "Add", al);
+        addControrollerBtn(controlerPanel, "New", al);
+        addControrollerBtn(controlerPanel, "Cancel", al);
+
         frm.add(controlerPanel, BorderLayout.SOUTH);
 
         
@@ -238,6 +171,85 @@ public class Form {
         JButton btn = new JButton(txt);
         btn.addActionListener(alr);
         panel.add(btn);
+    }
+
+    public void addToLayout(GridBagConstraints gbc, Insets insets, JPanel p, JScrollPane jsp) throws IOException
+    {
+                //List
+        gbc = new GridBagConstraints(0, 0, 1, 6, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
+        p.add(jsp, gbc);
+
+        //lblName
+        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lblName, gbc);
+
+        //txtName
+        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        p.add(txtName, gbc);
+
+        //pictPanel
+        pictPanel.setIcon(new ImageIcon(ImageIO.read(new File("E:\\code\\Java\\JavaGUI\\picture\\resize\\1.png"))));
+        gbc = new GridBagConstraints(4, 0, 1, 5, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
+        p.add(pictPanel, gbc);
+
+        //txtAddress
+        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lblAddress, gbc);
+
+        //genderPanel
+        JPanel genderPanel = new JPanel();
+        genderPanel.setBorder(BorderFactory.createTitledBorder("Gender"));
+        genderPanel.add(radMale);
+        genderPanel.add(radFemale);
+        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(genderPanel, gbc);
+
+        //lbldob
+        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lbldob, gbc);
+
+        //dob
+        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        p.add(txtDob, gbc);
+
+        //lblemail
+        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lblEmail, gbc);
+
+        //email
+        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        p.add(txtEmail, gbc);
+
+        //lblOccupation
+        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lblOccupation, gbc);
+
+        //occupation
+        gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        p.add(txtOccup, gbc);
+
+        //picChgBtn
+        gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        p.add(picChgBtn, gbc);
+
+        //lblUsername
+        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        p.add(lblUsername, gbc);
+        
+        //username
+        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        p.add(txtUsername, gbc);
+
+        //addressPanel
+        // taAddress.setText(
+        //     """
+        //     Flat 3B, Sai Residency, 
+        //     45 Park Road, Koregaon Park, Pune, 
+        //     Maharashtra 411001, India
+        //     """
+        //     );
+        gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
+        p.add(new JScrollPane(txtAddress), gbc);
     }
 
     public static void main(String[] args) throws IOException {
