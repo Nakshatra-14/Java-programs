@@ -72,7 +72,10 @@ public class Person {
         {
             inp.nextLine();
             while (inp.hasNextLine()) {
-                String arr[] = inp.nextLine().split(",");
+                String arr[];
+                
+                arr = inp.nextLine().split(",");
+                
                 Person p = new Person(arr[2], arr[6], arr[3], arr[7], arr[4], arr[8], arr[0], arr[1]);
                 al.add(p);
             }
@@ -82,7 +85,5 @@ public class Person {
 
     }
 
-    public static void main(String[] args) {
-        System.out.println(Person.generate());
-    }
+
 }

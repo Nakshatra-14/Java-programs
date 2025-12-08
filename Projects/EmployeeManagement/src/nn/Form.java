@@ -5,14 +5,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.awt.Panel;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -22,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -123,6 +120,14 @@ public class Form {
                         currIndex = people.size()-1;
                 }
                 case "Last" -> currIndex = people.size()-1;
+                case "New" -> blankData();
+                case "Add" -> {
+                    if (checkData(frm)) {
+                        Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), txtOccup.getText(), txtUsername.getText(), txtPassword.getText());
+                        people.add(p);
+                    }
+                }
+                case "Cancel" -> System.exit(0);
             }
             showData(currIndex);
         };
@@ -250,6 +255,44 @@ public class Form {
         //     );
         gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
         p.add(new JScrollPane(txtAddress), gbc);
+    }
+
+    public void blankData()
+    {
+        // System.out.println("Working");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtDob.setText("");
+        txtOccup.setText("");
+        txtEmail.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+
+        radFemale.setSelected(true);
+    }
+
+    public boolean checkData(JFrame frm)
+    {
+        boolean checked = true;
+        if(!txtName.getText().matches("[A-Za-z]"))
+        {
+            JOptionPane.showMessageDialog(frm , "Name should be using charecters between A to Z only");
+            txtName.getSelectionEnd();
+            checked = false;
+        }
+        // if(!txtAddress.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        // if(!txtDob.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        // if(!txtOccup.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        // if(!txtEmail.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        // if(!txtUsername.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        // if(!txtPassword.getText().matches(regex))
+        //     JOptionPane.showMessageDialog(frm , "");
+        return checked;
     }
 
     public static void main(String[] args) throws IOException {
