@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example.nn</groupId>
-    <artifactId>scene_builder</artifactId>
+    <artifactId>event_handling</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,8 +21,8 @@
             <version>13</version>
         </dependency>
     </dependencies>
-        <build>
-        <resources>
+    <build>
+    <resources>
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
@@ -42,6 +42,8 @@
                 <version>0.0.6</version>
                 <executions>
                     <execution>
+                        <!-- Default configuration for running -->
+                        <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.nn.Main</mainClass>
