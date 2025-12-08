@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example.nn</groupId>
-    <artifactId>event_handling</artifactId>
+    <artifactId>adding_css</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,11 +22,11 @@
         </dependency>
     </dependencies>
     <build>
-    <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
+    <!-- <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources> -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -42,7 +42,9 @@
                 <version>0.0.6</version>
                 <executions>
                     <execution>
-                        <id>default-cli</id> 
+                        <!-- Default configuration for running -->
+                        <!-- Usage: mvn clean javafx:run -->
+                        <id>default-cli</id>
                         <configuration>
                             <mainClass>com.example.nn.Main</mainClass>
                         </configuration>
