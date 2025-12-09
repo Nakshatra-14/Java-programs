@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ListView layoutX="14.0" layoutY="14.0" prefHeight="386.0" prefWidth="140.0" />
+      <Label layoutX="180.0" layoutY="32.0" text="Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="68.0" text="Address">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="159.0" text="DOB">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="321.0" layoutY="149.0" text="Gender">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="207.0" text="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="244.0" text="Occupation">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="281.0" text="Username">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="407.0" layoutY="282.0" text="Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="176.0" fitWidth="189.0" layoutX="468.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="468.0" layoutY="228.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Change" />
+      <TextField layoutX="223.0" layoutY="28.0" minHeight="20.0" prefHeight="15.0" prefWidth="228.0" />
+      <TextField layoutX="218.0" layoutY="205.0" minHeight="20.0" prefHeight="20.0" prefWidth="240.0" />
+      <TextField layoutX="257.0" layoutY="242.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextField layoutX="247.0" layoutY="282.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
+      <PasswordField layoutX="471.0" layoutY="280.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextArea layoutX="237.0" layoutY="68.0" prefHeight="74.0" prefWidth="214.0" />
+      <RadioButton layoutX="320.0" layoutY="177.0" mnemonicParsing="false" text="Male" />
+      <RadioButton layoutX="380.0" layoutY="177.0" mnemonicParsing="false" text="Female" />
+      <TextField layoutX="214.0" layoutY="159.0" minHeight="20.0" prefHeight="20.0" prefWidth="92.0" />
+      <Button layoutX="169.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="First" />
+      <Button layoutX="229.0" layoutY="370.0" mnemonicParsing="false" text="Previous" />
+      <Button layoutX="298.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Next" />
+      <Button layoutX="359.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Last" />
+      <Button layoutX="471.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Add" />
+      <Button layoutX="541.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="New" />
+      <Button layoutX="606.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Cancel" />
+   </children>
+</AnchorPane>
