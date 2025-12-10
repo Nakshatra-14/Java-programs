@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -38,7 +37,7 @@ public class SimpleBallFrame extends JFrame {
 
         JPanel p = new BallPanel();
 
-        createBall(1000);
+        createBall(100);
         
         add(p);
         

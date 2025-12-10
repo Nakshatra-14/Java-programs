@@ -16,7 +16,7 @@ public class ColorChanging extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel p = new DrawingPanel();
 
-        new Timer(1000, _ -> {
+        new Timer(200, _ -> {
             p.repaint();
         }).start();
 
@@ -36,11 +36,11 @@ public class ColorChanging extends JFrame{
             g.setColor((changeColor() == 1) ? Color.red : Color.green);
             g.fillRect(x/2 - 30/2 , y/2 - 30/2, 30, 30);
 
-            g.setColor((changeColor() == 1) ? Color.yellow : Color.cyan);
-            g.fillRect(x/2 - 30/2 , (y/2 - 30/2) + 40, 30, 30);
+            // g.setColor((changeColor() == 1) ? Color.yellow : Color.cyan);
+            // g.fillRect(x/2 - 30/2 , (y/2 - 30/2) + 40, 30, 30);
 
-            g.setColor((changeColor() == 1) ? Color.blue : Color.orange);
-            g.fillRect(x/2 - 30/2 , (y/2 - 30/2) + 80, 30, 30);
+            // g.setColor((changeColor() == 1) ? Color.blue : Color.orange);
+            // g.fillRect(x/2 - 30/2 , (y/2 - 30/2) + 80, 30, 30);
         }
     }
 

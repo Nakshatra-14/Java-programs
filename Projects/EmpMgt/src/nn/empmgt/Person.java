@@ -1,4 +1,4 @@
-package nn;
+package nn.empmgt;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ public class Person {
     private String dob;
     private String gender;
     private String email;
-    private String occupation;
+    private int occupationIndex;
     private String username;
     private String password;
 
@@ -21,7 +21,7 @@ public class Person {
         this.email = email;
         this.gender = gender;
         this.name = name;
-        this.occupation = occupation;
+        this.occupationIndex = Integer.parseInt(occupation) - 1;
         this.password = password;
         this.username = username;
     }
@@ -46,8 +46,8 @@ public class Person {
         return email;
     }
 
-    public String getOccupation() {
-        return occupation;
+    public int getOccupationIndex() {
+        return occupationIndex;
     }
 
     public String getUsername() {
@@ -65,6 +65,7 @@ public class Person {
         // al.add(new Person("Mukesh", "11-01-2003", "F", "Hydrabad", "def123@mail.com", "Engineer", "mukesh456", "muk456"));
         
         File file = new File("indian_1000_records.csv");
+        CSV csv = new CSV();
         try
         (
             Scanner inp = new Scanner(file);            
@@ -72,13 +73,14 @@ public class Person {
         {
             inp.nextLine();
             while (inp.hasNextLine()) {
-                String arr[];
+                String arr[] = csv.extract(inp.nextLine());
                 
-                arr = inp.nextLine().split(",");
+                // arr = inp.nextLine().split(",");
                 
                 Person p = new Person(arr[2], arr[6], arr[3], arr[7], arr[4], arr[8], arr[0], arr[1]);
                 al.add(p);
             }
+
 
         return al;
         }

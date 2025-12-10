@@ -1,4 +1,4 @@
-package nn ;
+package nn.empmgt ;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -7,14 +7,19 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -30,7 +35,7 @@ public class Form {
 
     // public ImageIcon getImg() throws IOException
     // {
-    //     return new ImageIcon(ImageIO.read(new File("picture\\resize\\1.png")));
+    //     return new ImageIcon(ImageIO.read(new File("picture\resize\1.png")));
     // }
     
     private JList<String> jlst = new JList<>();
@@ -54,8 +59,11 @@ public class Form {
     private JTextField txtPassword = new JTextField(10);
     private JButton chgPassBtn = new JButton("Change");
 
+    private JComboBox<String> occupComboBox = new JComboBox<>(txtFileToArray(new File("jobs.txt")));
+    
     private ArrayList<Person> people;
     private int currIndex = -1; 
+    private char aen = 'n';
 
     public Form() throws IOException {
         jlst.setVisibleRowCount(20);
@@ -120,23 +128,47 @@ public class Form {
                         currIndex = people.size()-1;
                 }
                 case "Last" -> currIndex = people.size()-1;
-                case "New" -> blankData();
-                case "Add" -> {
+                case "Save" -> {
                     if (checkData(frm)) {
                         Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), txtOccup.getText(), txtUsername.getText(), txtPassword.getText());
-                        people.add(p);
+                        
+                        if(aen == 'n')
+                            people.add(p);
+                        else
+                            people.set(currIndex, p);
+
+                        aen = 'n';
                     }
+                    else
+                        return;
                 }
-                case "Cancel" -> System.exit(0);
+                case "Cancel" -> {
+                    aen = 'n';
+                }
             }
             showData(currIndex);
         };
+
+        ActionListener lsnAED = ev -> {
+            JButton btn = (JButton) ev.getSource();
+            switch (btn.getText()) {
+                case "Add" -> 
+                {
+                    blankData();
+                    aen = 'a';
+                }
+                case "Edit" -> {aen = 'e';}
+            }
+            txtName.requestFocus();
+        };
+
         addControrollerBtn(controlerPanel, "First", al);
         addControrollerBtn(controlerPanel, "Previous", al);
         addControrollerBtn(controlerPanel, "Next", al);
         addControrollerBtn(controlerPanel, "Last", al);
-        addControrollerBtn(controlerPanel, "Add", al);
-        addControrollerBtn(controlerPanel, "New", al);
+        addControrollerBtn(controlerPanel, "Add", lsnAED);
+        addControrollerBtn(controlerPanel, "Edit", lsnAED);
+        addControrollerBtn(controlerPanel, "Save", al);
         addControrollerBtn(controlerPanel, "Cancel", al);
 
         frm.add(controlerPanel, BorderLayout.SOUTH);
@@ -160,9 +192,11 @@ public class Form {
         Person p = people.get(index);
         
         txtName.setText(p.getName());
-        txtAddress.setText(p.getAddress());
+        String addr[] = p.getAddress().split(", ");
+        // System.out.println(Arrays.toString(addr));
+        txtAddress.setText(String.join("\n", addr));
         txtDob.setText(p.getDob());
-        txtOccup.setText(p.getOccupation());
+        occupComboBox.setSelectedIndex(p.getOccupationIndex());
         txtEmail.setText(p.getEmail());
         txtUsername.setText(p.getUsername());
         txtPassword.setText(p.getPassword());
@@ -231,7 +265,7 @@ public class Form {
 
         //occupation
         gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        p.add(txtOccup, gbc);
+        p.add(occupComboBox, gbc);
 
         //picChgBtn
         gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
@@ -259,7 +293,6 @@ public class Form {
 
     public void blankData()
     {
-        // System.out.println("Working");
         txtName.setText("");
         txtAddress.setText("");
         txtDob.setText("");
@@ -269,6 +302,7 @@ public class Form {
         txtPassword.setText("");
 
         radFemale.setSelected(true);
+        System.out.println("Working");
     }
 
     public boolean checkData(JFrame frm)
@@ -277,7 +311,7 @@ public class Form {
         if(!txtName.getText().matches("[A-Za-z]"))
         {
             JOptionPane.showMessageDialog(frm , "Name should be using charecters between A to Z only");
-            txtName.getSelectionEnd();
+            txtName.requestFocus();
             checked = false;
         }
         // if(!txtAddress.getText().matches(regex))
@@ -293,6 +327,24 @@ public class Form {
         // if(!txtPassword.getText().matches(regex))
         //     JOptionPane.showMessageDialog(frm , "");
         return checked;
+    }
+
+    public String[] txtFileToArray(File file) throws FileNotFoundException
+    {
+        ArrayList<String> al = new ArrayList<>();
+        
+        try
+        (
+            Scanner inp = new Scanner(file);
+        )
+        {
+            while (inp.hasNextLine()) {
+                al.add(inp.nextLine());
+            }
+        }
+
+        String arr[] = new String[al.size()];
+        return al.toArray(arr);
     }
 
     public static void main(String[] args) throws IOException {
