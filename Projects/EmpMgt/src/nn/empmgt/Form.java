@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -51,7 +49,7 @@ public class Form {
     private JLabel lblEmail = new JLabel("Email:");
     private JTextField txtEmail = new JTextField(20);
     private JLabel lblOccupation = new JLabel("Occupation:");
-    private JTextField txtOccup = new JTextField();
+    // private JTextField txtOccup = new JTextField();
     private JButton picChgBtn = new JButton("Change");
     private JLabel lblUsername = new JLabel("Username:");
     private JTextField txtUsername = new JTextField(15);
@@ -130,10 +128,13 @@ public class Form {
                 case "Last" -> currIndex = people.size()-1;
                 case "Save" -> {
                     if (checkData(frm)) {
-                        Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), txtOccup.getText(), txtUsername.getText(), txtPassword.getText());
+                        Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), String.valueOf(occupComboBox.getSelectedIndex()), txtUsername.getText(), txtPassword.getText());
                         
                         if(aen == 'n')
+                        {
                             people.add(p);
+                            // model.addElement();
+                        }
                         else
                             people.set(currIndex, p);
 
@@ -296,7 +297,7 @@ public class Form {
         txtName.setText("");
         txtAddress.setText("");
         txtDob.setText("");
-        txtOccup.setText("");
+        occupComboBox.setSelectedIndex(0);
         txtEmail.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
@@ -308,7 +309,7 @@ public class Form {
     public boolean checkData(JFrame frm)
     {
         boolean checked = true;
-        if(!txtName.getText().matches("[A-Za-z]"))
+        if(!txtName.getText().matches("[A-Za-z ]+"))
         {
             JOptionPane.showMessageDialog(frm , "Name should be using charecters between A to Z only");
             txtName.requestFocus();
