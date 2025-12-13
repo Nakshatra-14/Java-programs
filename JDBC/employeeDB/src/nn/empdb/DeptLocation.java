@@ -1,7 +1,6 @@
 package nn.empdb;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
