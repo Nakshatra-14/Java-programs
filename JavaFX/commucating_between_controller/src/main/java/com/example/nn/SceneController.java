@@ -30,7 +30,7 @@ public class SceneController {
         root = loader.load();
 
         DataController dataController = loader.getController();
-        dataController.login(str);
+        dataController.login("Hello " + str);
 
         scene = new Scene(root);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
