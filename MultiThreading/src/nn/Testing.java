@@ -1,5 +1,39 @@
 package nn;
 
+
+/*
+signal
+index   color   maxTime (in sec)
+0       G       10
+1       Y       3
+2       R       7
+
+Timer t = new Timer(1000, _ -> action());
+t.start();
+
+timer -> action();
+
+curIndex = 0;
+curTime = maxTimes[curIndex];
+
+void action()
+{
+curTime --;
+    if(curTime = 0)
+    {
+        currIndex = (curIndex + 1) % 3;
+        curTime = maxTime[curIndex];
+    }
+
+    showTime(curTime);
+    showLight(curIndex);
+}
+
+ */
+
+
+
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,9 +43,9 @@ import javax.swing.Timer;
 
 public class Testing {
 
-    private static int waitRed = 60000;
-    private static int waitYellow = 5000;
-    private static int waitGreen = 80000;
+    private static int waitRed = 10000;
+    private static int waitYellow = 3000;
+    private static int waitGreen = 12000;
     private static int colorIndex = 0;
     // private static JLabel txtLabel = new JLabel("Helllooo");
     static String str = "";
@@ -68,7 +102,7 @@ public class Testing {
 
         new Timer(1000, _ -> {
             int temp = Testing.getCountDownStr();
-            Testing.setCountDownStr(--temp);
+            Testing.setCountDownStr(temp - 1);
             p.repaint();
         }).start();
 

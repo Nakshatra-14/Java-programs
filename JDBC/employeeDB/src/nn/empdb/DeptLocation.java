@@ -43,7 +43,7 @@ public class DeptLocation {
             // System.out.println("Database " + dbName + " connected succesfully");
             Statement stmt = con.createStatement(); 
 
-            String sql = "select Dname from department";
+            String sql = "select Dname from department order by dno";
             
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next())
@@ -57,7 +57,7 @@ public class DeptLocation {
         return al.toArray(arr);
     }
 
-    public static String getDeptLoc(int dno)
+    public static String getDeptLoc(String deptName)
     {
         String driveName = "com.mysql.cj.jdbc.Driver";
         String dbName = "companydb";
@@ -84,9 +84,10 @@ public class DeptLocation {
             // System.out.println("Database " + dbName + " connected succesfully");
             Statement stmt = con.createStatement(); 
 
-            String sql = "select dloc\n" + 
-                         "from deptloc\n" + 
-                         "where dno = " + dno;
+            String sql = "select dloc \n" +
+                         "from deptloc l, department d\n" + 
+                         "where d.dno = l.dno and Dname = '" + deptName +"'\n" +
+                         "order by 1";
             
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next())
@@ -110,7 +111,7 @@ public class DeptLocation {
         JPanel p = new JPanel(new BorderLayout(10, 10));
 
         btn.addActionListener(_ -> {
-            deptlocTxt.setText(getDeptLoc(deptNameCB.getSelectedIndex()+1));
+            deptlocTxt.setText(getDeptLoc((String) deptNameCB.getSelectedItem()));
         });
 
         p.add(deptNameCB, BorderLayout.NORTH);
