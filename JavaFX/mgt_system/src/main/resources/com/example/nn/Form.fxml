@@ -1,76 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nn.FormController">
    <children>
-      <ListView layoutX="14.0" layoutY="14.0" prefHeight="386.0" prefWidth="140.0" />
-      <Label layoutX="180.0" layoutY="32.0" text="Name">
+      <ListView fx:id="myList" layoutX="7.0" layoutY="14.0" prefHeight="338.0" prefWidth="152.0" />
+      <Label layoutX="193.0" layoutY="36.0" text="Name:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="68.0" text="Address">
+      <Label layoutX="180.0" layoutY="77.0" text="Address:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="159.0" text="DOB">
+      <Label layoutX="193.0" layoutY="162.0" text="DOB:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="321.0" layoutY="149.0" text="Gender">
+      <Label layoutX="190.0" layoutY="214.0" text="Email:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="207.0" text="Email">
+      <Label layoutX="445.0" layoutY="157.0" text="Gender:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="244.0" text="Occupation">
+      <Label layoutX="161.0" layoutY="253.0" text="Occupation:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="281.0" text="Username">
+      <Label layoutX="170.0" layoutY="304.0" text="Username:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="407.0" layoutY="282.0" text="Password">
+      <Label layoutX="412.0" layoutY="306.0" text="Password:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ImageView fitHeight="176.0" fitWidth="189.0" layoutX="468.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="468.0" layoutY="228.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Change" />
-      <TextField layoutX="223.0" layoutY="28.0" minHeight="20.0" prefHeight="15.0" prefWidth="228.0" />
-      <TextField layoutX="218.0" layoutY="205.0" minHeight="20.0" prefHeight="20.0" prefWidth="240.0" />
-      <TextField layoutX="257.0" layoutY="242.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
-      <TextField layoutX="247.0" layoutY="282.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
-      <PasswordField layoutX="471.0" layoutY="280.0" minHeight="20.0" prefHeight="20.0" prefWidth="150.0" />
-      <TextArea layoutX="237.0" layoutY="68.0" prefHeight="74.0" prefWidth="214.0" />
-      <RadioButton layoutX="320.0" layoutY="177.0" mnemonicParsing="false" text="Male" />
-      <RadioButton layoutX="380.0" layoutY="177.0" mnemonicParsing="false" text="Female" />
-      <TextField layoutX="214.0" layoutY="159.0" minHeight="20.0" prefHeight="20.0" prefWidth="92.0" />
-      <Button layoutX="169.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="First" />
-      <Button layoutX="229.0" layoutY="370.0" mnemonicParsing="false" text="Previous" />
-      <Button layoutX="298.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="50.0" text="Next" />
-      <Button layoutX="359.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Last" />
-      <Button layoutX="471.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Add" />
-      <Button layoutX="541.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="New" />
-      <Button layoutX="606.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Cancel" />
+      <Button fx:id="btnFirst" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#firstListItem" prefHeight="26.0" prefWidth="62.0" text="First" />
+      <Button layoutX="655.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="62.0" text="Cancel" />
+      <Button fx:id="btnSave" layoutX="584.0" layoutY="365.0" mnemonicParsing="false" onAction="#saveData" prefHeight="26.0" prefWidth="62.0" text="Save" />
+      <Button fx:id="btnEdit" layoutX="515.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Edit" />
+      <Button layoutX="445.0" layoutY="366.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="62.0" text="Add" />
+      <Button fx:id="btnLast" layoutX="217.0" layoutY="365.0" mnemonicParsing="false" onAction="#lastListItem" prefHeight="26.0" prefWidth="62.0" text="Last" />
+      <Button fx:id="btnNext" layoutX="149.0" layoutY="365.0" mnemonicParsing="false" onAction="#nextListItem" prefHeight="26.0" prefWidth="62.0" text="Next" />
+      <Button fx:id="btnPrevious" layoutX="81.0" layoutY="365.0" mnemonicParsing="false" onAction="#previousListItem" prefHeight="26.0" prefWidth="62.0" text="Previous" />
+      <TextField fx:id="txtFdName" layoutX="236.0" layoutY="33.0" prefHeight="26.0" prefWidth="291.0" />
+      <TextArea fx:id="txtFdAddress" layoutX="235.0" layoutY="76.0" prefHeight="77.0" prefWidth="291.0" />
+      <DatePicker fx:id="datePickDOB" layoutX="232.0" layoutY="160.0" promptText="Enter date" />
+      <TextField fx:id="txtFdEmail" layoutX="232.0" layoutY="210.0" prefHeight="26.0" prefWidth="187.0" />
+      <ComboBox fx:id="occupComboBox" layoutX="239.0" layoutY="250.0" prefHeight="26.0" prefWidth="262.0" />
+      <TextField fx:id="txtFdUsername" layoutX="237.0" layoutY="301.0" prefHeight="26.0" prefWidth="142.0" />
+      <Button fx:id="btnChangePassword" layoutX="634.0" layoutY="304.0" mnemonicParsing="false" text="Change" />
+      <PasswordField fx:id="txtFdPassword" layoutX="474.0" layoutY="304.0" />
+      <ImageView fx:id="myImgView" fitHeight="179.0" fitWidth="187.0" layoutX="537.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@placeholder.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnChangePicture" layoutX="537.0" layoutY="197.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="187.0" text="Change" />
+      <Button fx:id="btnTest" layoutX="342.0" layoutY="365.0" mnemonicParsing="false" onAction="#showDataInCLI" text="Test" />
+      <RadioButton fx:id="rMale" layoutX="435.0" layoutY="180.0" mnemonicParsing="false" text="Male">
+         <toggleGroup>
+            <ToggleGroup fx:id="gender" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rFemale" layoutX="434.0" layoutY="202.0" mnemonicParsing="false" text="Female" toggleGroup="$gender" />
    </children>
 </AnchorPane>

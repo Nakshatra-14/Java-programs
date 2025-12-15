@@ -1,0 +1,50 @@
+Human Resource Manager
+Marketing Executive
+Business Development Manager
+Operations Head
+Project Coordinator
+Financial Analyst
+Customer Relationship Manager
+Product Manager
+Supply Chain Executive
+Administrative Officer
+Software Engineer
+Data Analyst
+System Administrator
+Web Developer
+Cybersecurity Specialist
+Cloud Engineer
+UI/UX Designer
+Database Administrator
+Machine Learning Engineer
+IT Support Technician
+School Teacher
+College Professor
+Research Associate
+Education Counselor
+Librarian
+Principal
+Academic Coordinator
+Laboratory Assistant
+Tuition Tutor
+Special Educator
+General Physician
+Staff Nurse
+Pharmacist
+Lab Technician
+Physiotherapist
+Dentist
+Surgeon
+Dietitian
+Radiologist
+Ayurvedic Doctor
+IAS Officer
+Police Sub-Inspector
+Junior Engineer (PWD)
+Bank Probationary Officer (PO)
+Clerk (State/Central Govt.)
+Electrician
+Plumber
+Carpenter
+Driver
+Tailor

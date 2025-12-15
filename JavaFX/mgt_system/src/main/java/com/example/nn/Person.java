@@ -46,8 +46,8 @@ public class Person {
         return email;
     }
 
-    public String getOccupation() {
-        return occupation;
+    public int getOccupation() {
+        return Integer.parseInt(occupation);
     }
 
     public String getUsername() {
@@ -64,7 +64,10 @@ public class Person {
         // al.add(new Person("Nikil", "10-11-2002", "M", "Kolkata", "abc123@mail.com", "Doctor", "nikil123", "nik123"));
         // al.add(new Person("Mukesh", "11-01-2003", "F", "Hydrabad", "def123@mail.com", "Engineer", "mukesh456", "muk456"));
         
-        File file = new File("indian_1000_records.csv");
+        // File file = new File("indian_1000_records.csv");
+        File file = new File("src\\main\\resources\\com\\example\\nn\\data.csv");
+
+        CSV csv = new CSV();
         try
         (
             Scanner inp = new Scanner(file);            
@@ -72,19 +75,23 @@ public class Person {
         {
             inp.nextLine();
             while (inp.hasNextLine()) {
-                String arr[];
+                String arr[] = csv.extract(inp.nextLine());
                 
-                arr = inp.nextLine().split(",");
+                // arr = inp.nextLine().split(",");
                 
                 Person p = new Person(arr[2], arr[6], arr[3], arr[7], arr[4], arr[8], arr[0], arr[1]);
                 al.add(p);
             }
+
 
         return al;
         }
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Person [name=" + name + ", address=" + address + ", dob=" + dob + ", gender=" + gender + ", email=" + email + ", occupation=" + occupation + ", username=" + username + ", password=" + password + "]";
+    }
+    
 }
-
