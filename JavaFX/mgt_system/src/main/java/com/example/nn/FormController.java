@@ -21,8 +21,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.converter.LocalDateStringConverter;
 
 public class FormController implements Initializable{
 
@@ -53,6 +53,8 @@ public class FormController implements Initializable{
     @FXML
     private Button btnLast;
     @FXML
+    private Button btnAdd;
+    @FXML
     private Button btnEdit;
     @FXML
     private Button btnSave;
@@ -66,6 +68,7 @@ public class FormController implements Initializable{
     ArrayList<Person> people;
     int curIndex = -1;
     DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    char
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -144,11 +147,10 @@ public class FormController implements Initializable{
         occupComboBox.getSelectionModel().select(null);
         txtFdUsername.setText("");
         txtFdPassword.setText("");
-        btnSave.setDisable(false);
         btnChangePassword.setDisable(false);
         btnChangePicture.setDisable(false);
     }
-
+    
     public void addData()
     {
         blankData();
@@ -156,7 +158,21 @@ public class FormController implements Initializable{
         btnPrevious.setDisable(true);
         btnNext.setDisable(true);
         btnLast.setDisable(true);
+        btnAdd.setDisable(true);
         btnEdit.setDisable(true);
+        btnSave.setDisable(false);
+        btnChangePassword.setDisable(true);
+        btnChangePicture.setDisable(true);
+    }
+
+    public void editData(){
+        btnFirst.setDisable(true);
+        btnPrevious.setDisable(true);
+        btnNext.setDisable(true);
+        btnLast.setDisable(true);
+        btnAdd.setDisable(true);
+        btnEdit.setDisable(true);
+        btnSave.setDisable(false);
         btnChangePassword.setDisable(true);
         btnChangePicture.setDisable(true);
     }
@@ -275,6 +291,7 @@ public class FormController implements Initializable{
         btnFirst.setDisable(false);
         btnPrevious.setDisable(false);
         btnNext.setDisable(false);
+        btnAdd.setDisable(false);
         btnLast.setDisable(false);
         btnEdit.setDisable(false);
         btnChangePassword.setDisable(false);
@@ -314,6 +331,11 @@ public class FormController implements Initializable{
         myList.getSelectionModel().select(curIndex);
         curIndex = myList.getSelectionModel().getSelectedIndex();
         showData(curIndex);
+    }
+
+    public void changeImage(Image image)
+    {
+        myImgView.setImage(image);
     }
 
     public void showDataInCLI()

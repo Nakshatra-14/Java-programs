@@ -89,9 +89,27 @@ public class Person {
 
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Person [name=" + name + ", address=" + address + ", dob=" + dob + ", gender=" + gender + ", email=" + email + ", occupation=" + occupation + ", username=" + username + ", password=" + password + "]";
+    // }
+
     @Override
     public String toString() {
-        return "Person [name=" + name + ", address=" + address + ", dob=" + dob + ", gender=" + gender + ", email=" + email + ", occupation=" + occupation + ", username=" + username + ", password=" + password + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Person{");
+        sb.append("name=").append(name);
+        sb.append(", address=").append(address);
+        sb.append(", dob=").append(dob);
+        sb.append(", gender=").append(gender);
+        sb.append(", email=").append(email);
+        sb.append(", occupation=").append(occupation);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append('}');
+        return sb.toString();
     }
+
+
     
 }

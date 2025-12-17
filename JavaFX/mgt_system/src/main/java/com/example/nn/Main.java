@@ -14,7 +14,7 @@ public class Main extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("Form.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-
+        primaryStage.setTitle("Emp Mgt");
         Image icon = new Image(getClass().getResourceAsStream("icon.png"));
         primaryStage.getIcons().add(icon);
         primaryStage.setResizable(false);

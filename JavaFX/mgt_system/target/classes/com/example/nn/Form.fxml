@@ -61,8 +61,8 @@
       <Button fx:id="btnFirst" layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#firstListItem" prefHeight="26.0" prefWidth="62.0" text="First" />
       <Button layoutX="655.0" layoutY="364.0" mnemonicParsing="false" onAction="#cancel" prefHeight="26.0" prefWidth="62.0" text="Cancel" />
       <Button fx:id="btnSave" layoutX="584.0" layoutY="365.0" mnemonicParsing="false" onAction="#saveData" prefHeight="26.0" prefWidth="62.0" text="Save" />
-      <Button fx:id="btnEdit" layoutX="515.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Edit" />
-      <Button layoutX="445.0" layoutY="366.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="62.0" text="Add" />
+      <Button fx:id="btnEdit" layoutX="515.0" layoutY="365.0" mnemonicParsing="false" onAction="#editData" prefHeight="26.0" prefWidth="62.0" text="Edit" />
+      <Button fx:id="btnAdd" layoutX="445.0" layoutY="366.0" mnemonicParsing="false" onAction="#addData" prefHeight="26.0" prefWidth="62.0" text="Add" />
       <Button fx:id="btnLast" layoutX="217.0" layoutY="365.0" mnemonicParsing="false" onAction="#lastListItem" prefHeight="26.0" prefWidth="62.0" text="Last" />
       <Button fx:id="btnNext" layoutX="149.0" layoutY="365.0" mnemonicParsing="false" onAction="#nextListItem" prefHeight="26.0" prefWidth="62.0" text="Next" />
       <Button fx:id="btnPrevious" layoutX="81.0" layoutY="365.0" mnemonicParsing="false" onAction="#previousListItem" prefHeight="26.0" prefWidth="62.0" text="Previous" />
