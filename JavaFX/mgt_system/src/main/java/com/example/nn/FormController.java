@@ -68,7 +68,7 @@ public class FormController implements Initializable{
     ArrayList<Person> people;
     int curIndex = -1;
     DateTimeFormatter dtFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    char
+    // char
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -8,16 +8,13 @@ import java.sql.Statement;
 
 public class MySQL_Connector implements AutoCloseable{
     
-    String driveName = "com.mysql.cj.jdbc.Driver";
+    static String driveName = "com.mysql.cj.jdbc.Driver";
     String dbName;
-    String usr = "root";
-    String pwd = "4762";
-    Connection con;
-    Statement stmt;
-    
-    public MySQL_Connector(String databaseName) throws SQLException {
-        this.dbName = databaseName;
-        String url = "jdbc:mysql://localhost:3306/" + dbName;
+    static String usr = "root";
+    static String pwd = "4762";
+
+    static 
+    {
         try
         {
             Class.forName(driveName);
@@ -26,30 +23,18 @@ public class MySQL_Connector implements AutoCloseable{
         {
             System.out.println("Driver " + driveName + " is not found");
         }
-        con = DriverManager.getConnection(url, usr, pwd);
-        System.out.println("Database " + dbName + " connected succesfully");
-        stmt = con.createStatement();
     }
 
-    public Connection getConnection()
+    public static Connection getConnection(String databaseName) throws SQLException
     {
+        return getConnection(databaseName, usr, pwd);
+    }
+
+    public static Connection getConnection(String databaseName, String user, String password) throws SQLException
+    {
+        String url = "jdbc:mysql://localhost:3306/" + databaseName;
+        Connection con = DriverManager.getConnection(url, user, password);
+        // System.out.println("Database " + databaseName + " connected succesfully");
         return con;
     }
-
-    public Statement getStatement() throws SQLException
-    {
-        return stmt;
-    }
-
-    public ResultSet getResultSetOfExecuteQuery(String query) throws SQLException
-    {
- System.out.println("Executing Query: " + query);
-        return stmt.executeQuery(query);
-    }
-
-    @Override
-    public void close() throws Exception {
-        System.out.println("Connection " + dbName + " Closed");
-    }
-
 }
