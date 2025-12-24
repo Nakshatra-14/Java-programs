@@ -56,6 +56,15 @@ public class Form {
     private JLabel lblPassword = new JLabel("Password:");
     private JTextField txtPassword = new JTextField(10);
     private JButton chgPassBtn = new JButton("Change");
+    private JButton btnFirst = new JButton("First");
+    private JButton btnPrev = new JButton("Previous");
+    private JButton btnNext = new JButton("Next");
+    private JButton btnLast = new JButton("Last");
+    private JButton btnAdd = new JButton("Add");
+    private JButton btnEdit = new JButton("Edit");
+    private JButton btnSave = new JButton("Save");
+    private JButton btnDel = new JButton("Delete");
+    private JButton btnCancel = new JButton("Cancel");
 
     private JComboBox<String> occupComboBox = new JComboBox<>(txtFileToArray(new File("jobs.txt")));
     
@@ -110,6 +119,8 @@ public class Form {
         frm.add(mainPanel);
 
         JPanel controlerPanel = new JPanel(new GridLayout(1, 7, 10, 5));
+        
+        btnSave.setEnabled(false);
 
         ActionListener al = ev -> {
             JButton btn = (JButton) ev.getSource();
@@ -125,32 +136,50 @@ public class Form {
                     if(currIndex > people.size()-1)
                         currIndex = people.size()-1;
                 }
+
                 case "Last" -> currIndex = people.size()-1;
+
                 case "Save" -> {
                     if (checkData(frm)) {
                         Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), String.valueOf(occupComboBox.getSelectedIndex()), txtUsername.getText(), txtPassword.getText());
                         
-                        if(aen == 'n')
+                        if(aen == 'a')
                         {
                             people.add(p);
-                            // model.addElement();
+                            model.addElement(p.getName());
                         }
-                        else
+                        else if(aen == 'e')
+                        {
                             people.set(currIndex, p);
+                            model.set(currIndex, p.getName());
+                        }
 
                         aen = 'n';
+                        btnSave.setEnabled(false);
+                        btnFirst.setEnabled(true);
+                        btnPrev.setEnabled(true);
+                        btnNext.setEnabled(true);
+                        btnLast.setEnabled(true);
                     }
                     else
+                    {
+                        System.out.println("Wrong Input");
                         return;
+                    }
                 }
                 case "Cancel" -> {
                     aen = 'n';
+                    btnSave.setEnabled(false);
+                    btnFirst.setEnabled(true);
+                    btnPrev.setEnabled(true);
+                    btnNext.setEnabled(true);
+                    btnLast.setEnabled(true);
                 }
             }
             showData(currIndex);
         };
 
-        ActionListener lsnAED = ev -> {
+        ActionListener lsnAEN = ev -> {
             JButton btn = (JButton) ev.getSource();
             switch (btn.getText()) {
                 case "Add" -> 
@@ -160,17 +189,29 @@ public class Form {
                 }
                 case "Edit" -> {aen = 'e';}
             }
+            btnSave.setEnabled(true);
+            btnFirst.setEnabled(false);
+            btnPrev.setEnabled(false);
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
             txtName.requestFocus();
         };
 
-        addControrollerBtn(controlerPanel, "First", al);
-        addControrollerBtn(controlerPanel, "Previous", al);
-        addControrollerBtn(controlerPanel, "Next", al);
-        addControrollerBtn(controlerPanel, "Last", al);
-        addControrollerBtn(controlerPanel, "Add", lsnAED);
-        addControrollerBtn(controlerPanel, "Edit", lsnAED);
-        addControrollerBtn(controlerPanel, "Save", al);
-        addControrollerBtn(controlerPanel, "Cancel", al);
+        ActionListener lsnDel = ev -> {
+            people.remove(currIndex);
+            model.remove(currIndex);
+            blankData();
+        };
+
+        addControrollerBtn(controlerPanel, btnFirst, al);
+        addControrollerBtn(controlerPanel, btnPrev, al);
+        addControrollerBtn(controlerPanel, btnNext, al);
+        addControrollerBtn(controlerPanel, btnLast, al);
+        addControrollerBtn(controlerPanel, btnAdd, lsnAEN);
+        addControrollerBtn(controlerPanel, btnEdit, lsnAEN);
+        addControrollerBtn(controlerPanel, btnSave, al);
+        addControrollerBtn(controlerPanel, btnDel, lsnDel);
+        addControrollerBtn(controlerPanel, btnCancel, al);
 
         frm.add(controlerPanel, BorderLayout.SOUTH);
 
@@ -206,9 +247,8 @@ public class Form {
         radFemale.setSelected(p.getGender().equals("F"));
     }
 
-    public void addControrollerBtn(JPanel panel, String txt, ActionListener alr)
+    public void addControrollerBtn(JPanel panel, JButton btn, ActionListener alr)
     {
-        JButton btn = new JButton(txt);
         btn.addActionListener(alr);
         panel.add(btn);
     }
@@ -303,7 +343,7 @@ public class Form {
         txtPassword.setText("");
 
         radFemale.setSelected(true);
-        System.out.println("Working");
+        System.out.println("Blank");
     }
 
     public boolean checkData(JFrame frm)
@@ -315,18 +355,32 @@ public class Form {
             txtName.requestFocus();
             checked = false;
         }
-        // if(!txtAddress.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
-        // if(!txtDob.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
-        // if(!txtOccup.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
-        // if(!txtEmail.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
-        // if(!txtUsername.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
-        // if(!txtPassword.getText().matches(regex))
-        //     JOptionPane.showMessageDialog(frm , "");
+        if (!txtAddress.getText().matches("[A-Za-z ]+")) {
+            JOptionPane.showMessageDialog(frm, "Address should contain alphanumeric characters, periods, commas, spaces, and hyphens only.");
+            txtAddress.requestFocus();
+            checked = false;
+        }
+        if (!txtDob.getText().matches("[A-Za-z ]+")) { 
+            JOptionPane.showMessageDialog(frm, "Date of Birth should be in DD-MM-YYYY format.");
+            txtDob.requestFocus();
+            checked = false;
+        }
+        
+        if (!txtEmail.getText().matches("[A-Za-z ]+")) {
+            JOptionPane.showMessageDialog(frm, "Please enter a valid email address.");
+            txtEmail.requestFocus();
+            checked = false;
+        }
+        if (!txtUsername.getText().matches("[A-Za-z ]+")) { 
+            JOptionPane.showMessageDialog(frm, "Username should be 3-15 alphanumeric characters or underscores.");
+            txtUsername.requestFocus();
+            checked = false;
+        }
+        if (!txtPassword.getText().matches("[A-Za-z ]+")) { 
+            JOptionPane.showMessageDialog(frm, "Password must be at least 8 characters long and contain at least one digit, one lowercase, one uppercase, and one special character.");
+            txtPassword.requestFocus();
+            checked = false;
+        }
         return checked;
     }
 

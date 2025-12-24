@@ -37,4 +37,9 @@ public class MySQL_Connector implements AutoCloseable{
         // System.out.println("Database " + databaseName + " connected succesfully");
         return con;
     }
+
+    @Override
+    public void close() throws Exception {
+        // throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
