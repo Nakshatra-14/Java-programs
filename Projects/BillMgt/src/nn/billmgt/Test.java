@@ -32,5 +32,12 @@ public class Test {
         // System.out.println("())".contains("()"));
         // System.out.println("(())".contains("()"));
         // System.out.println("((())".contains("()"));
+
+        String name = "Nax";
+
+        if(!name.isEmpty())
+            System.out.println(name);
+        else
+            System.out.println("Hello");
     }
 }

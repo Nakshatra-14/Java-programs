@@ -79,7 +79,7 @@ public class Main {
     private static JPanel itemAddPanel = new JPanel();
     private static char aen = 'n';
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException {
 
         lst = new JList<>();
         lst.setFont(new Font("Monospaced", Font.PLAIN, 15));
@@ -302,13 +302,18 @@ public class Main {
 
                 }
                 case "Save" -> {
-                    System.out.println("S");
+                    try {
+                        addNewData();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
                 case "Delele Bill" -> {
                     bill.remove(curIndex);
                     try {
                         showData(curIndex, model);
                     } catch (SQLException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 case "Cancel" -> {
@@ -379,12 +384,14 @@ public class Main {
         lblBillAmt.setText(String.format("%.2f", grandTot - (grandTot * (grandDis / 100))));
     }
 
-    public void addNewData() throws ParseException {
+    public static void addNewData() throws ParseException {
         int billno = Integer.parseInt(lblBillNo.getText());
         String custName = txtFdcustName.getText();
         Date billDt = sdf.parse(txtFdBillDate.getText());
-        int custPhone = Integer.parseInt(txtFdcustPhone.getText());
-
+        String custPhone = txtFdcustPhone.getText();
+        BillInfo b = new BillInfo(billno, billDt, custName, String.valueOf(custPhone));
+        bill.add(b);
+        
     }
 
     public static ArrayList<Item> getCustItems(int billNo) throws SQLException {
