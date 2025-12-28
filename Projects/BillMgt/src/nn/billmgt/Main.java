@@ -1,6 +1,5 @@
 package nn.billmgt;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -17,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -52,7 +50,7 @@ public class Main {
     private static JLabel lblGrandDis = new JLabel("TestValue");
     private static JLabel lblRoundOff = new JLabel("TestValue");
     private static JLabel lblBillAmt = new JLabel("TestValue");
-    private static JButton btnSaveAndAdd = new JButton("Save and Add");
+    private static JButton btnSave = new JButton("Save");
     private static JButton btnPrint = new JButton("Print");
 
     //navigationAndCRUD
@@ -60,7 +58,6 @@ public class Main {
     private static JButton btnNext = new JButton("Next Bill");
     private static JButton btnNewBill = new JButton("New Bill");
     private static JButton btnEditBill = new JButton("Edit Bill");
-    private static JButton btnSaveBill = new JButton("Save Bill");
     private static JButton btnDeleteBill = new JButton("Delele Bill");
     private static JButton btnCancel = new JButton("Cancel");
     private static int curIndex = -1;
@@ -69,13 +66,14 @@ public class Main {
         {
             @Override
             public final String toString() {
-                return String.format(" %-21d | %-46s | %-23d | %-24.2f | %.2f", slNo, itemName, quantity, price, discount);
+                return String.format(" %-21d | %-46s | %-23d | %-24.2f | %.2f%%", slNo, itemName, quantity, price, discount);
             }
         }
-    
-    private static ArrayList<BillInfo> bill;
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    private static JPanel itemAddPanel = new JPanel();
+        
+        private static ArrayList<BillInfo> bill;
+        private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        private static JPanel itemAddPanel = new JPanel();
+        private static char aen = 'n';
 
     public static void main(String[] args) throws SQLException {
         
@@ -195,11 +193,11 @@ public class Main {
         gbc = new GridBagConstraints(4, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         paymentDetailPanel.add(lblBillAmt, gbc);    
         gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        paymentDetailPanel.add(btnSaveAndAdd, gbc);    
+        paymentDetailPanel.add(btnSave, gbc);    
         gbc = new GridBagConstraints(4, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
         paymentDetailPanel.add(btnPrint, gbc);    
         gbc = new GridBagConstraints(5, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
-        paymentDetailPanel.add(new JLabel("GAP"), gbc);
+        paymentDetailPanel.add(new JLabel(""), gbc);
         paymentDetailPanel.setBorder(border);
 
         JPanel navigationAndCRUDPanel = new JPanel(new GridLayout(0, 3, 10, 10));
@@ -208,10 +206,9 @@ public class Main {
         p.add(btnNext);
         p.setBorder(BorderFactory.createTitledBorder("Navigation"));
         navigationAndCRUDPanel.add(p);
-        p = new JPanel(new GridLayout(0, 4, 10, 10));
+        p = new JPanel(new GridLayout(0, 3, 10, 10));
         p.add(btnNewBill);
         p.add(btnEditBill);
-        p.add(btnSaveBill);
         p.add(btnDeleteBill);
         p.setBorder(BorderFactory.createTitledBorder("Operation"));
         navigationAndCRUDPanel.add(p);
@@ -258,7 +255,51 @@ public class Main {
         addBtnActionListener(btnPrev, navAl);
         addBtnActionListener(btnNext, navAl);
 
-        
+        ActionListener operationAl = ev -> {
+            JButton btn = (JButton) ev.getSource();
+
+            switch (btn.getText()) {
+                case "New Bill" -> {
+                    aen = 'a';
+                    blankDataForNew(model);
+                }
+                case "Edit Bill" -> {
+                    aen = 'e';
+                    enableEditForEdit();
+                }
+                case "Save" -> {System.out.println("S");}
+                case "Delele Bill" -> {
+                    bill.remove(curIndex);
+                try {
+                    showData(curIndex, model);
+                } catch (SQLException ex) {}
+                }
+                case "Cancel" -> {
+                    if(aen == 'a')
+                        try {
+                            cancelWorkWhileNew(model);
+                        } catch (SQLException ex) {}
+                    else if(aen == 'e')
+                        try {
+                            cancelWorkWhileEdit(model);
+                    } catch (SQLException ex) {}
+
+                    try {
+                        showData(curIndex, model);
+                    } catch (SQLException ex) {
+                        
+                    aen = 'n';
+                }
+                }
+            }
+        };
+
+        addBtnActionListener(btnNewBill, operationAl);
+        addBtnActionListener(btnEditBill, operationAl);
+        addBtnActionListener(btnSave, operationAl);
+        addBtnActionListener(btnDeleteBill, operationAl);
+        addBtnActionListener(btnCancel, operationAl);
+
 
         onStartButtons();
         showData(curIndex, model);
@@ -289,13 +330,18 @@ public class Main {
         txtFdcustPhone.setText(custPhone);
         
         //itemMgt
+        double grandTot = 0;
+        double grandDis = 0;
         ArrayList<Item> listItem = getCustItems(billNo);
         for (Item i : listItem) {
             model.addElement(i.toString());
+            grandTot += i.price();
+            grandDis += i.discount();
         }
-        
-        double billAmt = 0;
-        lblBillAmt.setText(String.format("%.2f", billAmt));
+        lblGrandTot.setText(String.format("%.2f", grandTot));
+        lblGrandDis.setText(String.format("%.2f", grandDis) + "%");
+        lblRoundOff.setText(String.format("%.2f", Math.round(grandTot) - grandTot));
+        lblBillAmt.setText(String.format("%.2f", Math.round(grandTot) - grandDis));
     }
 
 
@@ -359,6 +405,8 @@ public class Main {
     {
         btnAdd.setEnabled(false);
         btnRemove.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
         itemAddPanel.setEnabled(false);
         Component c[] = itemAddPanel.getComponents();
         for(Component comp : c)
@@ -368,4 +416,92 @@ public class Main {
         txtFdcustPhone.setEditable(false);
     }
 
+    public static void blankDataForNew(DefaultListModel<String> model)
+    {
+        lblBillNo.setText(String.valueOf(bill.get(bill.size()-1).billNo + 1));
+        txtFdcustName.setText(""); 
+        txtFdBillDate.setText(sdf.format(new Date()));
+        txtFdcustPhone.setText("");
+        btnAdd.setEnabled(true);
+        btnRemove.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnEditBill.setEnabled(false);
+        btnPrint.setEnabled(false);
+        btnDeleteBill.setEnabled(false);
+        btnPrev.setEnabled(false);
+        btnNext.setEnabled(false);
+        btnCancel.setEnabled(true);
+        itemAddPanel.setEnabled(true);
+        Component c[] = itemAddPanel.getComponents();
+        for(Component comp : c)
+            comp.setEnabled(true);
+        txtFdBillDate.setEditable(true);
+        txtFdcustName.setEditable(true);
+        txtFdcustPhone.setEditable(true);
+        model.removeAllElements();
+    }
+
+    public static void cancelWorkWhileNew(DefaultListModel<String> model) throws SQLException
+    {
+        showData(curIndex, model);
+        btnAdd.setEnabled(false);
+        btnRemove.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnEditBill.setEnabled(true);
+        btnPrint.setEnabled(true);
+        btnDeleteBill.setEnabled(true);
+        btnPrev.setEnabled(true);
+        btnNext.setEnabled(true);
+        btnCancel.setEnabled(false);
+        itemAddPanel.setEnabled(false);
+        Component c[] = itemAddPanel.getComponents();
+        for(Component comp : c)
+            comp.setEnabled(false);
+        txtFdBillDate.setEditable(false);
+        txtFdcustName.setEditable(false);
+        txtFdcustPhone.setEditable(false);
+    }
+
+    public static void enableEditForEdit()
+    {
+        btnAdd.setEnabled(true);
+        btnRemove.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnEditBill.setEnabled(true);
+        btnNewBill.setEnabled(false);
+        btnPrint.setEnabled(false);
+        btnDeleteBill.setEnabled(false);
+        btnPrev.setEnabled(false);
+        btnNext.setEnabled(false);
+        btnCancel.setEnabled(true);
+        itemAddPanel.setEnabled(true);
+        Component c[] = itemAddPanel.getComponents();
+        for(Component comp : c)
+            comp.setEnabled(true);
+        txtFdBillDate.setEditable(true);
+        txtFdcustName.setEditable(true);
+        txtFdcustPhone.setEditable(true);
+    }
+
+    public static void cancelWorkWhileEdit(DefaultListModel<String> model) throws SQLException
+    {
+        showData(curIndex, model);
+        btnAdd.setEnabled(false);
+        btnRemove.setEnabled(false);
+        btnSave.setEnabled(false);
+        btnNewBill.setEnabled(true);
+        btnEditBill.setEnabled(true);
+        btnPrint.setEnabled(true);
+        btnDeleteBill.setEnabled(true);
+        btnPrev.setEnabled(true);
+        btnNext.setEnabled(true);
+        btnCancel.setEnabled(false);
+        itemAddPanel.setEnabled(false);
+        Component c[] = itemAddPanel.getComponents();
+        for(Component comp : c)
+            comp.setEnabled(false);
+        txtFdBillDate.setEditable(false);
+        txtFdcustName.setEditable(false);
+        txtFdcustPhone.setEditable(false);
+    }
 }
