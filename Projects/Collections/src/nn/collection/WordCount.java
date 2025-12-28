@@ -46,33 +46,60 @@ public class WordCount {
 
         
     
-        // return sj.toString().split("\\W+");
-        System.out.println("Frequencies in the order of the apperance of the words");
-        for(String s : uniqueWords)
-            System.out.println(s + " == " + map.get(s));
+        // // return sj.toString().split("\\W+");
+        // System.out.println("Frequencies in the order of the apperance of the words");
+        // for(String s : uniqueWords)
+        //     System.out.println(s + " == " + map.get(s));
+
+        // System.out.println("Frequencies in the alphabetical order of the words");
+        // // Collections.sort(uniqueWords);
+        // uniqueWords.sort(Comparator.naturalOrder());
+        // for(String s : uniqueWords)
+        //     System.out.println(s + " == " + map.get(s));
+
+        // System.out.println("Words in decending order of Frequencies");
+        // // uniqueWords.sort(Comparator.comparing(map::get).reversed());
+
+        // Comparator<String> comp = new Comparator<String>() {
+        //     @Override
+        //     public int compare(String o1, String o2) {
+        //         return - (map.get(o1) - map.get(o2));
+        //     }
+            
+        // };
+        // uniqueWords.sort(comp);
+
 
         System.out.println("Frequencies in the alphabetical order of the words");
-        // Collections.sort(uniqueWords);
-        uniqueWords.sort(Comparator.naturalOrder());
-        for(String s : uniqueWords)
-            System.out.println(s + " == " + map.get(s));
+        record WordFreq(String word, int freq) {
+            @Override
+            public final String toString() {
+                return word + " == " + freq;
+            }
+        }
+        List<WordFreq> lst = new ArrayList<>();
+        for(var w : map.keySet())
+            lst.add(new WordFreq(w, map.get(w)));
+        lst.sort(Comparator.comparing(WordFreq::word));
+        // lst.sort(Comparator.comparing(e -> e.word()));
+        // if(ar[i].word().compareTo(ar[j].word()));
+        // for(var e : lst)
+        // {
+        //     System.out.println(e);
+        // }
+        // lst.forEach(e -> System.out.println(e));
+        //OR
+        lst.forEach(System.out::println);
 
         System.out.println("Words in decending order of Frequencies");
-        // uniqueWords.sort(Comparator.comparing(map::get).reversed());
-
-        Comparator<String> comp = new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return - (map.get(o1) - map.get(o2));
-            }
-            
-        };
-        uniqueWords.sort(comp);
+        lst.sort(Comparator.comparing(WordFreq::freq).reversed());
+        lst.forEach(System.out::println);
 
         //================================================ Can also be done using map.entryset()
-        for(String s : uniqueWords)
-            System.out.println(s + " == " + map.get(s));
+        // for(String s : uniqueWords)
+        //     System.out.println(s + " == " + map.get(s));
         return null;
+
     }
 
     public static void main(String[] args) throws FileNotFoundException{
