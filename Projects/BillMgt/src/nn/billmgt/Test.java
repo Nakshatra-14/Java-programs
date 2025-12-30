@@ -1,7 +1,5 @@
 package nn.billmgt;
 
-import java.util.Stack;
-
 public class Test {
 
     // public static boolean isPalindrome(String s) {
@@ -21,7 +19,16 @@ public class Test {
     //     }
     //     return true;
     // }
+    private static PaymentService paymentService;
 
+    public static void setPaymentService(PaymentService paymentService) {
+        Test.paymentService = paymentService;
+    }
+    // public Test() {
+    //     this.paymentService = new GooglePayPaymentService();
+    // }
+
+    
 
     public static void main(String[] args) {
         // System.out.println(isPalindrome("Was it a car or a cat I saw?"));
@@ -33,11 +40,13 @@ public class Test {
         // System.out.println("(())".contains("()"));
         // System.out.println("((())".contains("()"));
 
-        String name = "Nax";
+        // String name = "Nax";
 
-        if(!name.isEmpty())
-            System.out.println(name);
-        else
-            System.out.println("Hello");
+        // if(!name.isEmpty())
+        //     System.out.println(name);
+        // else
+        //     System.out.println("Hello");
+        setPaymentService(new PhonePePaymentService());
+        paymentService.doPayment(100);
     }
 }
