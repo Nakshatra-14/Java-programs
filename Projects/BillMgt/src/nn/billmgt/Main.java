@@ -278,11 +278,7 @@ public class Main {
                     model.removeAllElements();
                 }
             }
-            try {
-                showData(curIndex, model);
-            } catch (SQLException ex) {
-
-            }
+            showData(curIndex, model);
         };
 
         addBtnActionListener(btnPrev, navAl);
@@ -302,38 +298,23 @@ public class Main {
 
                 }
                 case "Save" -> {
-                    try {
-                        addNewData();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    addNewData();
+
                 }
                 case "Delele Bill" -> {
                     bill.remove(curIndex);
-                    try {
                         showData(curIndex, model);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
                 }
+                
                 case "Cancel" -> {
                     if (aen == 'a')
-                        try {
-                            cancelWorkWhileNew(model);
-                        } catch (SQLException ex) {
-                        }
+                        cancelWorkWhileNew(model);              
                     else if (aen == 'e')
-                        try {
-                            cancelWorkWhileEdit(model);
-                        } catch (SQLException ex) {
-                        }
-
-                    try {
+                        cancelWorkWhileEdit(model);
                         showData(curIndex, model);
-                    } catch (SQLException ex) {
-
-                        aen = 'n';
-                    }
+                    
+                    aen = 'n';
+                
                 }
             }
         };
@@ -358,7 +339,7 @@ public class Main {
         btn.addActionListener(al);
     }
 
-    public static void showData(int curIndex, DefaultListModel<String> model) throws SQLException {
+    public static void showData(int curIndex, DefaultListModel<String> model) {
         // billInfo
         int billNo = bill.get(curIndex).billNo();
         Date billDt = bill.get(curIndex).billDt();
@@ -384,17 +365,20 @@ public class Main {
         lblBillAmt.setText(String.format("%.2f", grandTot - (grandTot * (grandDis / 100))));
     }
 
-    public static void addNewData() throws ParseException {
+    public static void addNewData() {
+        Date billDt = null;
         int billno = Integer.parseInt(lblBillNo.getText());
         String custName = txtFdcustName.getText();
-        Date billDt = sdf.parse(txtFdBillDate.getText());
+        try {
+            billDt = sdf.parse(txtFdBillDate.getText());
+        } catch (ParseException ex) {ex.printStackTrace();}
         String custPhone = txtFdcustPhone.getText();
         BillInfo b = new BillInfo(billno, billDt, custName, String.valueOf(custPhone));
         bill.add(b);
         
     }
 
-    public static ArrayList<Item> getCustItems(int billNo) throws SQLException {
+    public static ArrayList<Item> getCustItems(int billNo) {
         ArrayList<Item> al = new ArrayList<>();
         try (
                 Connection con = MySQL_Connector.getConnection("bill");
@@ -405,6 +389,8 @@ public class Main {
                     "order by 1");
             while (rs.next())
                 al.add(new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5)));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return al;
     }
@@ -476,7 +462,7 @@ public class Main {
         model.removeAllElements();
     }
 
-    public static void cancelWorkWhileNew(DefaultListModel<String> model) throws SQLException {
+    public static void cancelWorkWhileNew(DefaultListModel<String> model) {
         showData(curIndex, model);
         btnAdd.setEnabled(false);
         btnRemove.setEnabled(false);
@@ -516,7 +502,7 @@ public class Main {
         txtFdcustPhone.setEditable(true);
     }
 
-    public static void cancelWorkWhileEdit(DefaultListModel<String> model) throws SQLException {
+    public static void cancelWorkWhileEdit(DefaultListModel<String> model) {
         showData(curIndex, model);
         btnAdd.setEnabled(false);
         btnRemove.setEnabled(false);

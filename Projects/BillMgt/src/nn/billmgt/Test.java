@@ -19,16 +19,10 @@ public class Test {
     //     }
     //     return true;
     // }
-    private static PaymentService paymentService;
 
-    public static void setPaymentService(PaymentService paymentService) {
-        Test.paymentService = paymentService;
-    }
     // public Test() {
     //     this.paymentService = new GooglePayPaymentService();
     // }
-
-    
 
     public static void main(String[] args) {
         // System.out.println(isPalindrome("Was it a car or a cat I saw?"));
@@ -46,7 +40,10 @@ public class Test {
         //     System.out.println(name);
         // else
         //     System.out.println("Hello");
-        setPaymentService(new PhonePePaymentService());
-        paymentService.doPayment(100);
+        // setPaymentService(new PhonePePaymentService());
+        // paymentService.doPayment(100);
+
+        PaymentService ps = new GooglePayPaymentService();
+        ps.doPayment(100);
     }
 }

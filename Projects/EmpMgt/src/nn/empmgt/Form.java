@@ -1,4 +1,4 @@
-package nn.empmgt ;
+package nn.empmgt;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -33,12 +34,12 @@ public class Form {
 
     // public ImageIcon getImg() throws IOException
     // {
-    //     return new ImageIcon(ImageIO.read(new File("picture\resize\1.png")));
+    // return new ImageIcon(ImageIO.read(new File("picture\resize\1.png")));
     // }
-    
+
     private JList<String> jlst = new JList<>();
-    private JLabel lblName = new JLabel("Name:"); 
-    private JTextField txtName = new JTextField(); 
+    private JLabel lblName = new JLabel("Name:");
+    private JTextField txtName = new JTextField();
     private JLabel pictPanel = new JLabel();
     private JLabel lblAddress = new JLabel("Address:");
     private JTextArea txtAddress = new JTextArea(4, 30);
@@ -54,7 +55,7 @@ public class Form {
     private JLabel lblUsername = new JLabel("Username:");
     private JTextField txtUsername = new JTextField(15);
     private JLabel lblPassword = new JLabel("Password:");
-    private JTextField txtPassword = new JTextField(10);
+    private JPasswordField pwdPassword = new JPasswordField(30);
     private JButton chgPassBtn = new JButton("Change");
     private JButton btnFirst = new JButton("First");
     private JButton btnPrev = new JButton("Previous");
@@ -67,9 +68,9 @@ public class Form {
     private JButton btnCancel = new JButton("Cancel");
 
     private JComboBox<String> occupComboBox = new JComboBox<>(txtFileToArray(new File("jobs.txt")));
-    
+
     private ArrayList<Person> people;
-    private int currIndex = -1; 
+    private int currIndex = -1;
     private char aen = 'n';
 
     public Form() throws IOException {
@@ -79,8 +80,7 @@ public class Form {
         jlst.setModel(model);
         jlst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jlst.addListSelectionListener(_ -> {
-            if(!jlst.getValueIsAdjusting())
-            {
+            if (!jlst.getValueIsAdjusting()) {
                 currIndex = jlst.getSelectedIndex();
                 showData(currIndex);
             }
@@ -100,27 +100,47 @@ public class Form {
 
         JPanel passwordPanel = new JPanel();
 
-        //lblPassword
-        // gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lblPassword
+        // gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST,
+        // GridBagConstraints.NONE, insets, 0, 0);
         // mainPanel.add(lblPassword, gbc);
         // passwordPanel.add(lblPassword);
 
-        //password
-        // gbc = new GridBagConstraints(4, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // password
+        // gbc = new GridBagConstraints(4, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST,
+        // GridBagConstraints.HORIZONTAL, insets, 0, 0);
         // mainPanel.add(password, gbc);
-        passwordPanel.add(txtPassword);
+        passwordPanel.add(pwdPassword);
 
-        //ChgPassBtn
+        // ChgPassBtn
         // mainPanel.add(chgPassBtn, gbc);
         passwordPanel.add(chgPassBtn);
         passwordPanel.setBorder(BorderFactory.createTitledBorder("Password"));
-        gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(3, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0,
+                0);
         mainPanel.add(passwordPanel, gbc);
         frm.add(mainPanel);
 
         JPanel controlerPanel = new JPanel(new GridLayout(1, 7, 10, 5));
-        
+
         btnSave.setEnabled(false);
+
+        ActionListener alChangePwd = ev -> {
+            var mgr = new PasswordManagerDiaglog(frm, "ChgPAss", true, null);
+            // var mgt = new PasswordManagerDiaglog(null, null, false);
+            // System.out.println("Done");
+            if(mgr.isItOk())
+            {
+                String pass = mgr.getPass();
+                System.out.println("Pass = " + pass);
+            }
+            else
+                System.out.println("Not Ok");
+            mgr.dispose();  //make it ready for garbage collection
+        };
+
+
+        chgPassBtn.addActionListener(alChangePwd);
 
         ActionListener al = ev -> {
             JButton btn = (JButton) ev.getSource();
@@ -128,28 +148,28 @@ public class Form {
                 case "First" -> currIndex = 0;
                 case "Previous" -> {
                     currIndex--;
-                    if(currIndex < 0)
+                    if (currIndex < 0)
                         currIndex = 0;
                 }
                 case "Next" -> {
                     currIndex++;
-                    if(currIndex > people.size()-1)
-                        currIndex = people.size()-1;
+                    if (currIndex > people.size() - 1)
+                        currIndex = people.size() - 1;
                 }
 
-                case "Last" -> currIndex = people.size()-1;
+                case "Last" -> currIndex = people.size() - 1;
 
                 case "Save" -> {
                     if (checkData(frm)) {
-                        Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F", txtAddress.getText(), txtEmail.getText(), String.valueOf(occupComboBox.getSelectedIndex()), txtUsername.getText(), txtPassword.getText());
-                        
-                        if(aen == 'a')
-                        {
+                        Person p = new Person(txtName.getText(), txtDob.getText(), (radMale.isSelected()) ? "M" : "F",
+                                txtAddress.getText(), txtEmail.getText(),
+                                String.valueOf(occupComboBox.getSelectedIndex()), txtUsername.getText(),
+                                pwdPassword.getText());
+
+                        if (aen == 'a') {
                             people.add(p);
                             model.addElement(p.getName());
-                        }
-                        else if(aen == 'e')
-                        {
+                        } else if (aen == 'e') {
                             people.set(currIndex, p);
                             model.set(currIndex, p.getName());
                         }
@@ -160,9 +180,7 @@ public class Form {
                         btnPrev.setEnabled(true);
                         btnNext.setEnabled(true);
                         btnLast.setEnabled(true);
-                    }
-                    else
-                    {
+                    } else {
                         System.out.println("Wrong Input");
                         return;
                     }
@@ -182,12 +200,13 @@ public class Form {
         ActionListener lsnAEN = ev -> {
             JButton btn = (JButton) ev.getSource();
             switch (btn.getText()) {
-                case "Add" -> 
-                {
+                case "Add" -> {
                     blankData();
                     aen = 'a';
                 }
-                case "Edit" -> {aen = 'e';}
+                case "Edit" -> {
+                    aen = 'e';
+                }
             }
             btnSave.setEnabled(true);
             btnFirst.setEnabled(false);
@@ -215,9 +234,8 @@ public class Form {
 
         frm.add(controlerPanel, BorderLayout.SOUTH);
 
-        
         people = Person.generate();
-        for(Person p : people)
+        for (Person p : people)
             model.addElement(p.getName());
         currIndex = 0;
         showData(currIndex);
@@ -229,10 +247,9 @@ public class Form {
         frm.setVisible(true);
     }
 
-    public void showData(int index)
-    {
+    public void showData(int index) {
         Person p = people.get(index);
-        
+
         txtName.setText(p.getName());
         String addr[] = p.getAddress().split(", ");
         // System.out.println(Arrays.toString(addr));
@@ -241,158 +258,170 @@ public class Form {
         occupComboBox.setSelectedIndex(p.getOccupationIndex());
         txtEmail.setText(p.getEmail());
         txtUsername.setText(p.getUsername());
-        txtPassword.setText(p.getPassword());
+        pwdPassword.setText(p.getPassword());
 
         radMale.setSelected(p.getGender().equals("M"));
         radFemale.setSelected(p.getGender().equals("F"));
     }
 
-    public void addControrollerBtn(JPanel panel, JButton btn, ActionListener alr)
-    {
+    public void addControrollerBtn(JPanel panel, JButton btn, ActionListener alr) {
         btn.addActionListener(alr);
         panel.add(btn);
     }
 
-    public void addToLayout(GridBagConstraints gbc, Insets insets, JPanel p, JScrollPane jsp) throws IOException
-    {
-                //List
-        gbc = new GridBagConstraints(0, 0, 1, 6, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
+    public void addToLayout(GridBagConstraints gbc, Insets insets, JPanel p, JScrollPane jsp) throws IOException {
+        // List
+        gbc = new GridBagConstraints(0, 0, 1, 6, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
+                0);
         p.add(jsp, gbc);
 
-        //lblName
-        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lblName
+        gbc = new GridBagConstraints(1, 0, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lblName, gbc);
 
-        //txtName
-        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // txtName
+        gbc = new GridBagConstraints(2, 0, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                insets, 0, 0);
         p.add(txtName, gbc);
 
-        //pictPanel
+        // pictPanel
         pictPanel.setIcon(new ImageIcon(ImageIO.read(new File("E:\\code\\Java\\JavaGUI\\picture\\resize\\1.png"))));
-        gbc = new GridBagConstraints(4, 0, 1, 5, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0, 0);
+        gbc = new GridBagConstraints(4, 0, 1, 5, 1.0, 1.0, GridBagConstraints.NORTH, GridBagConstraints.BOTH, insets, 0,
+                0);
         p.add(pictPanel, gbc);
 
-        //txtAddress
-        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // txtAddress
+        gbc = new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lblAddress, gbc);
 
-        //genderPanel
+        // genderPanel
         JPanel genderPanel = new JPanel();
         genderPanel.setBorder(BorderFactory.createTitledBorder("Gender"));
         genderPanel.add(radMale);
         genderPanel.add(radFemale);
-        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        gbc = new GridBagConstraints(3, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(genderPanel, gbc);
 
-        //lbldob
-        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lbldob
+        gbc = new GridBagConstraints(1, 2, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lbldob, gbc);
 
-        //dob
-        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // dob
+        gbc = new GridBagConstraints(2, 2, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                insets, 0, 0);
         p.add(txtDob, gbc);
 
-        //lblemail
-        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lblemail
+        gbc = new GridBagConstraints(1, 3, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lblEmail, gbc);
 
-        //email
-        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // email
+        gbc = new GridBagConstraints(2, 3, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                insets, 0, 0);
         p.add(txtEmail, gbc);
 
-        //lblOccupation
-        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lblOccupation
+        gbc = new GridBagConstraints(1, 4, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lblOccupation, gbc);
 
-        //occupation
-        gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+        // occupation
+        gbc = new GridBagConstraints(2, 4, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                insets, 0, 0);
         p.add(occupComboBox, gbc);
 
-        //picChgBtn
-        gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0, 0);
+        // picChgBtn
+        gbc = new GridBagConstraints(4, 3, 2, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, insets, 0,
+                0);
         p.add(picChgBtn, gbc);
 
-        //lblUsername
-        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0, 0);
+        // lblUsername
+        gbc = new GridBagConstraints(1, 5, 1, 1, 1.0, 1.0, GridBagConstraints.EAST, GridBagConstraints.NONE, insets, 0,
+                0);
         p.add(lblUsername, gbc);
-        
-        //username
-        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, insets, 0, 0);
+
+        // username
+        gbc = new GridBagConstraints(2, 5, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
+                insets, 0, 0);
         p.add(txtUsername, gbc);
 
-        //addressPanel
+        // addressPanel
         // taAddress.setText(
-        //     """
-        //     Flat 3B, Sai Residency, 
-        //     45 Park Road, Koregaon Park, Pune, 
-        //     Maharashtra 411001, India
-        //     """
-        //     );
-        gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0, 0);
+        // """
+        // Flat 3B, Sai Residency,
+        // 45 Park Road, Koregaon Park, Pune,
+        // Maharashtra 411001, India
+        // """
+        // );
+        gbc = new GridBagConstraints(2, 1, 2, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
+                0);
         p.add(new JScrollPane(txtAddress), gbc);
+
+        // pwdPassword.setEchoChar((char)0);
+        // pwdPassword.getPassword();
     }
 
-    public void blankData()
-    {
+    public void blankData() {
         txtName.setText("");
         txtAddress.setText("");
         txtDob.setText("");
         occupComboBox.setSelectedIndex(0);
         txtEmail.setText("");
         txtUsername.setText("");
-        txtPassword.setText("");
+        pwdPassword.setText("");
 
         radFemale.setSelected(true);
         System.out.println("Blank");
     }
 
-    public boolean checkData(JFrame frm)
-    {
+    public boolean checkData(JFrame frm) {
         boolean checked = true;
-        if(!txtName.getText().matches("[A-Za-z ]+"))
-        {
-            JOptionPane.showMessageDialog(frm , "Name should be using charecters between A to Z only");
+        if (!txtName.getText().matches("[A-Za-z ]+")) {
+            JOptionPane.showMessageDialog(frm, "Name should be using charecters between A to Z only");
             txtName.requestFocus();
             checked = false;
         }
         if (!txtAddress.getText().matches("[A-Za-z ]+")) {
-            JOptionPane.showMessageDialog(frm, "Address should contain alphanumeric characters, periods, commas, spaces, and hyphens only.");
+            JOptionPane.showMessageDialog(frm,
+                    "Address should contain alphanumeric characters, periods, commas, spaces, and hyphens only.");
             txtAddress.requestFocus();
             checked = false;
         }
-        if (!txtDob.getText().matches("[A-Za-z ]+")) { 
+        if (!txtDob.getText().matches("[A-Za-z ]+")) {
             JOptionPane.showMessageDialog(frm, "Date of Birth should be in DD-MM-YYYY format.");
             txtDob.requestFocus();
             checked = false;
         }
-        
+
         if (!txtEmail.getText().matches("[A-Za-z ]+")) {
             JOptionPane.showMessageDialog(frm, "Please enter a valid email address.");
             txtEmail.requestFocus();
             checked = false;
         }
-        if (!txtUsername.getText().matches("[A-Za-z ]+")) { 
+        if (!txtUsername.getText().matches("[A-Za-z ]+")) {
             JOptionPane.showMessageDialog(frm, "Username should be 3-15 alphanumeric characters or underscores.");
             txtUsername.requestFocus();
             checked = false;
         }
-        if (!txtPassword.getText().matches("[A-Za-z ]+")) { 
-            JOptionPane.showMessageDialog(frm, "Password must be at least 8 characters long and contain at least one digit, one lowercase, one uppercase, and one special character.");
-            txtPassword.requestFocus();
+        if (!pwdPassword.getText().matches("[A-Za-z ]+")) {
+            JOptionPane.showMessageDialog(frm,
+                    "Password must be at least 8 characters long and contain at least one digit, one lowercase, one uppercase, and one special character.");
+            pwdPassword.requestFocus();
             checked = false;
         }
         return checked;
     }
 
-    public String[] txtFileToArray(File file) throws FileNotFoundException
-    {
+    public String[] txtFileToArray(File file) throws FileNotFoundException {
         ArrayList<String> al = new ArrayList<>();
-        
-        try
-        (
-            Scanner inp = new Scanner(file);
-        )
-        {
+
+        try (
+                Scanner inp = new Scanner(file);) {
             while (inp.hasNextLine()) {
                 al.add(inp.nextLine());
             }
