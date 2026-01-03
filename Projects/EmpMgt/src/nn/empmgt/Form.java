@@ -364,7 +364,7 @@ public class Form {
 
         // pwdPassword.setEchoChar((char)0);
         // pwdPassword.getPassword();
-    }
+    } 
 
     public void blankData() {
         txtName.setText("");
