@@ -71,6 +71,14 @@ public class KNN {
         return (float) Math.sqrt((Math.pow((x2 - x1), 2)) + (Math.pow((y2 - y1), 2)));
     }
 
+    public static float mean(int... value)
+    {
+        float sum = 0;
+        for(float f : value)
+            sum = sum + f;
+        return sum/value.length;
+    }
+    
     public static void main(String[] args) throws FileNotFoundException {
         // System.out.println(Arrays.toString(getDataAge(new File("data.csv"))));
         // System.out.println(Arrays.toString(getDataWeight(new File("data.csv"))));
@@ -121,6 +129,8 @@ public class KNN {
             float mean = sum / k;
             // System.out.println(Arrays.toString(arr));
             System.out.println("Predicted Weight = " + mean);
+
+            System.out.println("");
         }
     }
 }
