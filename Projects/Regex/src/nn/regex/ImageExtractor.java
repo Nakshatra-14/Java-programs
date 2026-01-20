@@ -2,11 +2,10 @@ package nn.regex;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.IOError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -15,20 +14,18 @@ import java.util.regex.Pattern;
 
 public class ImageExtractor {
 
-    static String readAll(File file) throws FileNotFoundException
-    {
-        Scanner sc = new Scanner(file) ;
+    static String readAll(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
 
-        StringJoiner sj = new StringJoiner("\n") ;
-        while(sc.hasNextLine())
-            sj.add(sc.nextLine()) ;
-        sc.close(); 
+        StringJoiner sj = new StringJoiner("\n");
+        while (sc.hasNextLine())
+            sj.add(sc.nextLine());
+        sc.close();
 
-        return sj.toString() ;
+        return sj.toString();
     }
-    
-    public static List<String> countImg() throws FileNotFoundException
-    {
+
+    public static List<String> countImg() throws FileNotFoundException {
         ArrayList<String> al = new ArrayList<>();
         String regex = "img";
 
@@ -36,8 +33,7 @@ public class ImageExtractor {
 
         Matcher matcher = pat.matcher(readAll(new File("source.txt")));
 
-        while(matcher.find())
-        {
+        while (matcher.find()) {
             // System.out.println(matcher.group());
             al.add(matcher.group());
         }
@@ -45,48 +41,87 @@ public class ImageExtractor {
         return al;
     }
 
-    static List<String> getImgTag(File file) throws FileNotFoundException
-    {
-        Scanner sc = new Scanner(file) ;
+    static List<String> getImgTag(File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
         ArrayList<String> al = new ArrayList<>();
         String regex = "<img.*(src\\s*=\\s*\\\"([^\"]*)\\\").*>";
         Pattern pat = Pattern.compile(regex);
-        
-        while(sc.hasNextLine())
-        {
+
+        while (sc.hasNextLine()) {
             String line = sc.nextLine();
             Matcher matcher = pat.matcher(line);
-            if(matcher.find()) {
+            if (matcher.find()) {
                 al.add(matcher.group(2));
             }
         }
-        sc.close(); 
+        sc.close();
 
         return al;
     }
 
-    public static void replaceLinks(File fSource, File fTarget) throws IOException
-    {
-        String regex = "";
-        Pattern pat = Pattern.compile(regex);
-        try
-        (
-            Scanner sc = new Scanner(fSource);
-            FileWriter fw = new FileWriter(fTarget);
-        )
-        {
+    // public static void replaceLinks(File fSource, String tSource) throws IOException {
+    //     String regex = ".*^(https|http)[:]...*[?](text=(.*))";
+    //     Pattern pat = Pattern.compile(regex);
+    //     String str = "";
+    //     try (
+    //             Scanner sc = new Scanner(fSource);) {
+    //         while (sc.hasNextLine()) {
+    //             String line = sc.nextLine();
+    //             Matcher matcher = pat.matcher(line);
+    //             if (matcher.find()) {
+    //                 // System.out.println("http://our-server.co.org/imgs/" + matcher.group(3));
+    //                 String l = "http://our-server.co.org/imgs/" + matcher.group(3) + "\n";
+    //                 str += l;
+    //             } else
+    //                 str += line;
+    //         }
+    //         // System.out.println(str);
+    //     }
+    //     File fTarget = new File(tSource);
+    //     if (!fTarget.exists()) {
+    //         FileOutputStream fos = new FileOutputStream(fTarget);
+    //         fos.close();
+    //     }
+
+    //     try (
+    //             FileWriter fw = new FileWriter(fTarget);) {
+    //         fw.write(str);
+    //     }
+    // }
+
+    public static void replaceLinks(File fSource, String tSource) throws IOException {
+        String regexForImgTag = "<img.*(src\\s*=\\s*\\\"([^\"]*)\\\").*>";
+        String regexForLink = ".*^(https|http)[:]...*[?](text=(.*))";
+        Pattern patImgTag = Pattern.compile(regexForImgTag);
+        Pattern patForLink = Pattern.compile(regexForLink);
+        String str = "";
+        try (
+                Scanner sc = new Scanner(fSource);) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                Matcher matcher = pat.matcher(line);
-                if(matcher.find())
-                {
-                    
+                Matcher matcher = patImgTag.matcher(line);
+                if (matcher.find()) {
+                    al.add(matcher.group(2));
                 }
             }
         }
+        // System.out.println(str);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    File fTarget = new File(tSource);if(!fTarget.exists())
+    {
+        FileOutputStream fos = new FileOutputStream(fTarget);
+        fos.close();
+    }
+
+    try(
+    FileWriter fw = new FileWriter(fTarget);)
+    {
+        fw.write(str);
+    }
+    }
+
+    public static void main(String[] args) throws IOException {
         // System.out.println(countImg());
         // List<String> al = getImgTag(new File("index.html"));
 
@@ -107,5 +142,7 @@ public class ImageExtractor {
         //WAP that inp a html file and copy that file to another html, with all the links in the img source, replaced as bellow
         //http://our-server.co.org/imgs/<imagefilename>.jpg
         //where img file name is txt as before
+
+        replaceLinks(new File("T.txt"), "new.txt");
     }
 }

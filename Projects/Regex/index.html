@@ -2,186 +2,168 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Cartoon Characters</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoon Character Gallery</title>
     <style>
+        /* General Page Styling */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
             text-align: center;
         }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px;
-        }
-        .card {
-            background: white;
-            padding: 15px;
-            width: 200px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .card img {
-            width: 100%;
-            border-radius: 10px;
-        }
+
         h1 {
             color: #333;
+            margin-bottom: 30px;
         }
-        h3 {
-            color: #555;
+
+        /* The Grid Layout */
+        .gallery-container {
+            display: grid;
+            /* This creates columns that automatically adjust to fit the screen */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual Card Styling */
+        .character-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Image Styling */
+        .character-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover; /* Ensures image fills the square without stretching */
+            border-radius: 8px;
+            background-color: #ddd;
+        }
+
+        .character-card h3 {
+            margin: 15px 0 5px 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
         }
     </style>
 </head>
 <body>
 
-<h1>Famous Cartoon Characters</h1>
+    <h1>Top 20 Cartoon Characters</h1>
 
-<div class="container">
+    <div class="gallery-container">
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/orange/white?text=Mickey+Mouse.png" alt="Mickey Mouse">
+            <h3>Mickey Mouse</h3>
+        </div>
 
-    <!-- Original 3 -->
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Mickey+Mouse">
-        <h3>Mickey Mouse</h3>
-        <p>Cheerful Disney character.</p>
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/grey/white?text=Bugs+Bunny.jpeg" alt="Bugs Bunny">
+            <h3>Bugs Bunny</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/yellow/black?text=Homer+Simpson.jpg" alt="Homer Simpson">
+            <h3>Homer Simpson</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/yellow/brown?text=SpongeBob.svg" alt="SpongeBob">
+            <h3>SpongeBob</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/blue/white?text=Tom+Cat.png" alt="Tom">
+            <h3>Tom</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/brown/white?text=Jerry+Mouse.jpeg" alt="Jerry">
+            <h3>Jerry</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/chocolate/white?text=Scooby-Doo.jpg" alt="Scooby-Doo">
+            <h3>Scooby-Doo</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/yellow/black?text=Charlie+Brown.svg" alt="Charlie Brown">
+            <h3>Charlie Brown</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/gold/black?text=Pikachu.png" alt="Pikachu">
+            <h3>Pikachu</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/orange/blue?text=Goku.jpeg" alt="Goku">
+            <h3>Goku</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/pink/white?text=Sailor+Moon.jpg" alt="Sailor Moon">
+            <h3>Sailor Moon</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/orange/black?text=Fred+Flintstone.svg" alt="Fred Flintstone">
+            <h3>Fred Flintstone</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/navy/white?text=Popeye.png" alt="Popeye">
+            <h3>Popeye</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/black/yellow?text=Batman.jpeg" alt="Batman">
+            <h3>Batman</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/red/blue?text=Spider-Man.jpg" alt="Spider-Man">
+            <h3>Spider-Man</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/purple/white?text=Dora.svg" alt="Dora the Explorer">
+            <h3>Dora the Explorer</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/pink/red?text=Peppa+Pig.png" alt="Peppa Pig">
+            <h3>Peppa Pig</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/orange/black?text=Naruto.jpeg" alt="Naruto">
+            <h3>Naruto</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/skyblue/white?text=Rick+Sanchez.jpg" alt="Rick Sanchez">
+            <h3>Rick Sanchez</h3>
+        </div>
+
+        <div class="character-card">
+            <img src="https://placehold.co/400x400/blue/white?text=Finn+the+Human.svg" alt="Finn the Human">
+            <h3>Finn the Human</h3>
+        </div>
     </div>
-
-    <div class="card">
-        <img alt="Tom" height="20" width="50" src="https://via.placeholder.com/200x150?text=Tom">
-        <h3>Tom</h3>
-        <p>A clever cat.</p>
-    </div>
-
-    <div class="card">
-        "Tom Dancing"<img src="https://via.placeholder.com/200x150?text=Jerry">
-        <h3>Jerry</h3>
-        <p>A smart mouse.</p>
-    </div>
-
-    <!-- 20 More -->
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Doraemon">
-        <h3>Doraemon</h3>
-        <p>A robotic cat from the future.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Nobita">
-        <h3>Nobita</h3>
-        <p>Doraemon's best friend.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Shinchan">
-        <h3>Shinchan</h3>
-        <p>A funny and naughty boy.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Pikachu">
-        <h3>Pikachu</h3>
-        <p>An electric Pokémon.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=SpongeBob">
-        <h3>SpongeBob</h3>
-        <p>A happy sponge.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Patrick">
-        <h3>Patrick</h3>
-        <p>SpongeBob’s best friend.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Donald+Duck">
-        <h3>Donald Duck</h3>
-        <p>A short-tempered duck.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Goofy">
-        <h3>Goofy</h3>
-        <p>A clumsy but kind character.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Pooh">
-        <h3>Winnie the Pooh</h3>
-        <p>Loves honey.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Minion">
-        <h3>Minion</h3>
-        <p>Funny yellow helpers.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Ben+10">
-        <h3>Ben 10</h3>
-        <p>A young superhero.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Powerpuff+Girls">
-        <h3>Powerpuff Girls</h3>
-        <p>Three tiny superheroes.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Scooby+Doo">
-        <h3>Scooby Doo</h3>
-        <p>A mystery-solving dog.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Bugs+Bunny">
-        <h3>Bugs Bunny</h3>
-        <p>A smart rabbit.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Krishna">
-        <h3>Little Krishna</h3>
-        <p>A brave and playful hero.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Motu">
-        <h3>Motu</h3>
-        <p>Loves food and adventures.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Patlu">
-        <h3>Patlu</h3>
-        <p>Smart and slim friend.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Chhota+Bheem">
-        <h3>Chhota Bheem</h3>
-        <p>A strong village boy.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Oggy">
-        <h3>Oggy</h3>
-        <p>A lazy blue cat.</p>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/200x150?text=Jack">
-        <h3>Jack</h3>
-        <p>Oggy’s naughty enemy.</p>
-    </div>
-
-</div>
 
 </body>
 </html>
