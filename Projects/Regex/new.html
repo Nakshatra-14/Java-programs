@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoon Character Gallery</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* The Grid Layout */
+        .gallery-container {
+            display: grid;
+            /* This creates columns that automatically adjust to fit the screen */
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Individual Card Styling */
+        .character-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .character-card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* Image Styling */
+        .character-card img {
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            object-fit: cover; /* Ensures image fills the square without stretching */
+            border-radius: 8px;
+            background-color: #ddd;
+        }
+
+        .character-card h3 {
+            margin: 15px 0 5px 0;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Top 20 Cartoon Characters</h1>
+
+    <div class="gallery-container">
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Mickey+Mouse.png" alt="Mickey Mouse">" alt="Mickey Mouse">
+            <h3>Mickey Mouse</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Bugs+Bunny.jpeg" alt="Bugs Bunny">" alt="Bugs Bunny">
+            <h3>Bugs Bunny</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Homer+Simpson.jpg" alt="Homer Simpson">" alt="Homer Simpson">
+            <h3>Homer Simpson</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/SpongeBob.svg" alt="SpongeBob">" alt="SpongeBob">
+            <h3>SpongeBob</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Tom+Cat.png" alt="Tom">" alt="Tom">
+            <h3>Tom</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Jerry+Mouse.jpeg" alt="Jerry">" alt="Jerry">
+            <h3>Jerry</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Scooby-Doo.jpg" alt="Scooby-Doo">" alt="Scooby-Doo">
+            <h3>Scooby-Doo</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Charlie+Brown.svg" alt="Charlie Brown">" alt="Charlie Brown">
+            <h3>Charlie Brown</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Pikachu.png" alt="Pikachu">" alt="Pikachu">
+            <h3>Pikachu</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Goku.jpeg" alt="Goku">" alt="Goku">
+            <h3>Goku</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Sailor+Moon.jpg" alt="Sailor Moon">" alt="Sailor Moon">
+            <h3>Sailor Moon</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Fred+Flintstone.svg" alt="Fred Flintstone">" alt="Fred Flintstone">
+            <h3>Fred Flintstone</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Popeye.png" alt="Popeye">" alt="Popeye">
+            <h3>Popeye</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Batman.jpeg" alt="Batman">" alt="Batman">
+            <h3>Batman</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Spider-Man.jpg" alt="Spider-Man">" alt="Spider-Man">
+            <h3>Spider-Man</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Dora.svg" alt="Dora the Explorer">" alt="Dora the Explorer">
+            <h3>Dora the Explorer</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Peppa+Pig.png" alt="Peppa Pig">" alt="Peppa Pig">
+            <h3>Peppa Pig</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Naruto.jpeg" alt="Naruto">" alt="Naruto">
+            <h3>Naruto</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Rick+Sanchez.jpg" alt="Rick Sanchez">" alt="Rick Sanchez">
+            <h3>Rick Sanchez</h3>
+        </div>
+
+        <div class="character-card">
+<img src="http://our-server.co.org/imgs/Finn+the+Human.svg" alt="Finn the Human">" alt="Finn the Human">
+            <h3>Finn the Human</h3>
+        </div>
+    </div>
+
+</body>
+</html>
