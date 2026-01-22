@@ -108,7 +108,7 @@ public class ImageExtractor {
                         String s = matcherForImgTag.group(1) + "src=" + "\"" +
                                 "http://our-server.co.org/imgs/" + matcherForLink.group(3) + "\"" +
                                 matcherForImgTag.group(4) + "\n";
-                        System.out.println(s);
+                        // System.out.println(s);
                         str += s;
                     }
                 } else
@@ -116,11 +116,6 @@ public class ImageExtractor {
             }
             // System.out.println(str);
         }
-        // File fTarget = new File(tSource);
-        // if (!fTarget.exists()) {
-        // FileOutputStream fos = new FileOutputStream(fTarget);
-        // fos.close();
-        // }
 
         try (
         FileWriter fw = new FileWriter(fTarget);) {

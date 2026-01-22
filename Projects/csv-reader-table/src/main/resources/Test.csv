@@ -1,0 +1,21 @@
+ID,Name,Email,Department,Salary,JoinDate
+1,Alice Johnson,alice.johnson@company.com,Engineering,75000,2022-01-15
+2,Bob Smith,bob.smith@company.com,Sales,65000,2021-06-20
+3,Carol White,carol.white@company.com,Marketing,62000,2022-03-10
+4,David Brown,david.brown@company.com,Engineering,80000,2020-11-05
+5,Emma Davis,emma.davis@company.com,HR,58000,2023-02-14
+6,Frank Miller,frank.miller@company.com,Finance,70000,2021-09-22
+7,Grace Lee,grace.lee@company.com,Engineering,78000,2022-05-18
+8,Henry Wilson,henry.wilson@company.com,Operations,60000,2023-01-10
+9,Iris Martinez,iris.martinez@company.com,Marketing,64000,2022-07-25
+10,Jack Taylor,jack.taylor@company.com,Sales,66000,2021-04-12
+11,Karen Garcia,karen.garcia@company.com,Engineering,82000,2020-08-30
+12,Leo Anderson,leo.anderson@company.com,Finance,72000,2021-12-03
+13,Mary Thomas,mary.thomas@company.com,HR,59000,2023-03-20
+14,Nathan Jackson,nathan.jackson@company.com,Operations,61000,2022-10-15
+15,Olivia Martin,olivia.martin@company.com,Sales,67000,2021-02-28
+16,Paul Harris,paul.harris@company.com,Engineering,79000,2022-06-11
+17,Quinn Clark,quinn.clark@company.com,Marketing,63000,2022-09-05
+18,Rachel Lewis,rachel.lewis@company.com,Finance,71000,2021-11-17
+19,Samuel Walker,samuel.walker@company.com,Operations,62000,2023-04-08
+20,Tina Young,tina.young@company.com,Engineering,81000,2020-10-22
