@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -39,6 +40,7 @@ public class Main {
 
     // itemMgt
     private static JList<String> lst;
+    private static JTable tabDetails;
     private static JButton btnAdd = new JButton("Add");
     private static JButton btnRemove = new JButton("Remove");
 
@@ -85,6 +87,8 @@ public class Main {
         lst.setFont(new Font("Monospaced", Font.PLAIN, 15));
         DefaultListModel<String> model = new DefaultListModel<>();
         lst.setModel(model);
+
+        tabDetails = new JTable();
 
         bill = getALLBillInfo();
 
@@ -178,7 +182,8 @@ public class Main {
         itemMgtPanel.add(new JLabel("Discount......"), gbc);
         gbc = new GridBagConstraints(0, 1, 5, 2, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
                 0);
-        itemMgtPanel.add(new JScrollPane(lst), gbc);
+        // itemMgtPanel.add(new JScrollPane(lst), gbc);
+        itemMgtPanel.add(new JScrollPane(tabDetails), gbc);
         gbc = new GridBagConstraints(5, 1, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
                 0);
         itemMgtPanel.add(btnAdd, gbc);
