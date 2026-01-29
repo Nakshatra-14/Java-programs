@@ -8,7 +8,7 @@ public class FirstGUI {
     
         frn.setTitle("First GUI Program");
         frn.setSize(500, 300);
-        frn.setLocation(null);
+        frn.setLocationRelativeTo(null);
         frn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frn.setVisible(true);
     }

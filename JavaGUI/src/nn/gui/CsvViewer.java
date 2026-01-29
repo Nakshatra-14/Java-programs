@@ -1,15 +1,11 @@
 package nn.gui;
 
 import java.awt.BorderLayout;
-import java.awt.ScrollPane;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.AbstractTableModel;
@@ -75,39 +71,73 @@ class CSVTableModel extends AbstractTableModel {
 
 }
 
-public class CsvViewer {
+public class CsvViewer extends JFrame{
 
-    public String[] getFileNames()
-    {
-        ArrayList<String> al = new ArrayList<>();
+    private JTextField txtFileName = new JTextField(20);
+    private JFileChooser jfc = new JFileChooser();
+    JButton browseBtn = new JButton("...");
+    JButton openBtn = new JButton("Open");
+    private JTable jt;
+    private File file = new File("Test2.csv");
+    JPanel tablePanel = new JPanel();
 
-        return al.toArray(new String[al.size()]);
+    public CsvViewer()
+     {
+        setTitle("CSV Reader");
+
+        jfc.setCurrentDirectory(new File("."));
+        jfc.setFileFilter(new FileNameExtensionFilter("csv files", "csv"));
+
+        
+        browseBtn.addActionListener( _ -> {
+            int result = jfc.showOpenDialog(this);
+            if(result != JFileChooser.CANCEL_OPTION)
+                {
+                    // System.out.println("Selected " + jfc.getSelectedFile());
+                    file = new File(jfc.getSelectedFile().getAbsolutePath());
+                    txtFileName.setText(file.getName());
+                }
+                
+            });
+
+        openBtn.addActionListener( _ -> {
+            System.out.println(file);
+            if(!file.getName().equals(txtFileName.getText()))
+            {
+                JOptionPane.showMessageDialog(this, "No csv found of name " + txtFileName.getText() + "\nIt might be " + file.getName());
+                return;
+            }
+            showTable(tablePanel, jt, file);   
+        });
+        
+        JPanel p = new JPanel();
+        p.add(txtFileName);
+        p.add(browseBtn);
+        p.add(openBtn);
+        add(p, BorderLayout.NORTH);
+
+        // showTable(tablePanel, jt, file);
+
+        add(tablePanel, BorderLayout.SOUTH);
+
     }
 
-
-
-    public static void main(String[] args) {
-
-        JFileChooser jfc = new JFileChooser();
-        jfc.setCurrentDirectory(new File("."));
-        jfc.setFileFilter(new FileNameExtensionFilter("csv files", "csv", "tsv", "txt"));
-        JTable jt = new JTable(new CSVTableModel(new File("Test.csv")));
-
-        JFrame frm = new JFrame("CSV Reader");
-        
-        JButton btn = new JButton("Button");
-        btn.addActionListener( _ -> {
-            int result = jfc.showOpenDialog(frm);
-            if(result != JFileChooser.CANCEL_OPTION)
-                System.out.println("Selected " + jfc.getSelectedFile());
-        });
-
+    public void showTable(JPanel p, JTable jt, File file)
+    {
+        p.removeAll();
+        jt = new JTable(new CSVTableModel(file));
         jt.setFillsViewportHeight(true);
         jt.setAutoCreateRowSorter(true);
-        frm.add(btn, BorderLayout.SOUTH);
-        frm.add(new JScrollPane(jt));
-        frm.pack();
-        frm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frm.setVisible(true);
+        p.add(new JScrollPane(jt));
+        p.repaint();
+        revalidate();
+        pack();
+    }
+
+    public static void main(String[] args) {
+        CsvViewer csvViewer = new CsvViewer();
+        csvViewer.pack();
+        csvViewer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        csvViewer.setVisible(true);
     }
 }
