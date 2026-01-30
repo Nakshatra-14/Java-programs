@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -15,9 +18,15 @@ public class ShowQuote extends JFrame {
     private ArrayList<String> al = new ArrayList<>();
     private String str = "Helloo";
     Font f = new Font("Times New Romans", Font.BOLD, 20);
+    final Date time; 
 
     ShowQuote(String title) {
         setTitle(title);
+
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.set(gc.HOUR, 21);
+        gc.set(gc.MINUTE, 4);
+        time = gc.getTime(); 
 
         setSize(530, 200);
 
@@ -26,9 +35,17 @@ public class ShowQuote extends JFrame {
         JPanel p = new MyPanel();
         p.setBackground(Color.darkGray);
 
-        new Timer(5000, _ -> {
-            str = al.get(new Random().nextInt(30));
-            p.repaint();
+        new Timer(1000, _ -> {
+            GregorianCalendar curr = new GregorianCalendar();
+            Date currTime = curr.getTime();
+            long fixedMillis = time.getTime();
+            long currMillis = currTime.getTime();
+            System.out.println("Fixed: " + fixedMillis + "\nCurrent: " + currMillis);
+            if(fixedMillis >= currMillis)
+            {
+                str = al.get(new Random().nextInt(30));
+                p.repaint();
+            }
         }).start();
         add(p);
     }

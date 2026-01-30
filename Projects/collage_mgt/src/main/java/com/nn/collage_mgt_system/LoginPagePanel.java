@@ -2,6 +2,7 @@ package com.nn.collage_mgt_system;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -96,6 +97,18 @@ public class LoginPagePanel extends JPanel {
                         .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(104, Short.MAX_VALUE)));
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public JButton getBtnSubmit() {
+        return btnSubmit;
     }
 
 }

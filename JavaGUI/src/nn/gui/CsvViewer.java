@@ -74,40 +74,41 @@ class CSVTableModel extends AbstractTableModel {
 public class CsvViewer extends JFrame{
 
     private JTextField txtFileName = new JTextField(20);
-    private JFileChooser jfc = new JFileChooser();
+    private JFileChooser chooser = new JFileChooser();
     JButton browseBtn = new JButton("...");
     JButton openBtn = new JButton("Open");
-    private JTable jt;
-    private File file = new File("Test2.csv");
+    private JTable table = new JTable();
     JPanel tablePanel = new JPanel();
 
     public CsvViewer()
      {
         setTitle("CSV Reader");
 
-        jfc.setCurrentDirectory(new File("."));
-        jfc.setFileFilter(new FileNameExtensionFilter("csv files", "csv"));
+        chooser.setCurrentDirectory(new File("."));
+        chooser.setFileFilter(new FileNameExtensionFilter("csv files", "csv"));
 
         
-        browseBtn.addActionListener( _ -> {
-            int result = jfc.showOpenDialog(this);
+        browseBtn.addActionListener(_ -> {
+            int result = chooser.showOpenDialog(this);
             if(result != JFileChooser.CANCEL_OPTION)
                 {
                     // System.out.println("Selected " + jfc.getSelectedFile());
-                    file = new File(jfc.getSelectedFile().getAbsolutePath());
-                    txtFileName.setText(file.getName());
+                    File file = new File(chooser.getSelectedFile().getAbsolutePath());
+                    txtFileName.setText(file.getAbsolutePath());
                 }
                 
             });
 
         openBtn.addActionListener( _ -> {
-            System.out.println(file);
-            if(!file.getName().equals(txtFileName.getText()))
+            // System.out.println(file);
+            File file = new File(txtFileName.getText());
+            if(!file.exists())
             {
                 JOptionPane.showMessageDialog(this, "No csv found of name " + txtFileName.getText() + "\nIt might be " + file.getName());
                 return;
             }
-            showTable(tablePanel, jt, file);   
+            table.setModel(new CSVTableModel(file)) ;
+            table.revalidate();
         });
         
         JPanel p = new JPanel();
@@ -118,20 +119,8 @@ public class CsvViewer extends JFrame{
 
         // showTable(tablePanel, jt, file);
 
-        add(tablePanel, BorderLayout.SOUTH);
+        add(new JScrollPane(table), BorderLayout.CENTER);
 
-    }
-
-    public void showTable(JPanel p, JTable jt, File file)
-    {
-        p.removeAll();
-        jt = new JTable(new CSVTableModel(file));
-        jt.setFillsViewportHeight(true);
-        jt.setAutoCreateRowSorter(true);
-        p.add(new JScrollPane(jt));
-        p.repaint();
-        revalidate();
-        pack();
     }
 
     public static void main(String[] args) {
