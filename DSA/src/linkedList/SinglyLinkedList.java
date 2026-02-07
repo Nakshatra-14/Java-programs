@@ -1,5 +1,7 @@
 package linkedList;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringJoiner;
 
 public class SinglyLinkedList<T>
@@ -54,24 +56,48 @@ public class SinglyLinkedList<T>
 
     private Node<T> searchNodeByPos(int pos) // pos = 0 means first node
     {
-        // return null ; // write this
+        Node<T> tmp = start ;
+        for(int i = 0 ; tmp != null ; i++)
+        {
+            if(i == pos)
+                break;
+            tmp = tmp.next ;
+        }
+        return tmp;
     }
 
     public void reverse()
     {
-        <write your code here>
+        Node<T> tmp = start ;
+        while(tmp != null)
+        {
+
+            tmp = tmp.next ;
+        }
     }
 
     
     public void eleminateDuplicates()
     {
+        // Map<T, Integer> map = new HashMap<>();
+        // Node<T> tmp = start ;
+        // while(tmp != null)
+        // {
+        //     map.put(, value)
+        //     tmp = tmp.next ;
+        // }
         // abacdacbadbc -> abcd
-        <write your code here>
+        // <write your code here>
     }
 
     public void sort()
     {
-        <write your code here>
+        // <write your code here>
+        Node<T> tmp = start ;
+        while(tmp != null)
+        {
+            tmp = tmp.next ;
+        }
     }
 
     public void insertAt(T data, int at)
@@ -191,6 +217,8 @@ A -> B -> C-> D
 
         lst.insertAt("FIRST", 0);
         System.out.println(lst);
+
+        System.out.println(lst.searchNodeByPos(0));
 
     }
 }
