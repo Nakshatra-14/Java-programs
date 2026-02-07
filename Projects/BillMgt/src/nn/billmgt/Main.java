@@ -40,7 +40,7 @@ public class Main {
 
     // itemMgt
     private static JList<String> lst;
-    private static JTable tabDetails;
+    // private static JTable tabDetails;
     private static JButton btnAdd = new JButton("Add");
     private static JButton btnRemove = new JButton("Remove");
 
@@ -88,7 +88,7 @@ public class Main {
         DefaultListModel<String> model = new DefaultListModel<>();
         lst.setModel(model);
 
-        tabDetails = new JTable();
+        // tabDetails = new JTable();
 
         bill = getALLBillInfo();
 
@@ -182,8 +182,8 @@ public class Main {
         itemMgtPanel.add(new JLabel("Discount......"), gbc);
         gbc = new GridBagConstraints(0, 1, 5, 2, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
                 0);
-        // itemMgtPanel.add(new JScrollPane(lst), gbc);
-        itemMgtPanel.add(new JScrollPane(tabDetails), gbc);
+        itemMgtPanel.add(new JScrollPane(lst), gbc);
+        // itemMgtPanel.add(new JScrollPane(tabDetails), gbc);
         gbc = new GridBagConstraints(5, 1, 1, 1, 1.0, 1.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, insets, 0,
                 0);
         itemMgtPanel.add(btnAdd, gbc);
@@ -364,6 +364,8 @@ public class Main {
             grandTot += i.price();
             grandDis += i.discount();
         }
+        // model.addElement("ABCD");
+
         lblGrandTot.setText(String.format("%.2f", grandTot));
         lblGrandDis.setText(String.format("%.2f", grandDis) + "%");
         lblRoundOff.setText(String.format("%.2f", Math.round(grandTot) - grandTot));
@@ -385,13 +387,15 @@ public class Main {
 
     public static ArrayList<Item> getCustItems(int billNo) {
         ArrayList<Item> al = new ArrayList<>();
+        String sql = "select sd.SlNo, i.itemName, sd.Qty, i.itemPrice, i.discount\n" + //
+                    "from salesDetails sd, item i, sales s\n" + //
+                    "where sd.itemId = i.itemId and sd.billId = s.BillId and s.BIllNo = " + billNo + "\n" + //
+                    "order by 1";
+        // System.out.println(sql);
         try (
                 Connection con = MySQL_Connector.getConnection("bill");
                 Statement stmt = con.createStatement();) {
-            ResultSet rs = stmt.executeQuery("select sd.SlNo, i.itemName, sd.Qty, i.itemPrice, i.discount\n" + //
-                    "from salesDetails sd, item i, sales s\n" + //
-                    "where sd.itemId = i.itemId and sd.billId = s.BillId and s.BIllNo = " + billNo + "\n" + //
-                    "order by 1");
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next())
                 al.add(new Item(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getDouble(4), rs.getDouble(5)));
         } catch (SQLException ex) {

@@ -1,4 +1,4 @@
-package DSA.LinkedList;
+package linkedList;
 
 import java.util.StringJoiner;
 

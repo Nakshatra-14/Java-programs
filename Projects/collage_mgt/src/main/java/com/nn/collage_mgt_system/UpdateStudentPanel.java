@@ -264,18 +264,19 @@ public class UpdateStudentPanel extends JPanel{
         return btnUpdate;
     }
 
-    public void setTxtShowNewId(JTextField txtShowNewId) {
-        this.txtShowNewId = txtShowNewId;
+    public JTextField getTxtShowNewId() {
+        return txtShowNewId;
     }
 
-    public void setTxtShowNewName(JTextField txtShowNewName) {
-        this.txtShowNewName = txtShowNewName;
+    public JTextField getTxtShowNewName() {
+        return txtShowNewName;
     }
 
-    public void setTxtShowNewBatch(JTextField txtShowNewBatch) {
-        this.txtShowNewBatch = txtShowNewBatch;
+    public JTextField getTxtShowNewBatch() {
+        return txtShowNewBatch;
     }
 
-    
-
+    public JTextField getTxtId() {
+        return txtId;
+    }
 }

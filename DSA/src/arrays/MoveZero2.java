@@ -1,3 +1,4 @@
+package arrays;
 import java.util.Arrays;
 
 public class MoveZero2 {

@@ -1,8 +1,8 @@
-package nn.dsa.linkedlist;
+package linkedList;
 
 import java.util.StringJoiner;
 
-public class Linkedlist<T> {
+public class Linkedlist2<T> {
 
     private class Node {
         T data;
@@ -20,7 +20,7 @@ public class Linkedlist<T> {
 
     private Node first;
 
-    public Linkedlist() {
+    public Linkedlist2() {
         first = null;
     }
 
@@ -130,7 +130,7 @@ public class Linkedlist<T> {
 
     public static void main(String[] args) {
 
-        Linkedlist<String> lst = new Linkedlist<>();
+        Linkedlist2<String> lst = new Linkedlist2<>();
 
         lst.AddAfterLast("Mar");
         lst.AddAfterLast("Apr");
