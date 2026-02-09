@@ -1,7 +1,5 @@
 package linkedList;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringJoiner;
 
 public class SinglyLinkedList<T>
@@ -9,7 +7,7 @@ public class SinglyLinkedList<T>
     private Node<T> start = null ;
 
     // creates a node with give data and add it at the end of the list
-    public void append(T data) 
+    public SinglyLinkedList<T> append(T data) 
     {
         Node<T> node = new Node<>(data) ;
 
@@ -24,6 +22,7 @@ public class SinglyLinkedList<T>
 
             tmp.next = node ;
         }
+        return this;
     }
 
     @Override
@@ -68,24 +67,40 @@ public class SinglyLinkedList<T>
 
     public void reverse()
     {
-        Node<T> tmp = start ;
-        while(tmp != null)
+        Node<T> cur = start ;
+        Node<T> prv = null;
+        while(cur != null)
         {
-
-            tmp = tmp.next ;
+            Node<T> nxt = cur.next;
+            cur.next = prv;
+            
+            prv = cur;
+            cur = nxt;
         }
+        start = prv;
     }
 
     
     public void eleminateDuplicates()
     {
-        // Map<T, Integer> map = new HashMap<>();
-        // Node<T> tmp = start ;
-        // while(tmp != null)
-        // {
-        //     map.put(, value)
-        //     tmp = tmp.next ;
-        // }
+        Node<T> anchor = start ;
+        while(anchor != null)
+        {
+            Node<T> tmp = anchor;
+            while(tmp.next != null)
+            {
+                if(tmp.next.data.equals(anchor.data))    
+                {
+                    //delete the node refered by tmp.next
+                    Node<T> del = tmp.next;
+                    tmp.next = del.next;
+                    // tmp.next = tmp.next.next;
+                }
+                else
+                    tmp = tmp.next;
+            }
+            anchor = anchor.next;
+        }
         // abacdacbadbc -> abcd
         // <write your code here>
     }
@@ -220,5 +235,15 @@ A -> B -> C-> D
 
         System.out.println(lst.searchNodeByPos(0));
 
+        lst.reverse();
+
+        System.out.println(lst);
+
+        SinglyLinkedList<Integer> nums = new SinglyLinkedList<>();
+
+        nums.append(5).append(4).append(3).append(5).append(3).append(3).append(5);
+        System.out.println(nums);
+        nums.eleminateDuplicates();
+        System.out.println(nums);
     }
 }
