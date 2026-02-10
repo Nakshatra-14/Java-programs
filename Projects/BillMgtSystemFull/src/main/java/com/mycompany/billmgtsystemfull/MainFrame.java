@@ -17,6 +17,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        btnItemRemove.setEnabled(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -49,10 +51,10 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jButton6 = new javax.swing.JButton();
+        btnItemRemove = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -67,6 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
 
         jPanel3.setBackground(new java.awt.Color(209, 209, 209));
 
@@ -92,19 +95,19 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Bill Details");
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setBackground(new java.awt.Color(244, 244, 244));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setBackground(new java.awt.Color(244, 244, 244));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField3.setBackground(new java.awt.Color(244, 244, 244));
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField4.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField4.setBackground(new java.awt.Color(244, 244, 244));
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -242,15 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Add Items");
-
-        jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setBackground(new java.awt.Color(204, 204, 204));
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel6.setText("Items:");
 
         jButton6.setBackground(new java.awt.Color(82, 84, 192));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -262,13 +257,33 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(255, 102, 102));
+        btnItemRemove.setBackground(new java.awt.Color(255, 102, 102));
+        btnItemRemove.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnItemRemove.setForeground(new java.awt.Color(255, 255, 255));
+        btnItemRemove.setText("Remove Item");
+        btnItemRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnItemRemoveActionPerformed(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(214, 214, 214));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Remove Item");
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
+        jButton7.setText("Add Item");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton11.setBackground(new java.awt.Color(214, 214, 214));
+        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(0, 0, 0));
+        jButton11.setText("Quantity");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
             }
         });
 
@@ -283,13 +298,13 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnItemRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -301,10 +316,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(btnItemRemove)
+                    .addComponent(jButton7)
+                    .addComponent(jButton11))
                 .addContainerGap())
         );
 
@@ -391,7 +406,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("Save");
 
-        jButton9.setBackground(new java.awt.Color(0, 204, 204));
+        jButton9.setBackground(new java.awt.Color(0, 163, 163));
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButton9.setForeground(new java.awt.Color(255, 255, 255));
         jButton9.setText("Print");
@@ -475,9 +490,18 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void btnItemRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnItemRemoveActionPerformed
+
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        new ItemSelector();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,7 +529,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnItemRemove;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -514,8 +540,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
