@@ -28,9 +28,9 @@ public class MySQL_Connector {
         }
     }
    
-    public static Connection getConnection(String databaseName) throws SQLException
+    public static Connection getConnection() throws SQLException
     {
-        String url = "jdbc:mysql://localhost:3306/" + databaseName;
-        return DriverManager.getConnection(url);
+        String url = "jdbc:mysql://localhost:3306/" + "bill";
+        return DriverManager.getConnection(url, "root", "4762");
     }
 }

@@ -32,7 +32,7 @@ public class ItemSelector extends javax.swing.JFrame {
                      """;
         try
             (
-                Connection con = MySQL_Connector.getConnection("bill");
+                Connection con = MySQL_Connector.getConnection();
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
             )
@@ -44,18 +44,24 @@ public class ItemSelector extends javax.swing.JFrame {
         }
     }
     
-    public ItemSelector() throws SQLException {
+    public ItemSelector() {
         initComponents();
         
         DefaultListModel<String> model = new DefaultListModel<>();
         lst.setModel(model);
-        getData();
+        
+        try {
+            getData();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
         for(String s : al)
         {
             model.addElement(s);
         }
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 
