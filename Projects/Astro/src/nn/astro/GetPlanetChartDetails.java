@@ -8,7 +8,6 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -28,7 +27,7 @@ public class GetPlanetChartDetails extends JPanel {
 
         public static String[] getPlanetNameChartStringArray() {
                 ArrayList<String> l = new ArrayList<>();
-                for (int i = 0; i < 12; i++)
+                for (int i = 0; i < al.size() ; i++)
                         l.add(i + 1 + ": " + al.get(i).getName());
                 return l.toArray(new String[al.size()]);
         }
@@ -36,7 +35,7 @@ public class GetPlanetChartDetails extends JPanel {
         GetPlanetChartDetails() {
                 showColor.setBackground(Color.pink);
                 showColor.setOpaque(true);
-                Planets.addPlanetsChartDetails(al);
+                Planets.add9PlanetsChartDetails(al);
 
                 showColor.setForeground(Color.DARK_GRAY);
                 txtElement.setEditable(false);

@@ -21,7 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private record BillInfo(int billNo, Date billDt, String custName, String custPhone) {}
     private ArrayList<BillInfo> al = new ArrayList<>();
-    private int billPageNumber = 1;
+    private int billPageNumber = 0;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private DefaultTableModel model = new DefaultTableModel();
     private String[] colNames = {"Sl No.", "Item Name", "Quantity", "Price", "Discount"};
@@ -48,12 +48,13 @@ public class MainFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         
-        showData(billPageNumber);
-        
         for(String c : colNames)
             model.addColumn(c);
         
+        showData(billPageNumber);
+        
         setLocationRelativeTo(null);
+        
     }
     
     public void loadData() throws SQLException
@@ -85,7 +86,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         updateTable();
         
-        jTable.repaint();
+//        jTable.repaint();
     }
     
 //    record TableData(String Slno, String itemName, String quantity, String price, String discount) {};
@@ -113,6 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
                 String itemPrice = String.valueOf(rs.getFloat(4));
                 String discount = String.valueOf(rs.getFloat(5));
                 l.add(new String[] {slNo, itemName, quantity, itemPrice, discount});
+//                System.out.println(Arrays.toString(new String[] {slNo, itemName, quantity, itemPrice, discount}));
             }
         }
         catch(SQLException ex)
@@ -124,9 +126,11 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void updateTable()
     {
+        model.setRowCount(0);
         for(String[] s : getArraylistForTable())
         {
             model.addRow(s);
+            System.out.println("DATA= " + Arrays.toString(s));
         }
     }
 
@@ -189,40 +193,31 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Bill No.");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Date");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Phone:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Customer");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Bill Details");
 
         txtBillNo.setBackground(new java.awt.Color(244, 244, 244));
         txtBillNo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtBillNo.setForeground(new java.awt.Color(0, 0, 0));
 
         txtBillDate.setBackground(new java.awt.Color(244, 244, 244));
         txtBillDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtBillDate.setForeground(new java.awt.Color(0, 0, 0));
 
         txtCustomerName.setBackground(new java.awt.Color(244, 244, 244));
         txtCustomerName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtCustomerName.setForeground(new java.awt.Color(0, 0, 0));
 
         txtCustomerPhoneNumber.setBackground(new java.awt.Color(244, 244, 244));
         txtCustomerPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txtCustomerPhoneNumber.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -382,7 +377,6 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Items:");
 
         jButton6.setBackground(new java.awt.Color(82, 84, 192));
@@ -407,7 +401,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton7.setBackground(new java.awt.Color(214, 214, 214));
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
         jButton7.setText("Add Item");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -416,7 +409,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jComboBox1.setBackground(new java.awt.Color(214, 214, 214));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quantity", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -467,35 +459,27 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel5.setForeground(new java.awt.Color(102, 102, 102));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Grand Total:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Total Discount:");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Round Off:");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Final Bill Amount:");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Test");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Test");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Test");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Test");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -656,15 +640,18 @@ public class MainFrame extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        System.out.println("Trying");
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Motif".equals(info.getName())) {
+                    System.out.println("LAF Added");
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
             logger.log(java.util.logging.Level.SEVERE, null, ex);
+            System.out.println("laf not founnd");
         }
         //</editor-fold>
 

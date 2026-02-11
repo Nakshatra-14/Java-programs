@@ -2,7 +2,6 @@ package nn.astro;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Planets {
@@ -142,20 +141,33 @@ public class Planets {
         };
     }
 
+    public static void add9PlanetsChartDetails(List<Planets> lst)
+    {
+        lst.add(new Planets(Planets.getPlanetName(1), 1));
+        lst.add(new Planets(Planets.getPlanetName(2), 2));
+        lst.add(new Planets(Planets.getPlanetName(3), 3));
+        lst.add(new Planets(Planets.getPlanetName(4), 4));
+        lst.add(new Planets(Planets.getPlanetName(5), 5));
+        lst.add(new Planets(Planets.getPlanetName(6), 6));
+        lst.add(new Planets(Planets.getPlanetName(7), 7));
+        lst.add(new Planets(Planets.getPlanetName(8), 8));
+        lst.add(new Planets(Planets.getPlanetName(9), 9));
+    }
+
     public static void addPlanetsChartDetails(List<Planets> lst) {
-                lst.add(new Planets(Planets.getPlanetName(3), 1));
-                lst.add(new Planets(Planets.getPlanetName(6), 2));
-                lst.add(new Planets(Planets.getPlanetName(4), 3));
-                lst.add(new Planets(Planets.getPlanetName(2), 4));
-                lst.add(new Planets(Planets.getPlanetName(1), 5));
-                lst.add(new Planets(Planets.getPlanetName(4), 6));
-                lst.add(new Planets(Planets.getPlanetName(6), 7));
-                lst.add(new Planets(Planets.getPlanetName(3), 8));
-                lst.add(new Planets(Planets.getPlanetName(5), 9));
-                lst.add(new Planets(Planets.getPlanetName(7), 10));
-                lst.add(new Planets(Planets.getPlanetName(7), 11));
-                lst.add(new Planets(Planets.getPlanetName(5), 12));
-        }
+        lst.add(new Planets(Planets.getPlanetName(3), 1));
+        lst.add(new Planets(Planets.getPlanetName(6), 2));
+        lst.add(new Planets(Planets.getPlanetName(4), 3));
+        lst.add(new Planets(Planets.getPlanetName(2), 4));
+        lst.add(new Planets(Planets.getPlanetName(1), 5));
+        lst.add(new Planets(Planets.getPlanetName(4), 6));
+        lst.add(new Planets(Planets.getPlanetName(6), 7));
+        lst.add(new Planets(Planets.getPlanetName(3), 8));
+        lst.add(new Planets(Planets.getPlanetName(5), 9));
+        lst.add(new Planets(Planets.getPlanetName(7), 10));
+        lst.add(new Planets(Planets.getPlanetName(7), 11));
+        lst.add(new Planets(Planets.getPlanetName(5), 12));
+    }
 
         public static String[] getPlanetNameChartStringArray(List<Planets> lst) {
                 ArrayList<String> l = new ArrayList<>();
