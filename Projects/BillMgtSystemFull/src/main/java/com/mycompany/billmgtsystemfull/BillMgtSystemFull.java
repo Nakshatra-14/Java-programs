@@ -4,6 +4,9 @@
  */
 package com.mycompany.billmgtsystemfull;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.UIManager;
+
 /**
  *
  * @author naksh
@@ -12,22 +15,32 @@ public class BillMgtSystemFull {
 
     public BillMgtSystemFull() {
         var app = new MainFrame();
-        app.setVisible(true);
+        app.setVisible(true); 
         
+        Runtime runtime = Runtime.getRuntime();
+        long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024);
+        System.out.println("Used Memory: " + usedMemory + " MB");
     }
     
     
     public static void main(String[] args) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    System.out.println("LAF Added");
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            System.out.println("laf not founnd");
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+////            System.out.println("laf not founnd");
+//        }
+        try
+        {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
         new BillMgtSystemFull();
     }

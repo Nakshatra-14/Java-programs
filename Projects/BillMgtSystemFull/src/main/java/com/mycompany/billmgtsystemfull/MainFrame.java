@@ -20,7 +20,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private record BillInfo(int billNo, Date billDt, String custName, String custPhone) {}
-    private ArrayList<BillInfo> al = new ArrayList<>();
+//    private ArrayList<BillInfo> al = new ArrayList<>();
+    private ArrayList<Integer> alBillId = new ArrayList<>();
     private int billPageNumber = 0;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private DefaultTableModel model = new DefaultTableModel();
@@ -31,37 +32,43 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public void fixPage()
     {
-        if(billPageNumber > al.size() - 1)
+        if(billPageNumber > alBillId.size() - 1)
             billPageNumber = 0;
         else if(billPageNumber < 0)
-            billPageNumber = al.size() - 1;
+            billPageNumber = alBillId.size() - 1;
     }
     
     public MainFrame() {
+        setTitle("Bill Management System");
         initComponents();
         jTable.setModel(model);
         btnItemRemove.setEnabled(false);
         
-        try {
-            loadData();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+//        try {
+//            loadData();
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
         
         for(String c : colNames)
             model.addColumn(c);
-        
+        try {
+            loadBillId();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+//        System.out.println(alBillId);
         showData(billPageNumber);
-        
+
         setLocationRelativeTo(null);
         
     }
     
-    public void loadData() throws SQLException
+    public void loadBillId() throws SQLException
     {
         String sql = """
-                     select BillNo, BillDt, CustName, CustPhone
-                     from sales
+                     SELECT billid FROM salesdetails
+                     group by billid
                      order by 1
                      """;
         try
@@ -72,33 +79,19 @@ public class MainFrame extends javax.swing.JFrame {
             )
         {
             while(rs.next())
-                al.add(new BillInfo(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4)));
+            {
+                int id = rs.getInt(1);
+                alBillId.add(id);
+            }
         }
-//        System.out.println(al);
     }
     
-    public void showData(int pageNo)
+    public BillInfo getLoadBillInfo() throws SQLException
     {
-        txtBillNo.setText(String.valueOf(al.get(pageNo).billNo));
-        txtBillDate.setText(sdf.format(al.get(pageNo).billDt));
-        txtCustomerName.setText(al.get(pageNo).custName);
-        txtCustomerPhoneNumber.setText(al.get(pageNo).custPhone);
-        
-        updateTable();
-        
-//        jTable.repaint();
-    }
-    
-//    record TableData(String Slno, String itemName, String quantity, String price, String discount) {};
-    
-    public ArrayList<String[]> getArraylistForTable()
-    {
-        ArrayList<String[]> l = new ArrayList<>();
-        
-        String sql = "select sd.SlNo, i.itemName, sd.Qty, i.itemPrice, i.discount\n" +
-"                     from salesDetails sd, item i, sales s\n" +
-"                     where sd.itemId = i.itemId and sd.billId = s.BillId and s.BIllNo = " + al.get(billPageNumber).billNo + "\n" +
-"                     order by 1";
+        String sql = """
+                     SELECT BillNo, BillDt, CustName, CustPhone
+                     FROM bill.sales
+                     where billid = """ + alBillId.get(billPageNumber);
         try
             (
                 Connection con = MySQL_Connector.getConnection();
@@ -106,6 +99,55 @@ public class MainFrame extends javax.swing.JFrame {
                 ResultSet rs = stmt.executeQuery(sql);
             )
         {
+            while(rs.next())
+                return new BillInfo(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getString(4));
+                
+        }
+//        System.out.println(al);
+        return null;
+    }
+//    
+    public void showData(int pageNo)
+    {
+        BillInfo d = null;
+        try {
+            d = getLoadBillInfo();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        txtBillNo.setText(String.valueOf(d.billNo));
+        txtBillDate.setText(sdf.format(d.billDt));
+        txtCustomerName.setText(d.custName);
+        txtCustomerPhoneNumber.setText(d.custPhone);
+        
+        updateTable();
+        updateAmountData();
+//        jTable.repaint();
+    }
+    
+    record TableData(String Slno, String itemName, String quantity, String price, String discount) {};
+    float grandtot = 0;
+    float grandDiscount = 0;
+    float roundOff = 0;
+    float finalAmt = 0;
+    
+    public ArrayList<String[]> getArraylistForTable()
+    {
+        ArrayList<String[]> l = new ArrayList<>();
+        
+        String sql = "select sd.SlNo, i.itemName, sd.Qty, i.itemPrice, i.discount\n" +
+                     "from salesDetails sd, item i, sales s\n" +
+                     "where sd.itemId = i.itemId and sd.billId = s.BillId and s.BIllid = " + alBillId.get(billPageNumber) +"\n" +
+                     "order by 1";
+        try
+            (
+                Connection con = MySQL_Connector.getConnection();
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+            )
+        {
+            grandtot = 0;
+            grandDiscount = 0;
             while(rs.next())  
             {
                 String slNo = String.valueOf(rs.getInt(1));
@@ -115,6 +157,9 @@ public class MainFrame extends javax.swing.JFrame {
                 String discount = String.valueOf(rs.getFloat(5));
                 l.add(new String[] {slNo, itemName, quantity, itemPrice, discount});
 //                System.out.println(Arrays.toString(new String[] {slNo, itemName, quantity, itemPrice, discount}));
+    
+                grandtot += Float.parseFloat(itemPrice);
+                grandDiscount += Float.parseFloat(discount);
             }
         }
         catch(SQLException ex)
@@ -123,15 +168,23 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return l;
     }
-    
+//    
     public void updateTable()
     {
         model.setRowCount(0);
         for(String[] s : getArraylistForTable())
         {
             model.addRow(s);
-            System.out.println("DATA= " + Arrays.toString(s));
+//            System.out.println("DATA= " + Arrays.toString(s));
         }
+    }
+    
+    public void updateAmountData()
+    {
+        lblGrandTot.setText(String.valueOf(grandtot));
+        lblDiscountTot.setText(String.format("%.2f", grandDiscount) + "%");
+        lblRoundOff.setText(String.valueOf(Math.round(grandtot) - grandtot));
+        lblFinalAmount.setText(String.valueOf(grandtot - (grandtot * (grandDiscount / 100))));
     }
 
     /**
@@ -177,10 +230,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblGrandTot = new javax.swing.JLabel();
+        lblDiscountTot = new javax.swing.JLabel();
+        lblRoundOff = new javax.swing.JLabel();
+        lblFinalAmount = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -470,17 +523,17 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Final Bill Amount:");
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel11.setText("Test");
+        lblGrandTot.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblGrandTot.setText("Test");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Test");
+        lblDiscountTot.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblDiscountTot.setText("Test");
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setText("Test");
+        lblRoundOff.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblRoundOff.setText("Test");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel14.setText("Test");
+        lblFinalAmount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFinalAmount.setText("Test");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -489,19 +542,19 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblGrandTot, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
                 .addGap(55, 55, 55)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDiscountTot, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRoundOff, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFinalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(21, 21, 21))
         );
@@ -516,10 +569,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblGrandTot, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDiscountTot, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRoundOff, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFinalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -562,7 +615,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -578,11 +631,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -674,10 +727,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -697,6 +746,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
+    private javax.swing.JLabel lblDiscountTot;
+    private javax.swing.JLabel lblFinalAmount;
+    private javax.swing.JLabel lblGrandTot;
+    private javax.swing.JLabel lblRoundOff;
     private javax.swing.JTextField txtBillDate;
     private javax.swing.JTextField txtBillNo;
     private javax.swing.JTextField txtCustomerName;
