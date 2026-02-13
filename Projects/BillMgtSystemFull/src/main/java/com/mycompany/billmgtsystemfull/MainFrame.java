@@ -4,6 +4,7 @@
  */
 package com.mycompany.billmgtsystemfull;
 
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,6 @@ public class MainFrame extends javax.swing.JFrame {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private DefaultTableModel model = new DefaultTableModel();
     private String[] colNames = {"Sl No.", "Item Name", "Quantity", "Price", "Discount"};
-
     /**
      * Creates new form MainFrame
      */
@@ -41,8 +41,10 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         setTitle("Bill Management System");
         initComponents();
+        
         jTable.setModel(model);
-        btnItemRemove.setEnabled(false);
+        
+        setBillInfoEditableToFalse();
         
 //        try {
 //            loadData();
@@ -186,6 +188,14 @@ public class MainFrame extends javax.swing.JFrame {
         lblRoundOff.setText(String.valueOf(Math.round(grandtot) - grandtot));
         lblFinalAmount.setText(String.valueOf(grandtot - (grandtot * (grandDiscount / 100))));
     }
+    
+    public void setBillInfoEditableToFalse()
+    {
+        txtBillNo.setEditable(false);
+        txtBillDate.setEditable(false);
+        txtCustomerName.setEditable(false);
+        txtCustomerPhoneNumber.setEditable(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -213,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -356,10 +366,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(82, 84, 192));
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Admin Panel");
+        btnAdmin.setBackground(new java.awt.Color(82, 84, 192));
+        btnAdmin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdmin.setText("Admin Panel");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                    .addComponent(btnAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                     .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
@@ -405,7 +420,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -684,6 +699,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        // TODO add your handling code here:
+        new AdminFrame().setVisible(true);
+    }//GEN-LAST:event_btnAdminActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -713,9 +733,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnItemRemove;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

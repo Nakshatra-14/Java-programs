@@ -15,11 +15,7 @@ public class BillMgtSystemFull {
 
     public BillMgtSystemFull() {
         var app = new MainFrame();
-        app.setVisible(true); 
-        
-        Runtime runtime = Runtime.getRuntime();
-        long usedMemory = (runtime.totalMemory() - runtime.freeMemory()) / (1024 * 1024);
-        System.out.println("Used Memory: " + usedMemory + " MB");
+        app.setVisible(true);
     }
     
     
