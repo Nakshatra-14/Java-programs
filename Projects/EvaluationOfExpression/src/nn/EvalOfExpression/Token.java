@@ -7,7 +7,10 @@ public class Token {
 
     public Token(char symb) {
         this.symb = symb;
-        type = TokenType.Operator;
+        if(symb == ')')
+            type = TokenType.Cparen;
+        else
+            type = TokenType.Operator;
     }
 
     public Token(int value) {
