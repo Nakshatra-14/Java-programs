@@ -7,7 +7,7 @@ import java.util.List;
 
 public class EvaluationOfPostFix {
 
-    public int evalPost(List<Token> postfix)
+    public static int evalPost(List<Token> postfix)
     {
         Deque<Token> s = new ArrayDeque<>();
 

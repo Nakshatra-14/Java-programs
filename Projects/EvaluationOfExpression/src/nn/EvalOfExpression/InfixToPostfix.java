@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
+import java.util.StringTokenizer;
 import static nn.EvalOfExpression.Precedence.inStack;
 
 public class InfixToPostfix {
@@ -42,33 +43,52 @@ public class InfixToPostfix {
         return postfix;
     }
 
-    public List<Token> stringToTokens(String str)
+    public static List<Token> stringToTokens(String str)
     {
-        //Infix:    (5 + 7) * (12 - 10) 
-        s
+        //Infix:    ( 5 + 7 ) * ( 12 - 10 ) 
+        ArrayList<Token> al = new ArrayList<>();
+        StringTokenizer stk = new StringTokenizer(str, " ", true);
+        while(stk.hasMoreTokens())
+        {
+            String t = stk.nextToken();
+            char ch = t.charAt(0);
+            if(ch != ' ')
+            {
+                if(Character.isDigit(ch))
+                    al.add(new Token(Integer.parseInt(t)));
+                else
+                    al.add(new Token(ch));
+            }
+        }
+        return al;
     }
 
     public static void main(String[] args)
     {
-        //Infix:    (5 + 7) * (12 - 10) 
+        //Infix:    ( 5 + 7) * (12 - 10) 
         //Postfix:  5 7 + 12 10 - *
-        ArrayList<Token> infix = new ArrayList<>();
-
-        infix.add(new Token('('));
-        infix.add(new Token(5));
-        infix.add(new Token('+'));
-        infix.add(new Token(7));
-        infix.add(new Token(')'));
-        infix.add(new Token('*'));
-        infix.add(new Token('('));
-        infix.add(new Token(12));
-        infix.add(new Token('-'));
-        infix.add(new Token(10));
-        infix.add(new Token(')'));
+        // String strInfix = "( 5 + 7 ) * ( 12 - 10 )";
+        String strInfix = "( 1 + 2 ) * ( 3 ^ ( 4 - 5 ) + 6 ) - 7 / 8 / ( 9 + 10 )";
+        // ArrayList<Token> infix = new ArrayList<>();
+        List<Token> infix = stringToTokens(strInfix);
+        // infix.add(new Token('('));
+        // infix.add(new Token(5));
+        // infix.add(new Token('+'));
+        // infix.add(new Token(7));
+        // infix.add(new Token(')'));
+        // infix.add(new Token('*'));
+        // infix.add(new Token('('));
+        // infix.add(new Token(12));
+        // infix.add(new Token('-'));
+        // infix.add(new Token(10));
+        // infix.add(new Token(')'));
         
         List<Token> postfix = inToPost(infix);
 
         System.out.println("Infix:   " + infix);
         System.out.println("Postfix: " + postfix);
+        System.out.println("Evaluated:   " + EvaluationOfPostFix.evalPost(postfix));
+
+
     }
 }
