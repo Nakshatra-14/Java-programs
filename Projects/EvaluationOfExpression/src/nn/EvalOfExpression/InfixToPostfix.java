@@ -68,7 +68,14 @@ public class InfixToPostfix {
         //Infix:    ( 5 + 7) * (12 - 10) 
         //Postfix:  5 7 + 12 10 - *
         // String strInfix = "( 5 + 7 ) * ( 12 - 10 )";
-        String strInfix = "( 1 + 2 ) * ( 3 ^ ( 4 - 5 ) + 6 ) - 7 / 8 / ( 9 + 10 )";
+        String strInfix = "( 1 + 2 ) * ( 3 ^ ( 6 - 3 ) + 6 ) - 180 / 10 / ( 5 + 4 )";
+                            // 1.2+ * (3 ^ 6.3- + 6) - 180 / 10 / 5.4+
+                            // 1.2+ * (3.6.3-^ + 6) - 180.10/ / 5.4+
+                            // 1.2+ * 3.6.3-^6+ - 180.10/.5.4+/
+                            // 1.2+.3.6.3-^6+* - 180.10/.5.4+/
+                            // 1.2+.3.6.3-^6+*.180.10/.5.4+/-
+
+        // String strInfix = "( 5 + 7 ) * ( 12 - 10 )";
         // ArrayList<Token> infix = new ArrayList<>();
         List<Token> infix = stringToTokens(strInfix);
         // infix.add(new Token('('));
