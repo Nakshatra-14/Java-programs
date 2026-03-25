@@ -6,8 +6,6 @@ import java.util.Deque;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import nn.EvalOfExpression.queue.Queue;
-
 import static nn.EvalOfExpression.Precedence.inStack;
 
 public class InfixToPostfix {
@@ -15,8 +13,7 @@ public class InfixToPostfix {
     public static List<Token> inToPost(List<Token> infix)
     {
         ArrayList<Token> postfix = new ArrayList<>();
-        // Deque<Token> stack = new ArrayDeque<>();
-        Queue<Token> stack = new java.util.Queue<>();
+        Deque<Token> stack = new ArrayDeque<>();
 
         for(Token token : infix)
         {
