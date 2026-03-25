@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import nn.EvalOfExpression.queue.Queue;
+
 import static nn.EvalOfExpression.Precedence.inStack;
 
 public class InfixToPostfix {

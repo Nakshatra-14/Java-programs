@@ -126,6 +126,8 @@ public class Linkedlist2<T> {
             node.next = prev.next;
             prev.next = node;
         }
+
+        
     }
 
     public static void main(String[] args) {
