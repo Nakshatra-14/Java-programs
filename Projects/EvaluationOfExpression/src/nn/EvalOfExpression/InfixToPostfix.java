@@ -12,7 +12,8 @@ public class InfixToPostfix {
     public static List<Token> inToPost(List<Token> infix)
     {
         ArrayList<Token> postfix = new ArrayList<>();
-        Deque<Token> stack = new ArrayDeque<>();
+        // Deque<Token> stack = new ArrayDeque<>();
+        Queue<Token> stack = new java.util.Queue<>();
 
         for(Token token : infix)
         {
