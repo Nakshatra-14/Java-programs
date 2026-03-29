@@ -1,60 +1,36 @@
 package stack;
 
+import java.util.LinkedList;
+
 public class StackWithLinkedList<T> implements MyStack<T>
 {
-    private static class Node<T> {
-        T data;
-        Node next;
+    LinkedList<T> lst = new LinkedList<>();
 
-        public Node(T d) {
-            data = d;
-            next = null;
-        }
-
-        public String toString() {
-            return String.valueOf(data); // return data + "";
-        }
+    @Override
+    public boolean isEmpty() {
+        return lst.isEmpty();
     }
 
-    private Node<T> top;
-
-    public StackWithLinkedList(){
-        top = null;
-    }
-
-    public boolean isEmpty()
-    {
-        return top == null;
-    }
-
-    public boolean isFull()
-    {
+    @Override
+    public boolean isFull() {
         return false;
     }
 
-    public void push(T e)
-    {
-        Node<T> n = new Node<>(e);
-        n.next = top;
-        top = n;
+    @Override
+    public void push(T e) {
+        lst.add(e);
     }
 
-    public T pop()
-    {
-        if(isEmpty())
-            throw new RuntimeException("Stack is Empty");
-        else
-        {
-            T data = top.data;
-            top = top.next;
-            return data;
-        }
+    @Override
+    public T pop() {
+        if(lst.isEmpty())
+            throw new RuntimeException("Cannot remove item from stack as it is Empty");
+        return  lst.removeLast();
     }
 
-    public T peek()
-    {
-        if(isEmpty())
-            throw new RuntimeException("Stack is Empty");
-        return top.data;
+    @Override
+    public T peek() {
+        return lst.peek();
     }
+
 }

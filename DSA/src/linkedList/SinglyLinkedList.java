@@ -25,6 +25,11 @@ public class SinglyLinkedList<T>
         return this;
     }
 
+    public boolean isEmpty()
+    {
+        return 
+    }
+
     @Override
     public String toString()
     {
@@ -122,7 +127,7 @@ public class SinglyLinkedList<T>
         else
         {
             Node<T> prevNode =  searchNodeByPos(at-1) ;
-            System.out.println("prev = " + prevNode);
+            // System.out.println("prev = " + prevNode);
             insert(data, prevNode) ;
         }
     }
