@@ -16,16 +16,39 @@ public class Test {
         // Function<Integer, String> f = (integer) -> {return String.valueOf(integer);};
         // System.out.println(f.apply(10));
 
-        List<Integer> lst = new ArrayList<>(1000);
+        int size = 1_000;
+        List<Integer> lst = new ArrayList<>();
 
         Random rnd = new Random();
 
-        for(int i = 0 ; i < lst.size() ; i++)
+        for (int i = 0; i < size; i++)
             lst.add(rnd.nextInt(100));
 
-        lst.forEach(e -> System.out.println(e));
+        long seqStart = System.currentTimeMillis();
+        int sum1 = lst.stream()
+                        .map(e -> {
+                            try {
+                                Thread.sleep(1);
+                            } catch (Exception ex) {}
+                            return e*2;
+                        })
+                        .mapToInt(e -> e)
+                        .sum();
+        long seqEnd = System.currentTimeMillis();
+        long paraStart = System.currentTimeMillis();
+        int sum2 = lst.parallelStream()
+                        .map(e -> {
+                            try {
+                                Thread.sleep(1);
+                            } catch (Exception ex) {}
+                            return e*2;
+                        })
+                        .mapToInt(e -> e)
+                        .sum();
+        long paraEnd = System.currentTimeMillis();
 
-        System.out.println("worked");
+        System.out.println("Seq: " + (seqEnd - seqStart));
+        System.out.println("Para: " + (paraEnd - paraStart));
     }
 }
 
