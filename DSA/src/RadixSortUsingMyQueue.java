@@ -29,6 +29,7 @@ public class RadixSortUsingMyQueue<T> {
             queueAr[i] = new Queue<>();
             // queueAr[i] = new ArrayDeque<Integer>();
         
+        int p = 1;
         for(int i = 0 ; i < maxDigits ; i++)
         {
             for(int j = 0 ; j < data.length ; j++)
@@ -36,7 +37,8 @@ public class RadixSortUsingMyQueue<T> {
                 int num = data[j];
                 //ith right digit of num
                 //d = (num / 10^i) % 10
-                int d = (num / Math.powExact(10, i)) % 10;
+                // int d = (num / Math.powExact(10, i)) % 10;
+                int d = (num / p) % 10;
 
                 //put d into the d'th queue
                 // queueAr[d].add(num);
@@ -53,7 +55,7 @@ public class RadixSortUsingMyQueue<T> {
                     k++;
                 }
             }
-
+            p*=10;
         }
     }
     

@@ -1,53 +1,59 @@
 package stack;
 
-import java.lang.reflect.Array;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.StringJoiner;
 
-public class Stack<Integer> implements MyStack<Integer>{
+public class Stack<T> implements MyStack<T>{
 
-    int n = 0;
-    int arr[];
+    private T arr[];
+    private int size;
+    private int pos = 0;
 
     public Stack() {
-        arr = new int[n];
+        this(10);
     }
 
-    void updateArray(int value, int n)
+    public Stack(int n)
     {
-        int tmp[] = new int[arr.length+1];
-        for(int i = 0 ; i < arr.length ; i++)
-            tmp[i] = arr[i];
-        arr = tmp;
-        n++;
-        arr[n] = value;
+        arr = (T[]) new Object[n];
+        size = n;
     }
 
     @Override
     public boolean isEmpty() {
-        return n == 0;
+        return pos == 0;
     }
+
     @Override
     public boolean isFull() {
-        return false;
-    }
-    @Override
-    public void push(int e) {
-        updateArray(e, n);
-    }
-    @Override
-    public Integer pop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pop'");
-    }
-    @Override
-    public Integer peek() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+        return pos == size;
     }
 
-   
+    @Override
+    public void push(T e) {
+        if(isFull())
+            throw new RuntimeException("Stack is full");
+        arr[pos++] = e;
+    }
 
+    @Override
+    public T pop() {
+        if(isEmpty())
+            throw new RuntimeException("Stack is Empty");
+        T tmp = arr[pos];
+        pos--;
+        return tmp;
+    }
+
+    @Override
+    public T peek() {
+        return arr[pos];
+    } 
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner(",","[", "]");
+        for(int i = 0 ; i < arr.length ; i++)
+            sj.add("{" + i + " : " + arr[i]);
+        return sj.toString();
+    }
 }

@@ -1,5 +1,9 @@
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.TemporalField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +20,7 @@ public class Test {
         // Function<Integer, String> f = (integer) -> {return String.valueOf(integer);};
         // System.out.println(f.apply(10));
 
-        int size = 1_000;
+        int size = 1000;
         List<Integer> lst = new ArrayList<>();
 
         Random rnd = new Random();
@@ -49,6 +53,8 @@ public class Test {
 
         System.out.println("Seq: " + (seqEnd - seqStart));
         System.out.println("Para: " + (paraEnd - paraStart));
+    
+        // System.out.println(LocalTime.now().getHour());
     }
 }
 

@@ -20,11 +20,11 @@ public class Queue<T> implements MyQueue<T>{
     }
 
     private Node front;
-    private Node head; 
+    private Node rear; 
     
     public Queue() {
         front = null;
-        head = null;
+        rear = null;
     }
 
     @Override
@@ -33,26 +33,31 @@ public class Queue<T> implements MyQueue<T>{
         if(front == null)
         {
             front = n;
-            head = n;
+            rear = n;
         }
         else
         {
             // Node<T> n = new Node<>(e);
-            head.next = n;
-            head = n;
+            rear.next = n;
+            rear = n;
         }
     }
 
     @Override
     public T remove() {
+        if(isEmpty())
+            throw new RuntimeException("Queue is Empty");
+
         Node<T> n = front;
         front = front.next;
+        if(front == null)
+            rear = null;
         return n.data;
     }
 
     @Override
     public boolean isEmpty() {
-        return front == null && head == null;
+        return front == null && rear == null;
     }
 
     @Override
@@ -83,6 +88,11 @@ public class Queue<T> implements MyQueue<T>{
         System.out.println(q.remove());
         System.out.println(q);
         q.insert('E');
+        q.remove();
+        q.remove();
+        q.remove();
+        q.remove();
+        // q.remove();
         System.out.println(q);
     }
     
