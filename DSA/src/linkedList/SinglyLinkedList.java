@@ -27,7 +27,7 @@ public class SinglyLinkedList<T>
 
     public boolean isEmpty()
     {
-        return 
+        return start == null;
     }
 
     @Override

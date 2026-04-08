@@ -14,7 +14,7 @@ public class Stack<T> implements MyStack<T>{
 
     public Stack(int n)
     {
-        arr = (T[]) new Object[n];
+        arr = new T[n];
         size = n;
     }
 
@@ -52,8 +52,20 @@ public class Stack<T> implements MyStack<T>{
     @Override
     public String toString() {
         StringJoiner sj = new StringJoiner(",","[", "]");
-        for(int i = 0 ; i < arr.length ; i++)
-            sj.add("{" + i + " : " + arr[i]);
+        for(int i = 0 ; i <= pos ; i++)
+            sj.add("{" + i + " : " + arr[i] + "}");
         return sj.toString();
+    }
+
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+        System.out.println(stack);
+        System.out.println(stack.pop());
+        System.out.println(stack.peek());
     }
 }
