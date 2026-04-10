@@ -3,8 +3,8 @@ import random
 from datetime import datetime, timedelta
 
 def generate_employee_data(num_records=1000):
-    first_names = ["John", "Jane", "Michael", "Emily", "Robert", "Sarah", "David", "Linda", "James", "Karen"]
-    last_names = ["Smith", "Doe", "Brown", "Davis", "Wilson", "Taylor", "Anderson", "Thomas", "Jackson", "White"]
+    first_names = ["Aarav", "Vihaan", "Aditya", "Ananya", "Diya", "Ishani", "Arjun", "Sai", "Ishaan", "Aadhya"]
+    last_names = ["Sharma", "Verma", "Gupta", "Patel", "Reddy", "Singh", "Kumar", "Iyer", "Nair", "Joshi"]
     departments = ["Engineering", "Marketing", "Finance", "Sales", "HR", "Legal", "Product", "Support"]
     genders = ["Male", "Female"]
 
