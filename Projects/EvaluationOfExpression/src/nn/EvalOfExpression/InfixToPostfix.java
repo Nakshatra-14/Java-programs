@@ -1,11 +1,8 @@
 package nn.EvalOfExpression;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import static nn.EvalOfExpression.Precedence.inStack;
 
 public class InfixToPostfix {
@@ -13,7 +10,7 @@ public class InfixToPostfix {
     public static List<Token> inToPost(List<Token> infix)
     {
         ArrayList<Token> postfix = new ArrayList<>();
-        Deque<Token> stack = new ArrayDeque<>();
+        MyStackI<Token> stack = new MyStackWithLinkedList<>(); 
 
         for(Token token : infix)
         {

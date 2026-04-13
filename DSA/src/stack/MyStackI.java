@@ -1,6 +1,6 @@
 package stack;
 
-public interface MyStack<T> {
+public interface MyStackI<T> {
 
     boolean isEmpty();
     boolean isFull();

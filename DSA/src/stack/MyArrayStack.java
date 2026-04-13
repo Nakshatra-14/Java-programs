@@ -2,17 +2,17 @@ package stack;
 
 import java.util.StringJoiner;
 
-public class Stack<T> implements MyStack<T>{
+public class MyArrayStack<T> implements MyStackI<T>{
 
     private T arr[];
     private int size;
     private int pos = 0;
 
-    public Stack() {
+    public MyArrayStack() {
         this(10);
     }
 
-    public Stack(int n)
+    public MyArrayStack(int n)
     {
         arr = new T[n];
         size = n;
@@ -58,7 +58,7 @@ public class Stack<T> implements MyStack<T>{
     }
 
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>(5);
+        MyArrayStack<Integer> stack = new MyArrayStack<>(5);
         stack.push(1);
         stack.push(2);
         stack.push(3);
