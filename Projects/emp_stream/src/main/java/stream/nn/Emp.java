@@ -2,6 +2,9 @@ package stream.nn;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -54,7 +57,7 @@ public class Emp implements Comparable<Emp>{
             CSVReader csvReader = new CSVReader(new FileReader("src/main/resources/employees.csv"));
             Iterator<String[]> it = csvReader.iterator();
             it.next();
-            Stream<Emp> stm = Stream.iterate(readNextEmp(it), e -> it.hasNext() , e -> readNextEmp(it));
+            Stream<Emp> stm = Stream.iterate(readNextEmp(it), _ -> it.hasNext() , _ -> readNextEmp(it));
             stm.onClose(() -> {
                     try {
                         csvReader.close();
@@ -67,6 +70,37 @@ public class Emp implements Comparable<Emp>{
             catch (Exception ex) {ex.printStackTrace();}
             return null;
     }
+
+    
+    static Stream<Emp> streamFromDatabase()
+    {
+        DatabaseConnection dc = new DatabaseConnection();
+        dc.setDbName("empdb");
+        String sql = "SELECT code, id, firstname, lastname, gender, dob, doj, email, phNumber, dept\n" + //
+                     "FROM empdb.employee";
+        try {
+            ResultSet rs = dc.getConnection().createStatement().executeQuery(sql);
+            
+            Stream<Emp> stm = Stream.iterate(readNextEmpFrmDB(rs), _ -> rs.next(), readNextEmpFrmDB(rs));
+            
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }    
+    }
+    
+    static Emp readNextEmpFrmDB(ResultSet rs)
+    {
+        try {
+            if(rs.next())       
+                    return new Emp(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), sdfOut.format(rs.getDate(6)), sdfOut.format(rs.getDate(7)), rs.getString(8), rs.getString(9), rs.getString(10));
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {
@@ -89,9 +123,9 @@ public class Emp implements Comparable<Emp>{
 
     public static void main(String[] args) {
         Stream<Emp> stm = Emp.streamFromCSV();
-        stm = stm.limit(300);
+        // stm = stm.limit(300);
         // stm = stm.sorted();
-        stm = stm.sorted(Comparator.comparing(Emp::getlName).thenComparing(Emp::getfName).reversed());
+        // stm = stm.sorted(Comparator.comparing(Emp::getlName).thenComparing(Emp::getfName).reversed());
         System.out.println(Emp.getHeader());
         stm.forEach(System.out::println);
         stm.close();
