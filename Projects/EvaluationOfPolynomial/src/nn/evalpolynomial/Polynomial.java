@@ -61,9 +61,12 @@ public class Polynomial {
             else if(coef == 1)
                 s = s + "x" + "^" + exp;
             else if(coef > 0)
-                s = s + "+" + coef + "x" + "^" + exp;
+                s = s + " + " + coef + "x" + "^" + exp;
             else if(exp != 0)
                 s = coef + "x" + "^" + exp;
+
+            // if(s.charAt(0) == '+')
+
             return s;
         }
     }
