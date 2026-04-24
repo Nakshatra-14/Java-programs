@@ -56,8 +56,7 @@ public class Emp implements Comparable<Emp>{
     static Stream<Emp> streamFromCSV()
     {
         try {
-            // CSVReader csvReader = new CSVReader(new FileReader("src/main/resources/employees.csv"));
-            CSVReader csvReader = new CSVReader(new FileReader("src\\main\\resources\\employees copy.csv"));
+            CSVReader csvReader = new CSVReader(new FileReader("src/main/resources/employees.csv"));
             Iterator<String[]> it = csvReader.iterator();
             it.next();
             Stream<Emp> stm = Stream.iterate(readNextEmp(it), _ -> it.hasNext() , _ -> readNextEmp(it));
