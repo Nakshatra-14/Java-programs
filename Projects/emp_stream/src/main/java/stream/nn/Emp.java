@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import com.opencsv.CSVReader;
@@ -157,6 +158,7 @@ public class Emp implements Comparable<Emp>{
         System.out.println(Emp.getHeader());
         stm.forEach(System.out::println);
         stm.close();
+        new Scanner(System.in).next();
     }
 
     public String getEmpCode() {
