@@ -14,12 +14,12 @@ public class DatabaseConnection {
 
     public DatabaseConnection()
     {
-        this("com.mysql.cj.jdbc.Driver", "world", "root", "4762");
+        this("world", "root", "4762");
     }
 
-    public DatabaseConnection(String driverName, String dbName, String usr, String pwd) {
+    public DatabaseConnection(String dbName, String usr, String pwd) {
         this.dbName = dbName;
-        this.driverName = driverName;
+        this.driverName = "com.mysql.cj.jdbc.Driver";
         this.pwd = pwd;
         this.url = "jdbc:mysql://localhost:3306/" + dbName + "?charecterEncoding=Latin1";
         this.usr = usr;

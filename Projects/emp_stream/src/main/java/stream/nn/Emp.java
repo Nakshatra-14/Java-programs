@@ -158,7 +158,6 @@ public class Emp implements Comparable<Emp>{
         System.out.println(Emp.getHeader());
         stm.forEach(System.out::println);
         stm.close();
-        new Scanner(System.in).next();
     }
 
     public String getEmpCode() {
