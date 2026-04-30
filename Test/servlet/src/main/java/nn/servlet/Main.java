@@ -1,6 +1,6 @@
 package nn.servlet;
 
-public class Main {
+public class Main extends Htt{
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
